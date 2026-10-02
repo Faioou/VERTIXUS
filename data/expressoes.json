@@ -1,0 +1,161 @@
+[
+  {
+    "id": "expr-ir-de-sopa",
+    "definicao": "morrer ou ser despachado",
+    "expressao": "ir de sopa",
+    "alternativas": [
+      "ir de sopa"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790848074640",
+    "definicao": "Já está a dormir",
+    "expressao": "o sono já me ganhou",
+    "alternativas": [
+      "já apagou",
+      "o sono já me ganhou",
+      "já em dava por nada"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790848207025",
+    "definicao": "Eu cozinho tão bem",
+    "expressao": "O Gordon Ramsay ao pé de mim é menino.",
+    "alternativas": [
+      "O Gordon Ramsay que se ponha fino",
+      "O Gordon Ramsay hoje ficava no banco"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790848759677",
+    "definicao": "fiquei chocado quando o vi",
+    "expressao": "quando o vi, pensei isto não pode ser verdade",
+    "alternativas": [
+      "Quando o vi, até me caiu o queixo",
+      "Quando o vi, aquilo bateu-me de frente",
+      "Caiu-me a alma aos pés (mais sério)",
+      "Fiquei sem pinga de sangue.” → mais para susto/choque forte."
+    ],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790848793846",
+    "definicao": "adormeci de repente ou fiquei exausto",
+    "expressao": "Caí para o lado",
+    "alternativas": [],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790848834266",
+    "definicao": "está confiante e à vontade",
+    "expressao": "Está solto",
+    "alternativas": [],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790848896833",
+    "definicao": "tem talento natural.",
+    "expressao": "Tem queda para isso",
+    "alternativas": [],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790849463554",
+    "definicao": "dar-lhe umas palmadas",
+    "expressao": "Este é rijo",
+    "alternativas": [
+      "Este é um belo matulão",
+      "Olha o cabedal deste gajo",
+      "Está bem constituído",
+      "Isto aguenta com tudo"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790849819685",
+    "definicao": "o desenho representa bem o original, apesar de estar feio",
+    "expressao": "O desenho não está grande coisa, mas ficou fiel à pessoa.",
+    "alternativas": [
+      "Ficou fiel às feições dele",
+      "Apanhou-lhe mesmo a pinta/essência"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790850016775",
+    "definicao": "ela é fufa",
+    "expressao": "é sapatona",
+    "alternativas": [],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790850095718",
+    "definicao": "já arranjaste uma namorada",
+    "expressao": "já arranjaste uma \"catchopa\" (cachopa)",
+    "alternativas": [],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790850530202",
+    "definicao": "ela não é para ninguém",
+    "expressao": "não é pau que se apanhe",
+    "alternativas": [
+      "não é pau para nenhuma fogueira",
+      "Esse peixe não vem para a minha rede"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790850616686",
+    "definicao": "Não aprendemos nada com essa conversa, não interessa essa conversa, ter essa conversa e não ter é o mesmo",
+    "expressao": "Essa conversa não me põe pão na mesa",
+    "alternativas": [],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790850813280",
+    "definicao": "não participo nessa confusão",
+    "expressao": "Esse circo monta-se sem mim",
+    "alternativas": [
+      "Essa confusão não dorme na minha cama"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790850963792",
+    "definicao": "anda muito convencido, armado em importante",
+    "expressao": "anda feito enorme",
+    "alternativas": [
+      "anda cheio de si",
+      "cheio de nove horas",
+      "anda com grande ego",
+      "a dar-se muita importância."
+    ],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790851212258",
+    "definicao": "tens de me respeitar / reconhecer o meu valor / dar-me o devido crédito",
+    "expressao": "Reconhece quem tens à frente",
+    "alternativas": [
+      "Respeita o meu nome"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790851438614",
+    "definicao": "estão a abusar de ti, não podes ignorar / engolir / fingir que não aconteceu.",
+    "expressao": "Isso não pode ficar sem resposta",
+    "alternativas": [
+      "vou comer e calar queres ver?",
+      "Estão a fazer farinha contigo",
+      "Estão te a passar a perna",
+      "Não te deixes ficar",
+      "impõe-te"
+    ],
+    "nota": ""
+  }
+]

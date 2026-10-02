@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Código da Estrada PT</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<h1>🚘 Código da Estrada PT</h1>
+<p>Treino interativo com perguntas guardadas no próprio repositório.</p>
+</header>
+
+<div id="modeStatus" class="status">A iniciar…</div>
+
+<nav class="tabs">
+<button class="tab active" data-panel="train">🎯 Treinar</button>
+<button class="tab" data-panel="bank">📚 Base de perguntas</button>
+<button class="tab" data-panel="expressions">🗣️ Expressões informais</button>
+<button class="tab" data-panel="expressionBase">📖 Base de expressões informais</button>
+<button class="tab admin-only" data-panel="editor">➕ Criar pergunta</button>
+<button class="tab admin-only" data-panel="help">⚙️ Administração</button>
+</nav>
+
+<section id="train" class="panel active">
+<div class="toolbar">
+<div>
+<span class="pill">Perguntas: <span id="total">0</span></span>
+<span class="pill">Certas: <span id="correct">0</span></span>
+<span class="pill">Respondidas: <span id="answered">0</span></span>
+</div>
+<button class="secondary" onclick="loadQuestions()">↻ Recarregar</button>
+</div>
+<div id="quiz"></div>
+</section>
+
+<section id="bank" class="panel">
+<div class="card">
+<div class="toolbar">
+<div><h2 style="margin:0">Base de perguntas</h2><div class="small">A resposta correta fica sempre visível nesta área.</div></div>
+<span class="pill"><span id="bankCount">0</span> perguntas</span>
+</div>
+<div class="grid">
+<div><label>Pesquisar</label><input id="search" oninput="renderBank()" placeholder="Ex.: sinalização"></div>
+<div><label>Tipo</label><select id="filter" onchange="renderBank()"><option value="">Todos</option><option value="fill">Preencher espaços</option><option value="choice">Escolha múltipla</option><option value="correct">Certa/errada + corrigir palavra</option></select></div>
+</div>
+</div>
+<div id="bankList"></div>
+</section>
+
+
+<section id="expressions" class="panel">
+<div class="toolbar">
+<div>
+<span class="pill">Expressões: <span id="exprTotal">0</span></span>
+<span class="pill">Certas: <span id="exprCorrect">0</span></span>
+<span class="pill">Respondidas: <span id="exprAnswered">0</span></span>
+</div>
+<button class="secondary" onclick="loadExpressions()">↻ Recarregar</button>
+</div>
+
+<div class="card">
+<h2 style="margin-top:0">Treino de expressões informais</h2>
+<div class="small">É apresentada uma definição. Escreva a expressão informal correspondente.</div>
+</div>
+<div id="expressionQuiz"></div>
+
+<div class="card admin-only">
+<h2 id="exprEditorTitle">Adicionar expressão</h2>
+<input type="hidden" id="exprEditId">
+
+<div class="grid">
+<div>
+<label>Definição</label>
+<input id="exprDefinition" placeholder="Ex.: morrer ou ser despachado">
+</div>
+<div>
+<label>Expressão correta</label>
+<input id="exprText" placeholder="Ex.: ir de sopa">
+</div>
+</div>
+
+<label>Outras respostas aceites (opcional)</label>
+<div class="small">Separe por | se quiser aceitar variantes. Ex.: ir de sopa|foi de sopa</div>
+<input id="exprAlternatives" placeholder="Ex.: ir de sopa">
+
+<label>Nota / explicação (opcional)</label>
+<textarea id="exprNote" placeholder="Ex.: expressão informal usada em determinados contextos."></textarea>
+
+<div class="actions" style="margin-top:14px">
+<button class="primary" onclick="saveExpression()">Guardar expressão</button>
+<button class="secondary" onclick="clearExpressionEditor()">Limpar</button>
+</div>
+<div id="exprSaveMessage" class="feedback"></div>
+</div>
+
+</section>
+
+
+
+
+<section id="expressionBase" class="panel">
+<div class="card">
+<div class="toolbar">
+<div>
+<h2 style="margin:0">Base de expressões informais</h2>
+<div class="small">Consulte todas as definições e respetivas expressões.</div>
+</div>
+<span class="pill"><span id="exprBankCount">0</span> expressões</span>
+</div>
+<div>
+<label>Pesquisar</label>
+<input id="exprSearch" oninput="renderExpressionBank()" placeholder="Pesquisar definição ou expressão...">
+</div>
+</div>
+<div id="expressionBank"></div>
+</section>
+
+<section id="editor" class="panel admin-only">
+<div class="card">
+<h2 id="editorTitle">Criar nova pergunta</h2>
+<input type="hidden" id="editId">
+<div class="grid">
+<div><label>Categoria</label><input id="category" placeholder="Ex.: Hierarquia da sinalização"></div>
+<div><label>Tipo</label><select id="type" onchange="toggleFields()"><option value="fill">Preencher espaços</option><option value="choice">Escolha múltipla</option><option value="correct">Frase certa/errada + corrigir palavra</option></select></div>
+</div>
+
+<label>Enunciado</label>
+<textarea id="prompt" placeholder="Use [[1]], [[2]], [[3]]... para os espaços."></textarea>
+
+<div id="fillFields">
+<label>Respostas dos espaços</label>
+<div class="small">Uma linha por espaço. Pode aceitar variantes separando-as por |. Ex.: Veículo|Veiculo</div>
+<textarea id="answers"></textarea>
+</div>
+
+<div id="choiceFields" class="hidden">
+<div class="grid">
+<div><label>Opção A</label><input id="c0"></div><div><label>Opção B</label><input id="c1"></div>
+<div><label>Opção C</label><input id="c2"></div><div><label>Opção D</label><input id="c3"></div>
+</div>
+<label>Resposta correta</label><select id="choiceAnswer"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select>
+</div>
+
+<div id="correctFields" class="hidden">
+<div class="grid">
+<div><label>A frase está correta?</label><select id="statementCorrect"><option value="false">Não</option><option value="true">Sim</option></select></div>
+<div><label>Palavra errada</label><input id="wrongWord" placeholder="esquerda"></div>
+<div><label>Palavra correta</label><input id="correctWord" placeholder="retaguarda"></div>
+</div>
+</div>
+
+<label>Explicação</label><textarea id="explanation"></textarea>
+<label>Imagem opcional</label><input type="file" id="imageFile" accept="image/*">
+<div id="preview" class="img"></div>
+
+<div class="actions" style="margin-top:14px">
+<button class="primary" onclick="saveQuestion()">Guardar pergunta</button>
+<button class="secondary" onclick="clearEditor()">Limpar</button>
+</div>
+<div id="saveMessage" class="feedback"></div>
+</div>
+</section>
+
+<section id="help" class="panel admin-only">
+<div class="card">
+<h2>Modo administrador local</h2>
+<p>As perguntas são gravadas em <code>data/perguntas.json</code> e as expressões informais em <code>data/expressoes.json</code>. As imagens novas são copiadas para <code>imagens/</code>.</p>
+<p>Depois de criar ou editar perguntas, no terminal execute:</p>
+<pre>git add .
+git commit -m "Atualizar perguntas"
+git push</pre>
+<p class="small">Quando o GitHub Pages terminar a publicação, os outros dispositivos passam a ver os dados atualizados.</p>
+</div>
+</section>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

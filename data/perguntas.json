@@ -1,0 +1,710 @@
+[
+  {
+    "id": "sistema-circulacao",
+    "categoria": "Sistema de circulação rodoviária",
+    "tipo": "fill",
+    "pergunta": "O sistema de circulação rodoviária tem os seguintes componentes: 1. [[1]] 2. [[2]] 3. [[3]].",
+    "respostas": [
+      [
+        "Homem",
+        "O Homem"
+      ],
+      [
+        "Via",
+        "A Via"
+      ],
+      [
+        "Veículo",
+        "Veiculo",
+        "O Veículo",
+        "O Veiculo"
+      ]
+    ],
+    "explicacao": "Os componentes são o Homem, a Via e o Veículo.",
+    "imagem": ""
+  },
+  {
+    "id": "distancia-seguranca",
+    "categoria": "Marcas rodoviárias",
+    "tipo": "fill",
+    "pergunta": "Estas marcas indicam a [[1]] recomendada que devem guardar em relação ao veículo [[2]].",
+    "explicacao": "As marcas indicam a distância de segurança frontal recomendada em relação ao veículo precedente.",
+    "imagem": "imagens/distancia-seguranca.png",
+    "respostas": [
+      [
+        "distância de segurança frontal",
+        "distancia de seguranca frontal"
+      ],
+      [
+        "precedente"
+      ]
+    ]
+  },
+  {
+    "id": "hierarquia-sinalizacao",
+    "categoria": "Hierarquia da sinalização",
+    "tipo": "fill",
+    "pergunta": "[[1]] prevalece sobre [[2]] prevalece sobre [[3]] prevalece sobre [[4]] prevalece sobre [[5]] prevalece sobre [[6]] prevalece sobre [[7]].",
+    "respostas": [
+      [
+        "Agentes reguladores do trânsito",
+        "Agentes reguladores de trânsito"
+      ],
+      [
+        "Sinalização temporária",
+        "Sinalizacao temporaria"
+      ],
+      [
+        "Sinalização de mensagem variável",
+        "Sinalizacao de mensagem variavel"
+      ],
+      [
+        "Sinais luminosos",
+        "Sinalização luminosa",
+        "Sinalizacao luminosa"
+      ],
+      [
+        "Sinais verticais",
+        "Sinalização vertical",
+        "Sinalizacao vertical"
+      ],
+      [
+        "Marcas rodoviárias",
+        "Marcas rodoviarias"
+      ],
+      [
+        "Regras gerais de trânsito",
+        "Regras gerais de transito"
+      ]
+    ],
+    "explicacao": "A hierarquia é apresentada por ordem, com «prevalece sobre» entre cada elemento.",
+    "imagem": ""
+  },
+  {
+    "id": "agente-retaguarda",
+    "categoria": "Agente regulador do trânsito",
+    "tipo": "correct",
+    "pergunta": "O agente, com os braços estendidos horizontalmente, manda parar o trânsito que venha da sua esquerda. Está certa a resposta?",
+    "frase_correta": false,
+    "palavra_errada": "esquerda",
+    "palavra_correta": "retaguarda",
+    "explicacao": "A frase está errada. Deve substituir «esquerda» por «retaguarda».",
+    "imagem": "imagens/agente-regulador.png"
+  },
+  {
+    "id": "q-1790640205006",
+    "categoria": "Contraordenações",
+    "tipo": "fill",
+    "pergunta": "Uma contraordenação grave é punida com coima de [[1]] a [[2]] euros e com sanção acessória de [[3]].\nUma contraordenação muito grave é punida com coima de [[4]] a [[5]] euros e com sanção acessória de [[6]].\nUm crime é punido com [[7]] ou [[8]] e com sanção acessória de [[6]].",
+    "explicacao": "Nas contraordenações graves, a coima pode variar entre 250 € e 1 250 €, sendo ainda aplicável uma sanção acessória de inibição de conduzir de 1 mês a 1 ano.",
+    "imagem": "",
+    "respostas": [
+      [
+        "250"
+      ],
+      [
+        "1250"
+      ],
+      [
+        "inibição de conduzir de 1 mês a 1 ano",
+        "inibicao de conduzir de 1 mes a 1 ano",
+        "inibição de 1 mês a 1 ano",
+        "inibicao de 1 mes a 1 ano"
+      ],
+      [
+        "500"
+      ],
+      [
+        "2500"
+      ],
+      [
+        "inibição de conduzir de 2 meses a 2 anos",
+        "inibicao de conduzir de 2 meses a 2 anos",
+        "inibição de 2 meses a 2 anos",
+        "inibicao de 2 meses a 2 anos"
+      ],
+      [
+        "pena de prisão até 1 ano"
+      ],
+      [
+        "multa de 120 dias"
+      ],
+      [
+        "inibição de conduzir de 3 meses a 3 anos",
+        "inibicao de conduzir de 3 meses a 3 anos",
+        "inibição de 3 meses a 3 anos",
+        "inibicao de 3 meses a 3 anos"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790640334694",
+    "categoria": "Sinais Para Peões",
+    "tipo": "fill",
+    "pergunta": "Quando está verde para os peões, os condutores não são obrigados a [[1]] mas a [[2]].",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "parar"
+      ],
+      [
+        "ceder"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790640506280",
+    "categoria": "Luzes verdes suplementares",
+    "tipo": "fill",
+    "pergunta": "Mesmo que o semáforo esteja vermelho, se a luz verde suplementar estiver ligada na direção indicada [[1]].",
+    "explicacao": "prosseguir a marcha no sentido indicado pela seta da luz",
+    "imagem": "imagens/1790640506291-S4-3.png",
+    "respostas": [
+      [
+        "posso prosseguir a marcha"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790640715899",
+    "categoria": "Transporte coletivo de passageiros",
+    "tipo": "fill",
+    "pergunta": "Barra horizontal: passagem [[1]]\nBarra vertical: passagem [[2]]",
+    "explicacao": "",
+    "imagem": "imagens/1790640715908-S16.png",
+    "respostas": [
+      [
+        "proibida"
+      ],
+      [
+        "autorizada"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790641001295",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "A2a: [[1]] ou [[2]]\nA2b: [[3]] ou [[4]]\nA3c: [[5]] ou [[6]]",
+    "explicacao": "",
+    "imagem": "imagens/1790641001302-Screenshot-2026-09-29-011500.png",
+    "respostas": [
+      [
+        "lomba"
+      ],
+      [
+        "deformação convexa"
+      ],
+      [
+        "depressão"
+      ],
+      [
+        "deformação côncava"
+      ],
+      [
+        "lomba"
+      ],
+      [
+        "depressão"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790641723925",
+    "categoria": "Sinais de Perigo",
+    "tipo": "fill",
+    "pergunta": "A14: [[1]]\nA15: [[2]]\nA21: [[3]]\nA24: [[4]], ATENÇÃO: [[12]]\nA25: [[5]]\nA26: [[6]]\nA27: [[7]]\nA32a: [[8]]\nA32b: [[9]]\nA maior parte dos sinais de perigo são postos a mais de [[10]] e a menos de [[11]]",
+    "explicacao": "",
+    "imagem": "imagens/1790641723937-Screenshot-2026-09-29-012117.png",
+    "respostas": [
+      [
+        "crianças"
+      ],
+      [
+        "idosos"
+      ],
+      [
+        "via que pode ser sobrevoada"
+      ],
+      [
+        "cruzamento ou entroncamento onde vigora a regra geral de prioridade à direita"
+      ],
+      [
+        "trânsito passa a ser de sentido duplo"
+      ],
+      [
+        "passagem de nível com guarda"
+      ],
+      [
+        "passagem de nível sem guarda"
+      ],
+      [
+        "passagem de nível sem guarda (posto ao pé da passagem de nível)"
+      ],
+      [
+        "passagem de nível sem guarda com duas ou mais vias (posto ao pé da passagem de nível)"
+      ],
+      [
+        "150 m"
+      ],
+      [
+        "300 m"
+      ],
+      [
+        "excecionalmente (raramente/salvo exceções) pode ser utilizado dentro das localidades, ou seja, normalmente aparece fora das localidades"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790641896056",
+    "categoria": "Relevo dos pneus",
+    "tipo": "fill",
+    "pergunta": "O relevo mínimo dos pneus\n• Automóveis ligeiros: [[1]].\n• Motociclos e pesados: [[2]].",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "1,6 mm"
+      ],
+      [
+        "1 mm"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790641979889",
+    "categoria": "Líquido refrigerante",
+    "tipo": "fill",
+    "pergunta": "Verifica-se o líquido refrigerante com o motor [[1]] e [[2]].",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "desligado"
+      ],
+      [
+        "frio"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790642177249",
+    "categoria": "Ciclomotores vs Motociclos",
+    "tipo": "fill",
+    "pergunta": "Ciclomotores tem uma cilindrada [[1]] e [[2]] circular em autoestradas\n\nMotociclos tem uma cilindrada [[1]] e [[2]] circular em autoestradas\n\nC3e: proibição de [[3]] simples (ou seja, sem carro lateral)\nC3f: proibição de [[4]]",
+    "explicacao": "",
+    "imagem": "imagens/1790642391580-Screenshot-2026-09-29-013836.png",
+    "respostas": [
+      [
+        "até 50 cm³"
+      ],
+      [
+        "não podem"
+      ],
+      [
+        "acima de 50 cm³"
+      ],
+      [
+        "podem"
+      ],
+      [
+        "motociclos"
+      ],
+      [
+        "ciclomotores"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790642596585",
+    "categoria": "Velocidade do motor e travão de serviço",
+    "tipo": "fill",
+    "pergunta": "Aumentar a Velocidade do Motor significa [[1]].\n\nO travão de serviço é o [[2]].",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "carregar no acelerador"
+      ],
+      [
+        "pedal do travão"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790852599460",
+    "categoria": "Cedência de passagem",
+    "tipo": "fill",
+    "pergunta": "B1: [[1]] \nB2: [[2]]\nqualquer veículo [[3]] veículos de tração animal ou de animal conduzido\nB7: ceder a passagem aos veículos [[4]]\nB8-B9: interseções com vias [[5]] prioridade, porque nós temos a prioridade",
+    "explicacao": "",
+    "imagem": "imagens/1790852599475-Screenshot-2026-10-01-120252.png",
+    "respostas": [
+      [
+        "ceder"
+      ],
+      [
+        "parar e ceder"
+      ],
+      [
+        "até"
+      ],
+      [
+        "que nela transitem"
+      ],
+      [
+        "sem"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790854525125",
+    "categoria": "Proibição",
+    "tipo": "fill",
+    "pergunta": "C1: não podemos entrar nessa via, pois os veículos circulam [[1]].\nC2: QUALQUER VEÍCULO EXCETO [[2]].\nC3a: proibido a [[3]], [[4]], [[5]]\nC3b: proibido a [[6]]\nC3c: proibido a [[7]]\nC3d: proibido de mercadorias com [[8]] a 3,5t\nC3n:\tTrânsito proibido a veículos [[9]]\nC3o\tTrânsito proibido a veículos [[10]]\nC3p\tTrânsito proibido a veículos que transportem [[11]]\nC3q\tTrânsito proibido a veículos que transportem [[12]]\t\nC3r\tTrânsito proibido a veículos que transportem [[13]]\t\nC5\tTrânsito proibido a veículos de peso [[14]] superior ao indicado\nC6\tTrânsito proibido a veículos/conjuntos de peso [[15]] superior ao indicado\nC7\tTrânsito proibido a veículos ou conjuntos de [[16]] superior ao indicado\nC8\tTrânsito proibido a veículos de [[17]] superior à indicada\nC9\tTrânsito proibido a veículos de [[18]] superior à indicada\nC14a Proibição de ultrapassar para [[19]] o mesmo tipo de veículos exceto [[20]], [[21]] e [[22]].\nC18 e C19 representam Paragem [[23]]",
+    "explicacao": "",
+    "imagem": "imagens/1790854525148-Untitled-1.jpg",
+    "respostas": [
+      [
+        "no sentido oposto"
+      ],
+      [
+        "peões"
+      ],
+      [
+        "automóveis ligeiros"
+      ],
+      [
+        "automóveis pesados"
+      ],
+      [
+        "motociclos com carro"
+      ],
+      [
+        "pesados"
+      ],
+      [
+        "pesados ou ligeiros de mercadoria"
+      ],
+      [
+        "peso total superior"
+      ],
+      [
+        "com reboque"
+      ],
+      [
+        "com reboque de dois ou mais eixos"
+      ],
+      [
+        "mercadorias perigosas"
+      ],
+      [
+        "produtos facilmente inflamáveis ou explosivos"
+      ],
+      [
+        "produtos suscetíveis de poluir as águas"
+      ],
+      [
+        "por eixo"
+      ],
+      [
+        "total"
+      ],
+      [
+        "comprimento"
+      ],
+      [
+        "largura"
+      ],
+      [
+        "altura"
+      ],
+      [
+        "QUALQUER veículo a motor"
+      ],
+      [
+        "velocípedes"
+      ],
+      [
+        "ciclomotores de duas rodas"
+      ],
+      [
+        "motociclos de duas rodas sem carro lateral"
+      ],
+      [
+        "Obrigatória"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790854816411",
+    "categoria": "Fim de proibições",
+    "tipo": "fill",
+    "pergunta": "Sinal C20a finaliza todas as proibições anteriores e tem o mesmo efeito de todas aí da imagem exceto [[1]].\nSempre que aparece um ou mais riscos assim \"/\" significa [[2]]\nSempre que não aparece ou aparece um risco assim \"\\\" significa [[3]]",
+    "explicacao": "",
+    "imagem": "imagens/1790854816424-Untitled-1.jpg",
+    "respostas": [
+      [
+        "C21"
+      ],
+      [
+        "fim de proibição/obrigação..."
+      ],
+      [
+        "proibição"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790855000854",
+    "categoria": "Sinais de obrigação",
+    "tipo": "fill",
+    "pergunta": "Estes sinais indicam o(s) [[1]] e proibem [[2]]",
+    "explicacao": "",
+    "imagem": "imagens/1790855000873-Screenshot-2026-10-01-124157.png",
+    "respostas": [
+      [
+        "sentido(s) obrigatório(s)"
+      ],
+      [
+        "inverter o sentido de marcha"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790855185175",
+    "categoria": "Correntes de neve",
+    "tipo": "fill",
+    "pergunta": "Ao avistar este sinal, somos obrigados a ter correntes de neve em [[1]] rodas motoras",
+    "explicacao": "",
+    "imagem": "imagens/1790855185181-Screenshot-2026-10-01-124531.png",
+    "respostas": [
+      [
+        "duas",
+        "2"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790855405060",
+    "categoria": "Colocação dos Sinais de obrigação",
+    "tipo": "choice",
+    "pergunta": "Os sinais de obrigação são colocados",
+    "explicacao": "",
+    "imagem": "",
+    "opcoes": [
+      "Na proximidade imediata do local",
+      "entre a 150 m e 300 m",
+      ".",
+      "."
+    ],
+    "resposta_correta": 0
+  },
+  {
+    "id": "q-1790856325838",
+    "categoria": "Regime Probatório",
+    "tipo": "fill",
+    "pergunta": "O regime probatório termina depois de [[1]] anos, sem ter cometido nenhum [[2]], [[3]] nem [[4]]",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "3"
+      ],
+      [
+        "crime"
+      ],
+      [
+        "contraordenação muito grave"
+      ],
+      [
+        "duas contraordenações graves"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790856768623",
+    "categoria": "Amarelo",
+    "tipo": "fill",
+    "pergunta": "Semáforo a amarelo = [[1]], [[2]]",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "parar"
+      ],
+      [
+        "salvo se já não for possível parar em segurança."
+      ]
+    ]
+  },
+  {
+    "id": "q-1790857142187",
+    "categoria": "Carta de conução",
+    "tipo": "fill",
+    "pergunta": "Obter carta em Portugal → residência habitual em Portugal, mas não pode [[1]], a não ser que seja OU [[2]]\nA carta de condução é [[3]]\nPara ter a carta de condução é preciso saber ler e escrever? [[4]]",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "residir no estrangeiro"
+      ],
+      [
+        "estudante em Portugal há ≥ 185 dias."
+      ],
+      [
+        "única"
+      ],
+      [
+        "não"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790857728866",
+    "categoria": "Categoria B",
+    "tipo": "fill",
+    "pergunta": "Pode conduzir ligeiros com reboque de peso [[1]] até [[2]], peso do conjunto até [[3]] de peso [[4]]. e destinados a transportar:\naté [[5]] passageiros, além do condutor.\nCom esta categoria, posso conduzir sem precisar de tirar uma carta separada: [[6]], [[7]], [[8]], [[9]], [[10]], [[11]], [[12]]. \nPor outras palavras, a categoria B habilita às categorias supracitadas.",
+    "explicacao": "Peso bruto = máximo permitido.\nPeso total = quanto pesa naquele momento.",
+    "imagem": "",
+    "respostas": [
+      [
+        "bruto"
+      ],
+      [
+        "750 kg"
+      ],
+      [
+        "3500 kg"
+      ],
+      [
+        "bruto"
+      ],
+      [
+        "8"
+      ],
+      [
+        "AM"
+      ],
+      [
+        "B1"
+      ],
+      [
+        "A1 se tiver mais de 25 anos"
+      ],
+      [
+        "máquinas industriais ligeiras"
+      ],
+      [
+        "tratocarros"
+      ],
+      [
+        "veículos agrícolas de categoria I e II mediante formação"
+      ],
+      [
+        "triciclos com maior potência de 15kw se tiver mais de 21 anos"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790858396120",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Em que caso se devem utilizar placas de amarelo reflector e vermelho fluorescente, na retaguarda de um veículo? [[1]]",
+    "explicacao": "",
+    "imagem": "imagens/1790858396132-Screenshot-2026-10-01-133914.png",
+    "respostas": [
+      [
+        "Sempre que for um pesado"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790859923890",
+    "categoria": "Embraiagem",
+    "tipo": "fill",
+    "pergunta": "Quando eu piso o pedal da embraiagem: [[1]]",
+    "explicacao": "",
+    "imagem": "imagens/1790859923915-Imagem-ChatGPT-1_10_2026--14_04_34.jpg",
+    "respostas": [
+      [
+        "Desligo o movimento das rodas do movimento/da força do motor. O motor fica desligado da transmissão"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790868626198",
+    "categoria": "Períodos",
+    "tipo": "fill",
+    "pergunta": "Inibição -> A carta [[1]] válida, [[2]]\nCassação -> A carta [[3]] válida, [[4]]\n\nPeríodo de cassação [[5]]\nPeríodo de regime probatório [[6]]\nO agente pode ver o cadastro dos últimos [[7]]",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "continua a ser"
+      ],
+      [
+        "apesar do proprietário não poder conduzir"
+      ],
+      [
+        "deixa de ser"
+      ],
+      [
+        "pois perdeu todos os pontos"
+      ],
+      [
+        "2 anos"
+      ],
+      [
+        "3 anos"
+      ],
+      [
+        "5 anos"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790870752373",
+    "categoria": "Marcas amarelas reguladoras",
+    "tipo": "fill",
+    "pergunta": "M12 e M12a: Proibido [[1]]\nM13 e M13a e M14: Proibido [[2]]\nM14a: Proibido [[3]], exceto [[4]]\nM17 e M17a: [[5]] que proibem [[6]]\nM17b: Proibe [[7]]",
+    "explicacao": "",
+    "imagem": "imagens/1790870752390-Screenshot-2026-10-01-170404.png",
+    "respostas": [
+      [
+        "parar e estacionar"
+      ],
+      [
+        "estacionar"
+      ],
+      [
+        "parar e estacionar"
+      ],
+      [
+        "para efetuar cargas e descargas"
+      ],
+      [
+        "Raias"
+      ],
+      [
+        "entrar na área por elas abrangida"
+      ],
+      [
+        "entrar na área por elas abrangida"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790871328770",
+    "categoria": "Ponte 25 de abril",
+    "tipo": "fill",
+    "pergunta": "Muito semelhante a uma [[1]], exceto os limites de velocidade.",
+    "explicacao": "",
+    "imagem": "imagens/1790871328782-1117.jpg",
+    "respostas": [
+      [
+        "auto-estrada"
+      ]
+    ]
+  }
+]

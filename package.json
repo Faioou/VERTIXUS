@@ -1,0 +1,9 @@
+{
+  "name": "codigo-estrada-pt",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aplicação de estudo do Código da Estrada para localhost e GitHub Pages.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
