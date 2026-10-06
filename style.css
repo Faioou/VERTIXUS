@@ -24,3 +24,181 @@ input,select,textarea{width:100%;border:1px solid var(--line);border-radius:10px
 .fill-slot{display:inline-flex;vertical-align:middle;margin:2px 4px}.fill-answer-editor{width:185px;max-width:65vw;padding:6px 9px;border:2px solid #84adff;border-radius:9px;background:#eef4ff;font-weight:700}.fill-answer-editor:focus{outline:none;border-color:var(--blue);background:#fff}
 .fill-tip{margin-top:6px}.question-preview{min-height:54px;padding:12px 14px;border:1px dashed #b2ccff;border-radius:10px;background:#f8fbff;font-size:16px;color:var(--ink);line-height:1.65}.question-separator{border:0;border-top:1px solid #98a2b3;margin:12px 0}.choice-editor-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
 @media(max-width:760px){.choice-editor-options{grid-template-columns:1fr}.fill-answer-editor{width:150px}}
+
+
+/* Editor visual restaurado */
+.visual-fill-editor{
+  min-height:170px;
+  padding:18px;
+  border:1px solid #b2ccff;
+  border-radius:16px;
+  background:linear-gradient(180deg,#fff 0%,#fbfdff 100%);
+  box-shadow:inset 0 1px 2px rgba(16,24,40,.03);
+  font-size:17px;
+  line-height:2.4;
+  color:var(--ink);
+}
+.visual-fill-editor:focus{
+  border-color:#528bff;
+  box-shadow:0 0 0 4px rgba(21,94,239,.10);
+}
+.fill-slot{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  vertical-align:middle;
+  margin:4px 5px;
+  padding:4px 6px 4px 9px;
+  border:1px solid #84adff;
+  border-radius:11px;
+  background:#eef4ff;
+  box-shadow:0 2px 5px rgba(21,94,239,.08);
+}
+.fill-slot-label{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  font-weight:900;
+  color:#1849a9;
+}
+.fill-answer-editor{
+  width:190px;
+  max-width:58vw;
+  border:0 !important;
+  border-bottom:2px solid #528bff !important;
+  border-radius:6px !important;
+  background:#fff !important;
+  padding:7px 9px !important;
+  font-weight:800;
+}
+.editor-bold{
+  font-weight:900;
+  color:#101828;
+  background:linear-gradient(transparent 68%,#d1e0ff 68%);
+}
+.editor-separator-wrap{
+  display:block;
+  width:100%;
+  margin:9px 0;
+}
+.editor-separator{
+  border:0;
+  border-top:2px solid #d0d5dd;
+  margin:7px 0;
+}
+
+
+/* Campos de resposta integrados na frase — visual igual ao editor */
+.q{
+  white-space:normal;
+}
+
+.q .train-fill-slot{
+  display:inline-flex !important;
+  align-items:center;
+  gap:7px;
+  vertical-align:middle;
+  width:auto !important;
+  max-width:100%;
+  margin:4px 5px;
+  padding:4px 6px 4px 9px;
+  border:1px solid #84adff;
+  border-radius:11px;
+  background:#eef4ff;
+  box-shadow:0 2px 5px rgba(21,94,239,.08);
+  white-space:nowrap;
+}
+
+.q .train-fill-label{
+  display:inline-block;
+  width:auto !important;
+  flex:0 0 auto;
+  font-size:10px;
+  line-height:1;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  font-weight:900;
+  color:#1849a9;
+}
+
+.q input.train-fill-input{
+  display:inline-block !important;
+  flex:0 0 auto !important;
+  width:clamp(105px, calc(var(--answer-chars, 8) * 0.82ch + 58px), 360px) !important;
+  min-width:105px !important;
+  max-width:min(360px, 55vw) !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:7px 9px !important;
+  border:0 !important;
+  border-bottom:2px solid #528bff !important;
+  border-radius:6px !important;
+  background:#fff !important;
+  color:#101828 !important;
+  font:inherit;
+  font-weight:800 !important;
+  line-height:1.2 !important;
+  box-shadow:none !important;
+}
+
+.q input.train-fill-input:focus{
+  outline:none !important;
+  border-bottom-color:#155eef !important;
+  box-shadow:0 0 0 3px rgba(21,94,239,.10) !important;
+}
+
+.q input.train-fill-input::placeholder{
+  color:#98a2b3;
+  font-weight:600;
+}
+
+@media(max-width:600px){
+  .q .train-fill-slot{
+    gap:5px;
+    margin:3px 2px;
+    padding:4px 5px 4px 7px;
+  }
+  .q input.train-fill-input{
+    width:clamp(95px, calc(var(--answer-chars, 8) * 0.76ch + 50px), 68vw) !important;
+    min-width:95px !important;
+    max-width:68vw !important;
+  }
+}
+
+
+/* Campos de preenchimento sem rótulo "RESPOSTA" */
+.q .train-fill-slot{
+  gap:0 !important;
+  padding:4px 6px !important;
+}
+
+.q .train-fill-label{
+  display:none !important;
+}
+
+.q input.train-fill-input{
+  margin:0 !important;
+}
+
+
+/* Mostrar a resposta correta antes de avançar */
+.correct-answer-reveal{
+  margin-top:12px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#fff;
+  border:1px solid #fda29b;
+  color:#101828;
+}
+.correct-answer-title{
+  margin-bottom:7px;
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:#b42318;
+}
+.correct-answer-value{
+  font-size:16px;
+  line-height:1.65;
+}

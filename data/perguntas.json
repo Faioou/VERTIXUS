@@ -290,11 +290,11 @@
   },
   {
     "id": "q-1790642177249",
-    "categoria": "Ciclomotores vs Motociclos",
+    "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "Ciclomotores tem uma cilindrada [[1]] e [[2]] circular em autoestradas\n\nMotociclos tem uma cilindrada [[1]] e [[2]] circular em autoestradas\n\nC3e: proibição de [[3]] simples (ou seja, sem carro lateral)\nC3f: proibição de [[4]]",
+    "pergunta": "Ciclomotores tem uma cilindrada [[1]] e [[2]] circular em autoestradas\n\nMotociclos tem uma cilindrada [[3]] e [[4]] circular em autoestradas\n\nC3e: proibição de [[5]] simples (ou seja, sem carro lateral)\nC3f: proibição de [[6]]\nC3g: proibição de [[7]]\nRepare que o sinal de proibição de [[8]] é fácil de distinguir porque é o único que tem uma pessoa.",
     "explicacao": "",
-    "imagem": "imagens/1790642391580-Screenshot-2026-09-29-013836.png",
+    "imagem": "imagens/1791298370461-Screenshot-2026-10-06-154955.png",
     "respostas": [
       [
         "até 50 cm³"
@@ -303,16 +303,22 @@
         "não podem"
       ],
       [
-        "acima de 50 cm³"
+        "até 50 cm³"
       ],
       [
-        "podem"
+        "não podem"
       ],
       [
         "motociclos"
       ],
       [
         "ciclomotores"
+      ],
+      [
+        "velocípedes"
+      ],
+      [
+        "motociclos simples"
       ]
     ]
   },
@@ -756,7 +762,7 @@
     "id": "q-1791280244405",
     "categoria": "Iluminação dos veículos",
     "tipo": "fill",
-    "pergunta": "**Mínimos (luzes de [[1]] )**: usamos quando [[2]] e quando [[3]]. \nCores obrigatórias: \nà frente: cor [[4]] e visível a [[5]] no [[6]]\natrás: cor [[7]] e visível a [[8]] no [[9]]. \n---\n**Luzes de travagem ([[10]])**: cor [[11]].\n\n---\n**Luzes de Nevoeiro**: são [[12]], mas se o carro tiver são [[13]] [[14]]. Se o carro não tiver usam-se os [[15]]. Usam-se as luzes de nevoeiro em caso de [[16]] ou [[17]] e são visíveis no [[18]] a [[19]]\n\n---\n**Luzes de marcha-atrás**: são [[20]] de cor [[21]] e à retaguarda iluminam no [[22]] [[23]]\n\n---\n**Piscas**: são de cor [[24]] à frente e de cor [[25]] à retaguarda.\n\n---\n**Luzes de perigo**: Usam-se em [[26]], [[27]], [[28]], [[29]] e quando [[30]]\n\n---\n**Médios (luzes de [[31]] )**: usamos quando [[32]], [[33]], [[34]] e [[35]] . Cores obrigatórias: à frente: cores [[36]]. Visível a [[37]] no [[38]]\n\n---\n**Máximos (luzes de [[39]] )**: usamos quando [[40]]. Cores obrigatórias: à frente: cores [[41]]. Visível a [[42]] no [[43]]\n\n---\n**Luzes de chapa de matrícula**: cor [[44]] e deve ser visível no [[45]] a [[46]]\n\n---\nOs veículos só podem circular se tiverem pelo menos:\nà frente: [[47]] e [[48]]\nà retaguarda: [[49]] e [[50]]\nSe deixar de ter o mínimo exigido numa auto-estrada, [[51]] e [[52]].",
+    "pergunta": "**Mínimos (luzes de [[1]] )**: usamos quando [[2]] e quando [[3]]. \nCores obrigatórias: \nà frente: cor [[4]] e visível a [[5]] no [[6]]\natrás: cor [[7]] e visível a [[8]] no [[9]]. \n\n---\n\n**Luzes de travagem ([[10]])**: cor [[11]].\n\n---\n\n**Luzes de Nevoeiro**: são [[12]], mas se o carro tiver são [[13]] [[14]]. Se o carro não tiver usam-se os [[15]]. Usam-se as luzes de nevoeiro em caso de [[16]] ou [[17]] e são visíveis no [[18]] a [[19]]\n\n---\n\n**Luzes de marcha-atrás**: são [[20]] de cor [[21]] e à retaguarda iluminam no [[22]] [[23]]\n\n---\n\n**Piscas**: são de cor [[24]] à frente e de cor [[25]] à retaguarda.\n\n---\n\n**Luzes de perigo**: Usam-se em [[26]], [[27]], [[28]], [[29]] e quando [[30]]\n\n---\n\n**Médios (luzes de [[31]] )**: usamos quando [[32]], [[33]], [[34]] e [[35]] . Cores obrigatórias: à frente: cores [[36]]. Visível a [[37]] no [[38]]\n\n---\n\n**Máximos (luzes de [[39]] )**: usamos quando [[40]]. Cores obrigatórias: à frente: cores [[41]]. Visível a [[42]] no [[43]]\n\n---\n\n**Luzes de chapa de matrícula**: cor [[44]] e deve ser visível no [[45]] a [[46]]\n\n---\n\nOs veículos só podem circular se tiverem pelo menos:\nà frente: [[47]] e [[48]]\nà retaguarda: [[49]] e [[50]]\nSe deixar de ter o mínimo exigido numa auto-estrada, [[51]] e [[52]]. Se avariarem as luzes, mas que permitem ainda circular, devo [[53]]",
     "explicacao": "",
     "imagem": "",
     "respostas": [
@@ -915,6 +921,9 @@
       ],
       [
         "pare fora da faixa de rodagem, pois é uma imobilização forçada por avaria"
+      ],
+      [
+        "circular até à próxima área de serviço ou saída mais próxima"
       ]
     ]
   },
@@ -1100,7 +1109,7 @@
     "id": "q-1791286272579",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "Fora das localidades, ao contrário de dentro das localidades, não se pode[[1]], mas pode-se estacionar na berma\n\n**R**: [[2]]\n**S**: [[3]]\n**D**: [[4]]\n**X**: [[5]] é o que os peões usam se não houver passeio\n**T**: [[6]]\n**Y**: [[7]]",
+    "pergunta": "Fora das localidades, ao contrário de dentro das localidades, não se pode[[1]], mas pode-se estacionar na berma\n\n**R**: [[2]]\n**S**: [[3]]\n**D**: [[4]] que está destinada apenas a 1 [[5]]\n**X**: [[6]] é o que os peões usam se não houver passeio\n**T**: [[7]]\n**Y**: [[8]]",
     "explicacao": "",
     "imagem": "imagens/1791286272593-presinalizacao.jpg",
     "respostas": [
@@ -1114,7 +1123,10 @@
         "Faixa de rodagem"
       ],
       [
-        "Via/Fila de trânsito"
+        "Via de trânsito"
+      ],
+      [
+        "fila de trânsito"
       ],
       [
         "Berma"
@@ -1137,6 +1149,352 @@
     "respostas": [
       [
         "o motor"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791299675805",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Estacionamento abusivo e indevido que leva à [[1]]do carro:\nMais [[2]]num parque de estacionamento pago com taxas por pagar \nMais[[3]] para além do tempo permitido num local de estacionamento limitado \nMais[[4]] numa ZONA PAGA depois de terminar o tempo pago\nMais de [[5]]num LOCAL/PARQUE GRATUITO\nMais de [[6]] num local com sinais claros de abandono\nUm veículo com [[7]] num parque de estacionamento.\nUm veículo sem[[8]]\n\nUm reboque esteja mais de [[9]] num local não autorizado para estes veículos.\n\nO veículo também pode ser **apreendido** se [[10]] ou se [[11]].",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "remoção"
+      ],
+      [
+        "de 5 dias"
+      ],
+      [
+        "de 2 horas"
+      ],
+      [
+        "de 2 horas"
+      ],
+      [
+        "30 dias"
+      ],
+      [
+        "48 horas"
+      ],
+      [
+        "anúncio de venda"
+      ],
+      [
+        "chapa de matrícula"
+      ],
+      [
+        "72 horas"
+      ],
+      [
+        "não tiver seguro"
+      ],
+      [
+        "não tiver matrícula ou a mesma estar irregular"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791301315522",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "O painel adicional observado na imagem é [[1]] e aplica-se normalmente na [[2]]",
+    "explicacao": "",
+    "imagem": "imagens/1791301315535-57686e3f7230db79e9bba892bfb78f962b9724e00abd4d6eeed36a6295902453.jpg",
+    "respostas": [
+      [
+        "indicador de via de saída"
+      ],
+      [
+        "via de abrandamento"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791302271560",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "**Inversão do sentido de marcha**\nNeste local posso **inverter o sentido de marcha**? Não, porque o veículo está a sair de um caminho particular ou porque não há boa visibilidade? Ambas estão certas, mas a **mais** certa é a primeira ou a segunda? É a[[1]] opção, uma vez que é **estritamente proibida** em [[2]] , [[3]], [[4]], [[5]], [[6]], [[7]], [[8]]e [[9]], locais estes onde também é proibido de se fazer a manobra de [[10]], à exceção das [[11]].\n\n---\n**Marcha atrás**\nA manobra de **marcha atrás** deve ser feita [[12]] e no [[13]]\n\n---\n**Ultrapassagem**\nNão posso fazer nas [[14]], [[15]], [[16]], [[17]], [[18]], [[19]], [[20]], [[21]]\n\n---\nNuma linha mista, se do seu lado está a linha descontínua, pode pisá-la ou transpô-la para efetuar [[22]] ou [[23]]\n\n---",
+    "explicacao": "",
+    "imagem": "imagens/1791302271572-3079.jpg",
+    "respostas": [
+      [
+        "segunda"
+      ],
+      [
+        "locais de visibilidade insuficiente"
+      ],
+      [
+        "lombas"
+      ],
+      [
+        "pontes"
+      ],
+      [
+        "passagens de níveis"
+      ],
+      [
+        "túneis"
+      ],
+      [
+        "auto-estradas e via reservadas"
+      ],
+      [
+        "vias de sentido único"
+      ],
+      [
+        "locais com trânsito intenso"
+      ],
+      [
+        "marcha atrás"
+      ],
+      [
+        "vias de sentido único"
+      ],
+      [
+        "lentamente"
+      ],
+      [
+        "menor trajeto possível"
+      ],
+      [
+        "lombas"
+      ],
+      [
+        "locais de visibilidade insuficiente"
+      ],
+      [
+        "imediatamente antes e nas passagens de nível"
+      ],
+      [
+        "imediatamente antes e nos cruazamentos e entroncamentos"
+      ],
+      [
+        "imediatamente antes e nas passagens para peões"
+      ],
+      [
+        "vias com largura insuficiente"
+      ],
+      [
+        "ultrapassar um veículo que já a está a ser ultrapassado"
+      ],
+      [
+        "na presença de uma linha contínua"
+      ],
+      [
+        "ultrapassagem"
+      ],
+      [
+        "inversão de sentido de marcha"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791303537004",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "No que diz respeito aos limites de velocidade, um triciclo é equiparável a um [[1]], máquina industrial com matrícula a um [[2]] e um motociclo c/ + de 50 cm3 a um [[3]].",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "pesado de pessageiros sem reboque"
+      ],
+      [
+        "pesado de mercadorias com reboque"
+      ],
+      [
+        "ligeiro de passageiros"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791303601918",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "**Velocidade máxima**\nMáquina Agrícola\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "20"
+      ],
+      [
+        "20"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791303616492",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "**Velocidade máxima**\nMulticultivador\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "20"
+      ],
+      [
+        "20"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791303630780",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "**Velocidade máxima**\nTratocarro\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "20"
+      ],
+      [
+        "20"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791303655194",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "**Velocidade máxima**\nComboio turístico\nD.L: [[1]]km/h",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "25"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791303676493",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "**Velocidade máxima**\nMáquina Industrial sem matrícula\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "30"
+      ],
+      [
+        "30"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791303694350",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "**Velocidade máxima**\nTrator Agrícola\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "30"
+      ],
+      [
+        "40"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791303711609",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "**Velocidade máxima**\nCiclomotor\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "40"
+      ],
+      [
+        "45"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791303728294",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "**Velocidade máxima**\nQuadriciclo\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "40"
+      ],
+      [
+        "45"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791303768652",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "**Velocidade máxima**\nMotociclo até 50cm3\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "40"
+      ],
+      [
+        "60"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791303998215",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "São setas de [[1]] ou de [[2]]",
+    "explicacao": "",
+    "imagem": "imagens/1791303998222-images.jpg",
+    "respostas": [
+      [
+        "seleção"
+      ],
+      [
+        "orientação"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791304184033",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "São setas de [[1]] que informam que os condutores deverão ocupar a via mais à esquerda porque, na que estão colocadas [[2]], encontramos estas nas vias [[3]]",
+    "explicacao": "",
+    "imagem": "imagens/1791304184042-16a32a61eae83e976ee07b49e0ab1f5ca15a4b76fa8ec712c196fc6253d0ff8f.jpg",
+    "respostas": [
+      [
+        "desvio"
+      ],
+      [
+        "vai ser suprimida"
+      ],
+      [
+        "de aceleração"
+      ]
+    ]
+  },
+  {
+    "id": "q-1791304274936",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "É uma seta de [[1]] que obriga o utilizador a permanecer na via mais à direita",
+    "explicacao": "",
+    "imagem": "imagens/1791304274950-486604207_1056892596458965_8349379891802063528_n.jpg",
+    "respostas": [
+      [
+        "desvio"
       ]
     ]
   }
