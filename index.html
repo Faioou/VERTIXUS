@@ -126,33 +126,57 @@
 <div><label>Categoria</label><input id="category" placeholder="Ex.: Hierarquia da sinalização"></div>
 <div><label>Tipo</label><select id="type" onchange="toggleFields()"><option value="fill">Preencher espaços</option><option value="choice">Escolha múltipla</option><option value="correct">Frase certa/errada + corrigir palavra</option></select></div>
 </div>
-<div class="format-help"><strong>Formatação do enunciado:</strong><span><code>**texto**</code> → <strong>negrito</strong></span><span><code>---</code> numa linha → separador</span></div>
-<div id="normalPromptBlock"><label>Enunciado</label><textarea id="prompt" oninput="updatePromptPreview()" placeholder="Escreva o enunciado. Ex.: Qual é a **velocidade máxima**?"></textarea></div>
+
+<label>Enunciado</label>
+<textarea id="prompt" placeholder="Use [[1]], [[2]], [[3]]... para os espaços."></textarea>
+
 <div id="fillFields">
-<label>Enunciado com espaços</label>
-<div class="small">Escreva normalmente. Sempre que escrever <strong>[[]]</strong>, esse marcador transforma-se automaticamente num campo onde escreve logo a resposta correta. Pode usar <strong>|</strong> dentro da resposta para aceitar variantes.</div>
-<div id="fillVisualEditor" class="visual-fill-editor" contenteditable="true" spellcheck="true" data-placeholder="Ex.: A distância de segurança é [[]] em relação ao veículo [[]]."></div>
-<div class="small fill-tip">Depois de preencher a resposta do espaço, prima <strong>Enter</strong> para continuar a escrever o enunciado.</div>
+<label>Respostas dos espaços</label>
+<div class="small">Uma linha por espaço. Pode aceitar variantes separando-as por |. Ex.: Veículo|Veiculo</div>
+<textarea id="answers"></textarea>
 </div>
-<div id="promptPreviewWrap"><label>Pré-visualização</label><div id="promptPreview" class="question-preview small">O enunciado aparecerá aqui.</div></div>
+
 <div id="choiceFields" class="hidden">
 <div class="grid">
-<div><label>Número de respostas</label><select id="choiceCount" onchange="renderChoiceEditor()"><option value="2">2 respostas</option><option value="3">3 respostas</option><option value="4" selected>4 respostas</option><option value="5">5 respostas</option><option value="6">6 respostas</option><option value="7">7 respostas</option><option value="8">8 respostas</option></select></div>
-<div><label>Resposta correta</label><select id="choiceAnswer"></select></div>
+<div>
+<label>Número de respostas</label>
+<select id="choiceCount" onchange="renderChoiceEditor()">
+<option value="2">2 respostas</option>
+<option value="3">3 respostas</option>
+<option value="4" selected>4 respostas</option>
+<option value="5">5 respostas</option>
+<option value="6">6 respostas</option>
+<option value="7">7 respostas</option>
+<option value="8">8 respostas</option>
+</select>
 </div>
-<div id="choiceOptions" class="choice-editor-options"></div>
+<div>
+<label>Resposta correta</label>
+<select id="choiceAnswer"></select>
 </div>
+</div>
+<div id="choiceOptions" class="grid" style="margin-top:10px"></div>
+</div>
+
 <div id="correctFields" class="hidden">
 <div class="grid">
 <div><label>A frase está correta?</label><select id="statementCorrect"><option value="false">Não</option><option value="true">Sim</option></select></div>
 <div><label>Palavra errada</label><input id="wrongWord" placeholder="esquerda"></div>
 <div><label>Palavra correta</label><input id="correctWord" placeholder="retaguarda"></div>
-</div></div>
+</div>
+</div>
+
 <label>Explicação</label><textarea id="explanation"></textarea>
-<label>Imagem opcional</label><input type="file" id="imageFile" accept="image/*"><div id="preview" class="img"></div>
-<div class="actions" style="margin-top:14px"><button class="primary" onclick="saveQuestion()">Guardar pergunta</button><button class="secondary" onclick="clearEditor()">Limpar</button></div>
+<label>Imagem opcional</label><input type="file" id="imageFile" accept="image/*">
+<div id="preview" class="img"></div>
+
+<div class="actions" style="margin-top:14px">
+<button class="primary" onclick="saveQuestion()">Guardar pergunta</button>
+<button class="secondary" onclick="clearEditor()">Limpar</button>
+</div>
 <div id="saveMessage" class="feedback"></div>
-</div></section>
+</div>
+</section>
 
 <section id="help" class="panel admin-only">
 <div class="card">
