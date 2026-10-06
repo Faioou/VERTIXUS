@@ -157,5 +157,30 @@
       "impõe-te"
     ],
     "nota": ""
+  },
+  {
+    "id": "expr-1790982511218",
+    "definicao": "estás a fazer ragebait/ a procurar irritar/provocar",
+    "expressao": "Estás a atiçar",
+    "alternativas": [
+      "Estás a picar de propósito"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790982558794",
+    "definicao": "this car kicks ass/ este carro é grande besta",
+    "expressao": "Este carro mete respeito",
+    "alternativas": [],
+    "nota": ""
+  },
+  {
+    "id": "expr-1790983558796",
+    "definicao": "zesty festy/ homem todo aperaltado/exuberante ou com a mania",
+    "expressao": "Purpurina com pernas",
+    "alternativas": [
+      "todo produzido"
+    ],
+    "nota": ""
   }
 ]

@@ -706,5 +706,37 @@
         "auto-estrada"
       ]
     ]
+  },
+  {
+    "id": "q-1790981823988",
+    "categoria": "Peso da tara",
+    "tipo": "fill",
+    "pergunta": "Peso da tara = [[1]]",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "peso do veículo vazio, sem carga"
+      ]
+    ]
+  },
+  {
+    "id": "q-1790982072003",
+    "categoria": "Componentes da suspensão",
+    "tipo": "fill",
+    "pergunta": "Quando o carro passa num buraco ou numa lomba, a [[1]] comprime e estende, logo esta suporta o peso do veículo. \n[[2]]→ controla o movimento da [[3]]. Impede que ela continue a oscilar várias vezes.",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "mola"
+      ],
+      [
+        "amortecedor"
+      ],
+      [
+        "mola"
+      ]
+    ]
   }
 ]
