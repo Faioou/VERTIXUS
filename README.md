@@ -142,3 +142,32 @@ git push -u origin main
 ```
 
 Essa é a sequência certa para o ponto em que está agora.
+
+
+Se quiser que **Faioou fique como chave ativa por defeito**, escreva uma vez:
+
+```bash
+git config --global core.sshCommand "ssh -i ~/.ssh/Faioou -o IdentitiesOnly=yes"
+```
+
+A partir daí, pode fechar o Git Bash, reiniciar o PC, voltar amanhã — o Git continuará a usar **Faioou**.
+
+Para confirmar:
+
+```bash
+git config --global core.sshCommand
+```
+
+Deve devolver:
+
+```text
+ssh -i ~/.ssh/Faioou -o IdentitiesOnly=yes
+```
+
+Quando decidir mudar para **tomasnborges**, escreve apenas:
+
+```bash
+git config --global core.sshCommand "ssh -i ~/.ssh/tomasnborges -o IdentitiesOnly=yes"
+```
+
+E a partir desse momento fica `tomasnborges` permanentemente, até voltar a mudar.

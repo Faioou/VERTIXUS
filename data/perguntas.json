@@ -1497,5 +1497,24 @@
         "desvio"
       ]
     ]
+  },
+  {
+    "id": "q-1791308943772",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "**O velocípede** avança em primeiro ou cede a passagem ao veículo de tração animal? Primeira ou Segunda? R: [[1]], porque o velocípede vai [[2]]\n\nSe à direita do velocípede se encontrar um veículo de tração animal, outro velocípede ou por exemplo um polícia a cavalo o velocípede é [[3]].",
+    "explicacao": "",
+    "imagem": "imagens/1791308943785-3866.jpg",
+    "respostas": [
+      [
+        "Segunda"
+      ],
+      [
+        "mudar de direção à esquerda"
+      ],
+      [
+        "obrigado a ceder passagem"
+      ]
+    ]
   }
 ]
