@@ -14,3 +14,13 @@ input,select,textarea{width:100%;border:1px solid var(--line);border-radius:10px
 .ans{background:#f8fafc;border:1px solid #eaecf0;border-radius:10px;padding:10px;margin-top:10px}.head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.hidden{display:none!important}
 .status{margin:16px 0;padding:12px 14px;border-radius:12px;font-weight:800}.status.local{background:#ecfdf3;color:#067647;border:1px solid #abefc6}.status.public{background:#eef4ff;color:#1849a9;border:1px solid #b2ccff}
 @media(max-width:760px){.grid{grid-template-columns:1fr}.wrap{padding:14px}.q{font-size:16px}.head{display:block}}
+
+
+/* Editor melhorado de perguntas */
+.format-help{margin:16px 0 8px;padding:11px 13px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--muted)}
+.format-help code{background:#fff;border:1px solid #eaecf0;border-radius:6px;padding:2px 5px;color:var(--ink)}
+.visual-fill-editor{min-height:130px;width:100%;border:1px solid var(--line);border-radius:12px;padding:13px;margin-top:7px;background:#fff;line-height:2.2;white-space:pre-wrap;outline:none}
+.visual-fill-editor:focus{border-color:#84adff;box-shadow:0 0 0 3px #d1e0ff}.visual-fill-editor:empty:before{content:attr(data-placeholder);color:#98a2b3;pointer-events:none}
+.fill-slot{display:inline-flex;vertical-align:middle;margin:2px 4px}.fill-answer-editor{width:185px;max-width:65vw;padding:6px 9px;border:2px solid #84adff;border-radius:9px;background:#eef4ff;font-weight:700}.fill-answer-editor:focus{outline:none;border-color:var(--blue);background:#fff}
+.fill-tip{margin-top:6px}.question-preview{min-height:54px;padding:12px 14px;border:1px dashed #b2ccff;border-radius:10px;background:#f8fbff;font-size:16px;color:var(--ink);line-height:1.65}.question-separator{border:0;border-top:1px solid #98a2b3;margin:12px 0}.choice-editor-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media(max-width:760px){.choice-editor-options{grid-template-columns:1fr}.fill-answer-editor{width:150px}}
