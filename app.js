@@ -12,6 +12,7 @@ let previousExpressionId = null;
 let trainingPendingIds = [];
 let currentTrainingId = null;
 let previousTrainingId = null;
+let questionEditContext = null;
 
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function norm(s){return String(s??'').toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ')}
@@ -298,7 +299,7 @@ function renderBank(){
  const A=questions.filter(q=>(!f||q.tipo===f)&&(!s||norm(q.categoria+' '+q.pergunta+' '+answerSummary(q)).includes(s)));
  document.getElementById('bankCount').textContent=questions.length;
  document.getElementById('bankList').innerHTML=A.map(q=>`
- <div class="item">
+ <div class="item bank-question-item" id="bank-question-${esc(q.id)}" data-question-id="${esc(q.id)}">
    <div class="head">
      <div><span class="tag">${esc(q.categoria)}</span></div>
      ${IS_ADMIN?`<div class="actions"><button class="secondary" onclick="editQuestion('${q.id}')">Editar</button><button class="danger" onclick="deleteQuestion('${q.id}')">Apagar</button></div>`:''}
@@ -308,6 +309,33 @@ function renderBank(){
    <div class="ans"><strong>Resposta:</strong> ${esc(answerSummary(q))}</div>
    ${q.explicacao?`<div class="small" style="margin-top:8px"><strong>Explicação:</strong> ${esc(q.explicacao)}</div>`:''}
  </div>`).join('')||'<div class="card small">Sem resultados.</div>';
+}
+
+
+function activateQuestionPanel(panelName){
+ const tab=document.querySelector(`[data-panel="${panelName}"]`);
+ const panel=document.getElementById(panelName);
+ if(!tab||!panel)return;
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+ document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+ tab.classList.add('active');
+ panel.classList.add('active');
+}
+function editorSecondaryButton(){
+ const editor=document.getElementById('editor');
+ if(!editor)return null;
+ const buttons=[...editor.querySelectorAll('.actions button')];
+ return buttons.find(b=>b.getAttribute('onclick')==='clearEditor()')||buttons.find(b=>/limpar|cancelar/i.test(b.textContent||''));
+}
+function updateEditorSecondaryButton(){const btn=editorSecondaryButton();if(btn)btn.textContent=questionEditContext?'Cancelar edição':'Limpar';}
+function captureQuestionEditContext(questionId){questionEditContext={id:questionId,search:document.getElementById('search')?.value||'',filter:document.getElementById('filter')?.value||'',scrollY:window.scrollY};updateEditorSecondaryButton();}
+function returnToEditedQuestion(questionId,highlight=true){
+ const ctx=questionEditContext||{id:questionId};activateQuestionPanel('bank');
+ const search=document.getElementById('search'),filter=document.getElementById('filter');
+ if(search&&ctx.search!==undefined)search.value=ctx.search;if(filter&&ctx.filter!==undefined)filter.value=ctx.filter;
+ renderBank();
+ requestAnimationFrame(()=>{const card=document.querySelector(`[data-question-id="${String(questionId).replace(/"/g,'\\"')}"]`);if(card){card.scrollIntoView({behavior:'smooth',block:'center'});if(highlight){card.classList.add('question-edit-highlight');setTimeout(()=>card.classList.remove('question-edit-highlight'),3200);}}else if(Number.isFinite(ctx.scrollY)){window.scrollTo({top:ctx.scrollY,behavior:'smooth'});}});
+ questionEditContext=null;updateEditorSecondaryButton();
 }
 
 function toggleFields(){
@@ -522,8 +550,101 @@ function updatePromptPreview(){
  p.innerHTML=raw?formatQuestionText(raw,false):'<span class="small">O enunciado aparecerá aqui.</span>';
 }
 
+function visualFragmentToClipboardText(root){
+ function walk(node){
+   if(node.nodeType===Node.TEXT_NODE) return node.nodeValue;
+   if(node.nodeType!==Node.ELEMENT_NODE && node.nodeType!==Node.DOCUMENT_FRAGMENT_NODE) return '';
+
+   if(node.nodeType===Node.ELEMENT_NODE){
+     const el=node;
+     if(el.classList?.contains('fill-slot')){
+       const value=el.querySelector('[data-fill-answer]')?.value ?? '';
+       return `[[${value}]]`;
+     }
+     if(el.hasAttribute?.('data-editor-bold')){
+       return `****${el.textContent||''}****`;
+     }
+     if(el.hasAttribute?.('data-editor-separator')){
+       return '\n---\n';
+     }
+     if(el.tagName==='BR') return '\n';
+   }
+
+   let out='';
+   node.childNodes?.forEach(child=>out+=walk(child));
+   if(node.nodeType===Node.ELEMENT_NODE && (node.tagName==='DIV'||node.tagName==='P') && !out.endsWith('\n')) out+='\n';
+   return out;
+ }
+ return walk(root).replace(/\n{3,}/g,'\n\n').replace(/^\n+|\n+$/g,'');
+}
+
+function clipboardTextToVisualFragment(text){
+ const frag=document.createDocumentFragment();
+ const lines=String(text||'').split(/\r?\n/);
+
+ function appendInline(line){
+   const tokenRe=/(\[\[([\s\S]*?)\]\]|\*\*\*\*([\s\S]+?)\*\*\*\*)/g;
+   let last=0,m;
+   while((m=tokenRe.exec(line))){
+     if(m.index>last) frag.appendChild(document.createTextNode(line.slice(last,m.index)));
+     if(m[2]!==undefined){
+       frag.appendChild(createFillSlot(m[2]));
+     }else{
+       frag.appendChild(createBoldNode(m[3]||''));
+     }
+     last=tokenRe.lastIndex;
+   }
+   if(last<line.length) frag.appendChild(document.createTextNode(line.slice(last)));
+ }
+
+ lines.forEach((line,i)=>{
+   if(line.trim()==='---') frag.appendChild(createSeparatorNode());
+   else appendInline(line);
+   if(i<lines.length-1) frag.appendChild(document.createElement('br'));
+ });
+ return frag;
+}
+
+function insertVisualFragmentAtSelection(fragment){
+ const sel=window.getSelection();
+ if(!sel || !sel.rangeCount) return;
+ const range=sel.getRangeAt(0);
+ range.deleteContents();
+ const last=fragment.lastChild;
+ range.insertNode(fragment);
+ if(last){
+   range.setStartAfter(last);
+   range.collapse(true);
+   sel.removeAllRanges();
+   sel.addRange(range);
+ }
+}
+
 const fillEditor=document.getElementById('fillVisualEditor');
 if(fillEditor){
+ fillEditor.addEventListener('copy',e=>{
+   const sel=window.getSelection();
+   if(!sel || !sel.rangeCount || sel.isCollapsed) return;
+   const range=sel.getRangeAt(0);
+   if(!fillEditor.contains(range.commonAncestorContainer)) return;
+
+   const fragment=range.cloneContents();
+   const text=visualFragmentToClipboardText(fragment);
+   if(!text) return;
+
+   e.preventDefault();
+   e.clipboardData.setData('text/plain',text);
+ });
+
+ fillEditor.addEventListener('paste',e=>{
+   const text=e.clipboardData?.getData('text/plain');
+   if(text===undefined || text===null) return;
+   e.preventDefault();
+   const fragment=clipboardTextToVisualFragment(text);
+   insertVisualFragmentAtSelection(fragment);
+   updatePromptPreview();
+ });
+
  fillEditor.addEventListener('input',e=>{
    if(e.target.matches&&e.target.matches('[data-fill-answer]')){
      updatePromptPreview();
@@ -547,20 +668,32 @@ document.getElementById('imageFile').addEventListener('change',e=>{const f=e.tar
 function saveMsg(msg,ok){const e=document.getElementById('saveMessage');e.className='feedback '+(ok?'ok':'bad');e.textContent=msg}
 async function uploadImageIfNeeded(){if(!currentImage||!currentImage.startsWith('data:'))return currentImage;const file=document.getElementById('imageFile').files[0],filename=file?.name||'imagem.png';const r=await fetch('/api/upload-image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename,dataUrl:currentImage})});if(!r.ok)throw new Error('Não foi possível guardar a imagem.');return (await r.json()).path}
 async function saveQuestion(){
- try{if(!IS_ADMIN)return;const tipo=document.getElementById('type').value;let pergunta='',fillData=null;if(tipo==='fill'){fillData=serializeFillEditor();pergunta=fillData.pergunta.trim()}else pergunta=document.getElementById('prompt').value.trim();if(!pergunta){saveMsg('Escreva o enunciado.',false);return}
- const id=document.getElementById('editId').value||('q-'+Date.now()),q={id,categoria:document.getElementById('category').value.trim()||'Sem categoria',tipo,pergunta,explicacao:document.getElementById('explanation').value.trim(),imagem:await uploadImageIfNeeded()};
- if(tipo==='fill'){q.respostas=fillData.respostas;if(!q.respostas.length){saveMsg('Crie pelo menos um espaço escrevendo [[]] no enunciado.',false);return}const missing=q.respostas.findIndex(a=>!a.length);if(missing>=0){saveMsg(`Falta indicar a resposta correta do espaço ${missing+1}.`,false);return}}
- else if(tipo==='choice'){q.opcoes=[...document.querySelectorAll('.choice-option-input')].map(x=>x.value.trim());if(q.opcoes.length<2){saveMsg('Crie pelo menos duas respostas.',false);return}if(q.opcoes.some(x=>!x)){saveMsg('Preencha todas as respostas que escolheu.',false);return}q.resposta_correta=Number(document.getElementById('choiceAnswer').value)}
- else{q.frase_correta=document.getElementById('statementCorrect').value==='true';q.palavra_errada=document.getElementById('wrongWord').value.trim();q.palavra_correta=document.getElementById('correctWord').value.trim();if(!q.frase_correta&&(!q.palavra_errada||!q.palavra_correta)){saveMsg('Indique a palavra errada e a correta.',false);return}}
- const idx=questions.findIndex(x=>x.id===id);if(idx>=0)questions[idx]=q;else questions.push(q);await persistQuestions();saveMsg('Pergunta gravada em data/perguntas.json.',true);clearEditor();await loadQuestions()}catch(e){saveMsg(e.message,false)}
+ try{
+  if(!IS_ADMIN)return;const tipo=document.getElementById('type').value;let pergunta='',fillData=null;
+  if(tipo==='fill'){fillData=serializeFillEditor();pergunta=fillData.pergunta.trim()}else pergunta=document.getElementById('prompt').value.trim();
+  if(!pergunta){saveMsg('Escreva o enunciado.',false);return}
+  const id=document.getElementById('editId').value||('q-'+Date.now());
+  const q={id,categoria:document.getElementById('category').value.trim()||'Sem categoria',tipo,pergunta,explicacao:document.getElementById('explanation').value.trim(),imagem:await uploadImageIfNeeded()};
+  if(tipo==='fill'){q.respostas=fillData.respostas;if(!q.respostas.length){saveMsg('Crie pelo menos um espaço escrevendo [[]] no enunciado.',false);return}const missing=q.respostas.findIndex(a=>!a.length);if(missing>=0){saveMsg(`Falta indicar a resposta correta do espaço ${missing+1}.`,false);return}}
+  else if(tipo==='choice'){q.opcoes=[...document.querySelectorAll('.choice-option-input')].map(x=>x.value.trim());if(q.opcoes.length<2){saveMsg('Crie pelo menos duas respostas.',false);return}if(q.opcoes.some(x=>!x)){saveMsg('Preencha todas as respostas que escolheu.',false);return}q.resposta_correta=Number(document.getElementById('choiceAnswer').value)}
+  else{q.frase_correta=document.getElementById('statementCorrect').value==='true';q.palavra_errada=document.getElementById('wrongWord').value.trim();q.palavra_correta=document.getElementById('correctWord').value.trim();if(!q.frase_correta&&(!q.palavra_errada||!q.palavra_correta)){saveMsg('Indique a palavra errada e a correta.',false);return}}
+  const idx=questions.findIndex(x=>x.id===id);const wasEditing=idx>=0&&!!questionEditContext;if(idx>=0)questions[idx]=q;else questions.push(q);
+  await persistQuestions();clearEditor(false);await loadQuestions();if(wasEditing)returnToEditedQuestion(id,true);else saveMsg('Pergunta gravada em data/perguntas.json.',true);
+ }catch(e){saveMsg(e.message,false)}
 }
-function clearEditor(){document.getElementById('editorTitle').textContent='Criar nova pergunta';['editId','category','prompt','explanation','wrongWord','correctWord'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});document.getElementById('type').value='fill';document.getElementById('choiceCount').value='4';document.getElementById('statementCorrect').value='false';document.getElementById('imageFile').value='';document.getElementById('preview').innerHTML='';document.getElementById('fillVisualEditor').innerHTML='';currentImage='';renderChoiceEditor([],0);toggleFields();document.getElementById('saveMessage').className='feedback';updatePromptPreview()}
+function clearEditor(returnAfterCancel=true){
+ const cancelTarget=returnAfterCancel&&questionEditContext?questionEditContext.id:null;
+ document.getElementById('editorTitle').textContent='Criar nova pergunta';
+ ['editId','category','prompt','explanation','wrongWord','correctWord'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+ document.getElementById('type').value='fill';document.getElementById('choiceCount').value='4';document.getElementById('statementCorrect').value='false';document.getElementById('imageFile').value='';document.getElementById('preview').innerHTML='';document.getElementById('fillVisualEditor').innerHTML='';currentImage='';renderChoiceEditor([],0);toggleFields();const msg=document.getElementById('saveMessage');if(msg)msg.className='feedback';updatePromptPreview();
+ if(cancelTarget)returnToEditedQuestion(cancelTarget,false);else if(returnAfterCancel){questionEditContext=null;updateEditorSecondaryButton()}
+}
 function editQuestion(id){
- const q=questions.find(x=>x.id===id);if(!q)return;document.querySelector('[data-panel="editor"]').click();document.getElementById('editorTitle').textContent='Editar pergunta';document.getElementById('editId').value=q.id;document.getElementById('category').value=q.categoria||'';document.getElementById('type').value=q.tipo;document.getElementById('explanation').value=q.explicacao||'';
+ const q=questions.find(x=>x.id===id);if(!q)return;captureQuestionEditContext(id);document.querySelector('[data-panel="editor"]').click();document.getElementById('editorTitle').textContent='Editar pergunta';document.getElementById('editId').value=q.id;document.getElementById('category').value=q.categoria||'';document.getElementById('type').value=q.tipo;document.getElementById('explanation').value=q.explicacao||'';
  if(q.tipo==='fill'){document.getElementById('prompt').value='';loadFillVisualEditor(q.pergunta||'',q.respostas||[])}else{document.getElementById('prompt').value=q.pergunta||'';document.getElementById('fillVisualEditor').innerHTML=''}
  if(q.tipo==='choice'){const count=Math.max(2,Math.min(8,(q.opcoes||[]).length||4));document.getElementById('choiceCount').value=String(count);renderChoiceEditor(q.opcoes||[],q.resposta_correta||0)}
  if(q.tipo==='correct'){document.getElementById('statementCorrect').value=String(!!q.frase_correta);document.getElementById('wrongWord').value=q.palavra_errada||'';document.getElementById('correctWord').value=q.palavra_correta||''}
- currentImage=q.imagem||'';document.getElementById('preview').innerHTML=q.imagem?`<img src="${q.imagem}">`:'';toggleFields();updatePromptPreview();window.scrollTo({top:0,behavior:'smooth'})
+ currentImage=q.imagem||'';document.getElementById('preview').innerHTML=q.imagem?`<img src="${q.imagem}">`:'';toggleFields();updatePromptPreview();updateEditorSecondaryButton();window.scrollTo({top:0,behavior:'smooth'});
 }
 async function deleteQuestion(id){if(!confirm('Apagar esta pergunta?'))return;questions=questions.filter(q=>q.id!==id);await persistQuestions();await loadQuestions()}
 

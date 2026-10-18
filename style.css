@@ -202,3 +202,5 @@ input,select,textarea{width:100%;border:1px solid var(--line);border-radius:10px
   font-size:16px;
   line-height:1.65;
 }
+
+.bank-question-item{scroll-margin-top:24px;transition:border-color .35s ease,box-shadow .35s ease,background-color .35s ease}.bank-question-item.question-edit-highlight{border-color:#528bff !important;background:#f5f8ff !important;box-shadow:0 0 0 4px rgba(21,94,239,.12),0 12px 30px rgba(21,94,239,.12) !important}

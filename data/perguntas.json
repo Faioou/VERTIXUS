@@ -4,6 +4,8 @@
     "categoria": "Sistema de circulação rodoviária",
     "tipo": "fill",
     "pergunta": "O sistema de circulação rodoviária tem os seguintes componentes: 1. [[1]] 2. [[2]] 3. [[3]].",
+    "explicacao": "Os componentes são o Homem, a Via e o Veículo.",
+    "imagem": "",
     "respostas": [
       [
         "Homem",
@@ -19,9 +21,7 @@
         "O Veículo",
         "O Veiculo"
       ]
-    ],
-    "explicacao": "Os componentes são o Homem, a Via e o Veículo.",
-    "imagem": ""
+    ]
   },
   {
     "id": "distancia-seguranca",
@@ -979,10 +979,13 @@
     "id": "q-1791284870869",
     "categoria": "Sinalização",
     "tipo": "fill",
-    "pergunta": "São sinais [[1]]",
+    "pergunta": "são sinais de [[1]] , especificamente de [[2]]",
     "explicacao": "",
     "imagem": "imagens/1791284870877-Screenshot-2026-10-06-120707.png",
     "respostas": [
+      [
+        "indicação"
+      ],
       [
         "de pré-sinalização"
       ]
@@ -992,12 +995,15 @@
     "id": "q-1791284892662",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "São sinais [[1]]",
+    "pergunta": "São sinais de [[1]], especificamente sinais de [[2]]",
     "explicacao": "",
     "imagem": "imagens/1791284892670-Screenshot-2026-10-06-120705.png",
     "respostas": [
       [
-        "de pré-sinalização"
+        "indicação"
+      ],
+      [
+        "pré-sinalização"
       ]
     ]
   },
@@ -1005,12 +1011,15 @@
     "id": "q-1791284906201",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "São sinais [[1]]",
+    "pergunta": "São sinais de [[1]], especificamente sinais de [[2]]",
     "explicacao": "",
     "imagem": "imagens/1791284906210-Screenshot-2026-10-06-120701.png",
     "respostas": [
       [
-        "de pré-sinalização"
+        "indicação"
+      ],
+      [
+        "pré-sinalização"
       ]
     ]
   },
@@ -1018,10 +1027,13 @@
     "id": "q-1791284919394",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "São sinais [[1]]",
+    "pergunta": "São sinais de [[1]], especificamente sinais [[2]]",
     "explicacao": "",
     "imagem": "imagens/1791284919401-Screenshot-2026-10-06-120658.png",
     "respostas": [
+      [
+        "indicação"
+      ],
       [
         "de pré-sinalização"
       ]
@@ -1031,10 +1043,13 @@
     "id": "q-1791284936178",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "São sinais [[1]]",
+    "pergunta": "São sinais de [[1]], especificamente sinais [[2]]",
     "explicacao": "",
     "imagem": "imagens/1791284936186-Screenshot-2026-10-06-120655.png",
     "respostas": [
+      [
+        "indicação"
+      ],
       [
         "de pré-sinalização"
       ]
@@ -1044,12 +1059,15 @@
     "id": "q-1791284950966",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "São sinais [[1]]",
+    "pergunta": "São sinais de [[1]], especificamente sinais de [[2]]",
     "explicacao": "",
     "imagem": "imagens/1791284950979-Screenshot-2026-10-06-120653.png",
     "respostas": [
       [
-        "de pré-sinalização"
+        "indicação"
+      ],
+      [
+        "pré-sinalização"
       ]
     ]
   },
@@ -1057,12 +1075,15 @@
     "id": "q-1791284964882",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "São sinais [[1]]",
+    "pergunta": "São sinais de [[1]], especificamente sinais de [[2]]",
     "explicacao": "",
     "imagem": "imagens/1791284964889-Screenshot-2026-10-06-120649.png",
     "respostas": [
       [
-        "de pré-sinalização"
+        "indicação"
+      ],
+      [
+        "pré-sinalização"
       ]
     ]
   },
@@ -1070,12 +1091,15 @@
     "id": "q-1791284979070",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "São sinais [[1]]",
+    "pergunta": "São sinais de [[1]], especificamente sinais de [[2]]",
     "explicacao": "",
     "imagem": "imagens/1791284979086-Screenshot-2026-10-06-120644.png",
     "respostas": [
       [
-        "de pré-sinalização"
+        "indicação"
+      ],
+      [
+        "pré-sinalização"
       ]
     ]
   },
@@ -1083,12 +1107,15 @@
     "id": "q-1791285087455",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "São sinais [[1]], pois indica a estrada em que estamos colocados, bem como a indicação dos destinos e as respetivas distâncias",
+    "pergunta": "São sinais de [[1]], especificamente sinais de [[2]]",
     "explicacao": "",
     "imagem": "imagens/1791285087473-Screenshot-2026-10-06-121034.png",
     "respostas": [
       [
-        "de confirmação"
+        "indicação"
+      ],
+      [
+        "confirmação"
       ]
     ]
   },
@@ -1514,6 +1541,653 @@
       ],
       [
         "obrigado a ceder passagem"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792048827334",
+    "categoria": "Condução prática — Paragem",
+    "tipo": "fill",
+    "pergunta": "Para parar completamente um automóvel de caixa manual:\n\n1. Retira-se o pé do [[1]].\n2. Começa-se a travar com o pé [[2]].\n3. Quando o automóvel estiver quase a parar, carrega-se na [[3]] até ao fundo.\n4. Mantém-se a embraiagem a fundo enquanto se termina a [[4]].\n5. Depois de completamente parado, pode colocar-se a caixa em [[5]].",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "acelerador"
+      ],
+      [
+        "direito"
+      ],
+      [
+        "embraiagem"
+      ],
+      [
+        "travagem"
+      ],
+      [
+        "ponto morto"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792048877280",
+    "categoria": "Condução prática — Embraiagem",
+    "tipo": "fill",
+    "pergunta": "Quando se pretende ****parar completamente**** um automóvel manual, a embraiagem deve ser pressionada até [[1]] antes de o motor começar a [[2]].",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "ao fundo",
+        "fundo"
+      ],
+      [
+        "ir abaixo"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792048947473",
+    "categoria": "Condução prática — Paragem",
+    "tipo": "fill",
+    "pergunta": "Depois de o automóvel estar completamente parado, pode colocar-se a caixa em [[1]].\n\nDepois de colocar a caixa nessa posição, pode libertar-se a [[2]], mantendo o [[3]] pressionado.",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "ponto morto",
+        "ponto morto (N)",
+        "N"
+      ],
+      [
+        "embraiagem"
+      ],
+      [
+        "travão"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792048996512",
+    "categoria": "Condução prática — Estacionamento",
+    "tipo": "fill",
+    "pergunta": "****Ordem para estacionar um automóvel manual em piso plano****\n\n1. Imobilizar o veículo com o [[1]].\n2. Pressionar a [[2]] até ao fundo antes de o motor ir abaixo.\n3. Colocar a caixa em [[3]].\n4. Acionar o [[4]], mantendo o pé direito no travão.\n5. Desligar o [[5]].\n6. Libertar o pedal da embraiagem.\n7. Libertar o [[6]] depois de confirmar que o veículo está seguro.",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "travão",
+        "travão de pé"
+      ],
+      [
+        "embraiagem"
+      ],
+      [
+        "ponto morto",
+        "ponto morto (N)",
+        "N"
+      ],
+      [
+        "travão de mão"
+      ],
+      [
+        "motor"
+      ],
+      [
+        "travão",
+        "pedal do travão"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792049154482",
+    "categoria": "Condução prática — Arranque em subida",
+    "tipo": "fill",
+    "pergunta": "****Arranque numa subida utilizando o travão de mão****\n\n1. Pressiona-se a [[1]] até ao fundo.\n2. Pressiona-se o [[2]] de pé.\n3. Confirma-se que a caixa está em [[3]].\n4. Liga-se o [[4]].\n5. Engata-se a [[5]].\n6. Confirma-se que o [[6]] está acionado.\n7. Pressiona-se ligeiramente o [[7]].\n8. Levanta-se lentamente a embraiagem até ao [[8]].\n9. Liberta-se o [[9]].\n10. Continua-se a acelerar suavemente enquanto se levanta progressivamente a [[10]].",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "embraiagem"
+      ],
+      [
+        "travão"
+      ],
+      [
+        "ponto morto",
+        "N"
+      ],
+      [
+        "motor"
+      ],
+      [
+        "primeira velocidade",
+        "primeira"
+      ],
+      [
+        "travão de mão"
+      ],
+      [
+        "acelerador"
+      ],
+      [
+        "ponto de embraiagem"
+      ],
+      [
+        "travão de mão"
+      ],
+      [
+        "embraiagem"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792049219720",
+    "categoria": "Condução prática — Arranque em subida",
+    "tipo": "fill",
+    "pergunta": "****Arranque em subida sem utilizar o travão de mão****\n\n1. O pé esquerdo mantém a [[1]] pressionada e engata-se a primeira.\n2. O pé direito mantém o [[2]] pressionado.\n3. Levanta-se suavemente a embraiagem até perto do [[3]].\n4. O pé direito passa rapidamente do [[4]] para o [[5]].\n5. Acelera-se suavemente enquanto se levanta progressivamente a [[6]].",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "embraiagem"
+      ],
+      [
+        "travão"
+      ],
+      [
+        "ponto de embraiagem"
+      ],
+      [
+        "travão"
+      ],
+      [
+        "acelerador"
+      ],
+      [
+        "embraiagem"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792049349808",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "****Nesta situação, posso inverter o sentido de marcha?****\n\n[[1]]",
+    "explicacao": "",
+    "imagem": "imagens/1792049349827-Screenshot-2026-10-15-082838.png",
+    "respostas": [
+      [
+        "Sim, desde que tome as devidas precauções."
+      ]
+    ]
+  },
+  {
+    "id": "q-1792050691139",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "O condutor é obrigado a substituir as ****luzes de máximos pelos médios****",
+    "explicacao": "",
+    "imagem": "",
+    "opcoes": [
+      "No atravessamento de uma passagem de nível",
+      "Quando se cruza com animais",
+      "No acesso a uma autoestrada"
+    ],
+    "resposta_correta": 1
+  },
+  {
+    "id": "q-1792050838252",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "O sinal apresentado na imagem é um sinal de",
+    "explicacao": "",
+    "imagem": "imagens/1792050838269-Screenshot-2026-10-15-085150.png",
+    "opcoes": [
+      "Regulamentação que significa pista obrigatória para peões e velocípedes",
+      "Indicação que significa pista obrigatória para peões e velocípedes",
+      "Prescrição específica que significa pista obrigatória para peões e velocípedes"
+    ],
+    "resposta_correta": 0
+  },
+  {
+    "id": "q-1792050915658",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Os sinais de regulamentação são sinais de:1. [[1]]\n2. [[2]]\n3. [[3]]\n4. [[4]]",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "cedência de passagem"
+      ],
+      [
+        "proibição"
+      ],
+      [
+        "obrigação"
+      ],
+      [
+        "prescrição específica"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792050999191",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Os sinais de prescrição específica podem ser sinais de:\n1. [[1]]\n2. [[2]]\n3. [[3]]",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "seleção de vias"
+      ],
+      [
+        "afetação de vias"
+      ],
+      [
+        "sinais de zona"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792051191179",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "explicacao": "",
+    "imagem": "imagens/1792051191189-images--1-.jpg",
+    "respostas": [
+      [
+        "prescrição específica"
+      ],
+      [
+        "seleção de vias"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792051205827",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "explicacao": "",
+    "imagem": "imagens/1792051205837-images--2-.jpg",
+    "respostas": [
+      [
+        "prescrição específica"
+      ],
+      [
+        "seleção de vias"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792051224391",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "explicacao": "",
+    "imagem": "imagens/1792051224397-images--3-.jpg",
+    "respostas": [
+      [
+        "prescrição específica"
+      ],
+      [
+        "seleção de vias"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792051246896",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "explicacao": "",
+    "imagem": "imagens/1792051246909-F1b-2-480x489.jpg",
+    "respostas": [
+      [
+        "prescrição específica"
+      ],
+      [
+        "afetação de vias"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792051257483",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "explicacao": "",
+    "imagem": "imagens/1792051257492-F1c-1-480x489.jpg",
+    "respostas": [
+      [
+        "prescrição específica"
+      ],
+      [
+        "afetação de vias"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792051268189",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "explicacao": "",
+    "imagem": "imagens/1792051268195-images.png",
+    "respostas": [
+      [
+        "prescrição específica"
+      ],
+      [
+        "afetação de vias"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792051276904",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "explicacao": "",
+    "imagem": "imagens/1792051276914-F2-1-480x489.jpg",
+    "respostas": [
+      [
+        "prescrição específica"
+      ],
+      [
+        "afetação de vias"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792051286813",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "explicacao": "",
+    "imagem": "imagens/1792051286819-G5a-1-480x480.jpg",
+    "respostas": [
+      [
+        "prescrição específica"
+      ],
+      [
+        "zona"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792271715139",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "O STOP é um sinal de [[1]], mas não significa isso. Significa [[2]]",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "cedência de passagem"
+      ],
+      [
+        "paragem obrigatória"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792272003790",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "O **sinal triangular** significa travessia/passagem [[1]] peões\nJá o **sinal retangular**  indica passagem [[2]] peões",
+    "explicacao": "",
+    "imagem": "imagens/1792272003803-Screenshot-2026-10-17-221808.png",
+    "respostas": [
+      [
+        "de"
+      ],
+      [
+        "para"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792272125403",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Numa viagem prolongada, o condutor deve sair do veiculo: de [[1]] em [[2]] horas",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "2"
+      ],
+      [
+        "2"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792272965798",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "****Observe os sinais de informação apresentados na imagem e complete o significado de cada um:****\n\nH11 — [[1]]\n\nH14b — [[2]]\nH16a — [[3]]\nH16b — [[4]]\n\n---\n\nH14a — [[5]]\nH14c — [[6]]\nH16d — [[7]]\n\nH16c — [[8]]\n\n---\n\nH17 — [[9]], por exemplo hotel\nH10 — [[10]]\nH18 — [[11]]\n\nH20c — [[12]]",
+    "explicacao": "",
+    "imagem": "imagens/1792272965809-Screenshot-2026-10-17-223030.png",
+    "respostas": [
+      [
+        "Oficina"
+      ],
+      [
+        "Parque de caravanismo"
+      ],
+      [
+        "Pousada"
+      ],
+      [
+        "Alojamento local"
+      ],
+      [
+        "Parque de campismo"
+      ],
+      [
+        "Parque misto para campismo e caravanismo"
+      ],
+      [
+        "Turismo rural"
+      ],
+      [
+        "Pousada de juventude"
+      ],
+      [
+        "Empreendimento turístico"
+      ],
+      [
+        "Posto de socorros"
+      ],
+      [
+        "Restaurante"
+      ],
+      [
+        "Paragem de veículos afetos ao transporte de crianças"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792273089880",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "No cruzamento devo:",
+    "explicacao": "",
+    "imagem": "",
+    "opcoes": [
+      "Ceder a passagem aos veiculos da direita",
+      "Passar, conduzindo com cautela necessária à segurança do trânsito"
+    ],
+    "resposta_correta": 1
+  },
+  {
+    "id": "q-1792273155441",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "As operações de descarga e carga devem fazer-se:",
+    "explicacao": "",
+    "imagem": "",
+    "opcoes": [
+      "Sempre pela direita ou retaguarda",
+      "De modo a evitar ruídos incómodos",
+      "Sempre pela retaguarda"
+    ],
+    "resposta_correta": 1
+  },
+  {
+    "id": "q-1792307189275",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "O sinal representa",
+    "explicacao": "",
+    "imagem": "imagens/1792307189311-Screenshot-2026-10-18-080535.png",
+    "opcoes": [
+      "Queda de Pedras",
+      "Cais ou precipicio"
+    ],
+    "resposta_correta": 0
+  },
+  {
+    "id": "q-1792307441167",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "[[1]] de inclinação acentuada, pois é da esquerda para a direita",
+    "explicacao": "",
+    "imagem": "imagens/1792307441197-Screenshot-2026-10-18-080949.png",
+    "respostas": [
+      [
+        "descida"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792308469867",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "****É proibido parar e estacionar:****\n\nNas [[1]], [[2]], [[3]], [[4]], [[5]] e nos locais de [[6]].\n\n---\n****Dentro das localidades, é proibido parar e estacionar:****\n\nA menos de [[7]] metros [[8]]dos cruzamentos, entroncamentos ou rotundas.\n\n---\n\nA menos de [[9]] metros [[10]]e a menos de [[11]] metros [[12]]das paragens dos autocarros.\n\n---\n\nA menos de [[13]] metros [[14]]das paragens dos elétricos.\n\n---\n\nA menos de [[15]] metros [[16]] passagens para peões.\n\n---\n\nA menos de [[17]] metros dos semáforos, quando a altura do veículo possa encobrir os sinais.\n\n---\n\n****É proibido parar e estacionar:****\n\nNa faixa de rodagem, junto a uma linha contínua, quando a distância entre a linha e o veículo for inferior a [[18]]metros.\n\n---\n\n****Fora das localidades****, na faixa de rodagem, a menos de [[19]] metros [[20]] dos cruzamentos, entroncamentos, rotundas, curvas ou lombas de [[21]].\n\n---\n****É proibido estacionar, mas pode-se parar:****\n\nDe modo a impedir a formação de uma [[22]].\n\nEm [[23]].\n\nNas rampas de acesso a [[24]].\n\n---\n\nA menos de [[25]] metros [[26]]das passagens de nível.\n\nA menos de [[27]] metros [[28]]dos postos de abastecimento de combustível.\n\n---\n\nEm locais reservados a [[29]].\n\nVeículos com [[30]].\n\n---\n\nNas faixas de rodagem, de noite ou de dia, [[31]], ainda que na berma seja possível\nNa berma de uma [[32]]\nNas faixas de rodagem de vias com o sinal [[33]].\n\n---",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "rotundas"
+      ],
+      [
+        "pontes"
+      ],
+      [
+        "túneis"
+      ],
+      [
+        "passagens de nível"
+      ],
+      [
+        "passagens inferiores ou superiores"
+      ],
+      [
+        "visibilidade insuficiente"
+      ],
+      [
+        "5"
+      ],
+      [
+        "antes e depois"
+      ],
+      [
+        "25"
+      ],
+      [
+        "antes"
+      ],
+      [
+        "5"
+      ],
+      [
+        "depois"
+      ],
+      [
+        "6"
+      ],
+      [
+        "antes"
+      ],
+      [
+        "5"
+      ],
+      [
+        "antes e nas"
+      ],
+      [
+        "20"
+      ],
+      [
+        "3"
+      ],
+      [
+        "50"
+      ],
+      [
+        "antes e depois"
+      ],
+      [
+        "visiblidade reduzida"
+      ],
+      [
+        "fila de trânsito"
+      ],
+      [
+        "segunda fila"
+      ],
+      [
+        "propriedades privadas"
+      ],
+      [
+        "10"
+      ],
+      [
+        "antes e depois"
+      ],
+      [
+        "5"
+      ],
+      [
+        "antes e depois"
+      ],
+      [
+        "outros veículos"
+      ],
+      [
+        "anúncio de venda"
+      ],
+      [
+        "fora das localidades"
+      ],
+      [
+        "utoestrada ou via equiparada, ou seja, via reservada a automóveis e motociclos"
+      ],
+      [
+        "via com prioridade"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792308550750",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Se a velociade aumenta, a distância de segurança deve [[1]], porque deve significa [[2]]",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "aumentar"
+      ],
+      [
+        "tem de"
       ]
     ]
   }
