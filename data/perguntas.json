@@ -292,22 +292,10 @@
     "id": "q-1790642177249",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "Ciclomotores tem uma cilindrada [[1]] e [[2]] circular em autoestradas\n\nMotociclos tem uma cilindrada [[3]] e [[4]] circular em autoestradas\n\nC3e: proibição de [[5]] simples (ou seja, sem carro lateral)\nC3f: proibição de [[6]]\nC3g: proibição de [[7]]\nRepare que o sinal de proibição de [[8]] é fácil de distinguir porque é o único que tem uma pessoa.",
+    "pergunta": "C3e: proibição de [[1]] simples (ou seja, sem carro lateral)\nC3f: proibição de [[2]]\nC3g: proibição de [[3]]\nRepare que o sinal de proibição de [[4]](ou seja, sem carro lateral) é fácil de distinguir porque é o único que tem uma pessoa, mas no de perigo é o de [[5]]",
     "explicacao": "",
     "imagem": "imagens/1791298370461-Screenshot-2026-10-06-154955.png",
     "respostas": [
-      [
-        "até 50 cm³"
-      ],
-      [
-        "não podem"
-      ],
-      [
-        "até 50 cm³"
-      ],
-      [
-        "não podem"
-      ],
       [
         "motociclos"
       ],
@@ -319,6 +307,9 @@
       ],
       [
         "motociclos simples"
+      ],
+      [
+        "saída de velocípedes"
       ]
     ]
   },
@@ -1497,7 +1488,7 @@
     "id": "q-1791304184033",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "São setas de [[1]] que informam que os condutores deverão ocupar a via mais à esquerda porque, na que estão colocadas [[2]], encontramos estas nas vias [[3]]",
+    "pergunta": "São setas de [[1]] que informam que os condutores deverão ocupar a via mais à esquerda porque, na que estão colocadas vai ser [[2]], encontramos estas nas vias [[3]]",
     "explicacao": "",
     "imagem": "imagens/1791304184042-16a32a61eae83e976ee07b49e0ab1f5ca15a4b76fa8ec712c196fc6253d0ff8f.jpg",
     "respostas": [
@@ -1505,7 +1496,7 @@
         "desvio"
       ],
       [
-        "vai ser suprimida"
+        "suprimida"
       ],
       [
         "de aceleração"
@@ -2438,6 +2429,22 @@
     "respostas": [
       [
         "1.5"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792434268030",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "A17 [[1]]\nA18 [[2]]",
+    "explicacao": "",
+    "imagem": "imagens/1792434268046-Screenshot-2026-10-19-192258.png",
+    "respostas": [
+      [
+        "saída de velocípedes"
+      ],
+      [
+        "passagem para velocípedes"
       ]
     ]
   }
