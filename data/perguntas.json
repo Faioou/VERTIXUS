@@ -2190,5 +2190,255 @@
         "tem de"
       ]
     ]
+  },
+  {
+    "id": "q-1792424425570",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "O desrespeito das regras relativas à posição de marcha, constitui uma contraordenação",
+    "explicacao": "",
+    "imagem": "imagens/1792424425599-Screenshot-2026-10-19-163720.png",
+    "opcoes": [
+      "muito grave",
+      "grave",
+      "leve"
+    ],
+    "resposta_correta": 0
+  },
+  {
+    "id": "q-1792424600156",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "Este sinal é de",
+    "explicacao": "",
+    "imagem": "imagens/1792424600170-Screenshot-2026-10-19-164233.png",
+    "opcoes": [
+      "zona de velocidade controlada",
+      "indicação",
+      "prescrição específica"
+    ],
+    "resposta_correta": 1
+  },
+  {
+    "id": "q-1792424833949",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "Pretendo mudar de direção à esquerda. Para tal devo:",
+    "explicacao": "",
+    "imagem": "imagens/1792424833965-Screenshot-2026-10-19-164346.png",
+    "opcoes": [
+      "Aproximar o veículo ao lado do esquerdo da faixa de rodagem",
+      "Aproximar o veículo da marca rodoviária que está a dividir as vias de trânsito",
+      "Aproximar o veículo do eixo da faixa de rodagem"
+    ],
+    "resposta_correta": 2
+  },
+  {
+    "id": "q-1792424920344",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "Se a velocidade aumenta, a distância de segurança:",
+    "explicacao": "",
+    "imagem": "imagens/1792424920357-Screenshot-2026-10-19-164737.png",
+    "opcoes": [
+      "Não se altera",
+      "Deve ser menor",
+      "Deve aumentar também"
+    ],
+    "resposta_correta": 2
+  },
+  {
+    "id": "q-1792425096745",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "A prioridade de passagem não é um direito absoluto",
+    "explicacao": "",
+    "imagem": "imagens/1792425096759-Screenshot-2026-10-19-165041.png",
+    "opcoes": [
+      "Certo, porque não significa poder avançar sem cuidado",
+      "Errado, porque não significa poder avançar sem cuidado"
+    ],
+    "resposta_correta": 0
+  },
+  {
+    "id": "q-1792425261530",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "A aquaplanagem é:",
+    "explicacao": "",
+    "imagem": "imagens/1792425261545-Screenshot-2026-10-19-165317.png",
+    "opcoes": [
+      "O excesso de água sobre o pavimento",
+      "A perda de aderência dos pneus"
+    ],
+    "resposta_correta": 1
+  },
+  {
+    "id": "q-1792431382263",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "O sinal vertical indica a existência de:",
+    "explicacao": "",
+    "imagem": "imagens/1792431382277-Screenshot-2026-10-19-183538.png",
+    "opcoes": [
+      "Trabalhos na estrada",
+      "Obras ou obstáculos na via"
+    ],
+    "resposta_correta": 1
+  },
+  {
+    "id": "q-1792431594359",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Posso fazer inversão de marcha no local exato onde me encontro? Não, porque a[[1]] que constitui a marca longitudinal contínua não me permite",
+    "explicacao": "",
+    "imagem": "imagens/1792431626290-Screenshot-2026-10-19-184009.png",
+    "respostas": [
+      [
+        "sinalização"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792431829145",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "animais [[1]]",
+    "explicacao": "",
+    "imagem": "imagens/1792431829151-Screenshot-2026-10-19-184334.png",
+    "respostas": [
+      [
+        "sem condutor"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792432418430",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "Para a revalidação do titulo de condução tenho de realizar exame médico?",
+    "explicacao": "",
+    "imagem": "",
+    "opcoes": [
+      "Sim",
+      "Sim, mas se tiver apenas mais de 65 anos",
+      "Não, apenas se me encontrar doente"
+    ],
+    "resposta_correta": 0
+  },
+  {
+    "id": "q-1792432566846",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "Para facilitar a passagem de um veículo que segue em missão urgente de socorro numa auto-estrada devo desviar-me:",
+    "explicacao": "",
+    "imagem": "",
+    "opcoes": [
+      "De modo a facilitar a sua passagem pela berma",
+      "Para a direita, utilizando a berma se necessário",
+      "Para a esquerda, aproximando-me do eixo da faixa de rodagem se necessário"
+    ],
+    "resposta_correta": 0
+  },
+  {
+    "id": "q-1792432739424",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "Nesta situação, sou alertado para um perigo que pode ter como consequência:",
+    "explicacao": "",
+    "imagem": "imagens/1792432739436-Screenshot-2026-10-19-185756.png",
+    "opcoes": [
+      "O aumento da distância de paragem",
+      "O aumento de aderência ao piso",
+      "A diminuição de paragem devido à diminuição da aderência ao piso"
+    ],
+    "resposta_correta": 0
+  },
+  {
+    "id": "q-1792433181852",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "A verificação do nivel de oleo deve ser feita: [[1]]",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "regularmente com o motor a frio"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792433470217",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Recua:\n1. Quem está [[1]]\nUm carro está a subir e outro a descer:\nCede quem [[2]], mas recua quem [[3]]",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "mais perto do cruzamento"
+      ],
+      [
+        "desce"
+      ],
+      [
+        "sobe"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792433622314",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Devemos sempre ceder a prioridade a um veiculo em missão de socorro, exceto apenas1. Se eu estiver a [[1]]\n2. Se o veiculo em missão estiver a [[2]]",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "sair de uma passagem de nível"
+      ],
+      [
+        "entrar numa AE/via reservada a automóveis e motociclos"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792433680637",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Sem o seguro de [[1]] não conduzes!",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "responsabilidade civil"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792433705946",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Crianças com menos de 12 anos podem estar à frente se [[1]]",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "não houver cintos atrás"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792433738007",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "distância de segurança lateral mínimo com os peões : [[1]] metros",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "1.5"
+      ]
+    ]
   }
 ]

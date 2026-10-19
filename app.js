@@ -12,6 +12,7 @@ let previousExpressionId = null;
 let trainingPendingIds = [];
 let currentTrainingId = null;
 let previousTrainingId = null;
+let currentChoiceOrder = [];
 let questionEditContext = null;
 
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
@@ -155,13 +156,27 @@ function currentTrainingQuestion(){
  return questions.find(q=>q.id===currentTrainingId) || null;
 }
 
+function shuffledChoiceOrder(q){
+ const order=(q.opcoes||[]).map((_,i)=>i);
+ for(let i=order.length-1;i>0;i--){
+   const j=Math.floor(Math.random()*(i+1));
+   [order[i],order[j]]=[order[j],order[i]];
+ }
+ return order;
+}
+
 function renderQuiz(){
  const q=currentTrainingQuestion();
  if(!q){ nextTrainingQuestion(); return; }
  const i=questions.findIndex(x=>x.id===q.id);
  let controls='';
  if(q.tipo==='fill') controls=`<div class="actions"><button class="primary" onclick="checkFill(${i})">Corrigir resposta</button></div>`;
- if(q.tipo==='choice') controls=(q.opcoes||[]).map((c,j)=>`<button class="choice" onclick="checkChoice(${i},${j},this)">${String.fromCharCode(65+j)}. ${esc(c)}</button>`).join('');
+ if(q.tipo==='choice'){
+   currentChoiceOrder=shuffledChoiceOrder(q);
+   controls=currentChoiceOrder.map((originalIndex,displayIndex)=>`<button class="choice" data-original-index="${originalIndex}" onclick="checkChoice(${i},${originalIndex},this)">${String.fromCharCode(65+displayIndex)}. ${esc(q.opcoes[originalIndex])}</button>`).join('');
+ }else{
+   currentChoiceOrder=[];
+ }
  if(q.tipo==='correct'){
    controls=`<div id="yn${i}" class="actions"><button class="secondary" onclick="correctStep(${i},true,this)">Sim, está certa</button><button class="secondary" onclick="correctStep(${i},false,this)">Não, está errada</button></div>
    <div id="fix${i}" class="ans hidden">Altere <strong>${esc(q.palavra_errada||'')}</strong> para <input id="fixInput${i}" class="blank" value="${esc(q.palavra_errada||'')}"> <button class="primary" onclick="finishCorrection(${i})">Validar</button></div>`;
@@ -207,7 +222,9 @@ function correctAnswerHTML(q){
  }
  if(q.tipo==='choice'){
    const idx=Number(q.resposta_correta||0);
-   return `<div><strong>${String.fromCharCode(65+idx)}.</strong> ${esc(q.opcoes?.[idx]||'')}</div>`;
+   const displayIndex=currentChoiceOrder.indexOf(idx);
+   const letter=displayIndex>=0?String.fromCharCode(65+displayIndex):'';
+   return `<div>${letter?`<strong>${letter}.</strong> `:''}${esc(q.opcoes?.[idx]||'')}</div>`;
  }
  if(q.tipo==='correct'){
    if(q.frase_correta) return '<div><strong>A frase está correta.</strong></div>';
@@ -245,13 +262,14 @@ function checkFill(i){
  if(registerAttempt(i,ok)) feedback(i,ok,q.explicacao);
 }
 
-function checkChoice(i,j,btn){
- const q=questions[i],ok=j===q.resposta_correta;
+function checkChoice(i,originalIndex,btn){
+ const q=questions[i],ok=originalIndex===q.resposta_correta;
  if(!registerAttempt(i,ok)) return;
- document.querySelectorAll(`#q${i} .choice`).forEach((b,k)=>{
+ document.querySelectorAll(`#q${i} .choice`).forEach(b=>{
    b.disabled=true;
-   if(k===q.resposta_correta)b.style.background='#ecfdf3';
-   if(k===j&&!ok)b.style.background='#fef3f2';
+   const optionIndex=Number(b.dataset.originalIndex);
+   if(optionIndex===q.resposta_correta)b.style.background='#ecfdf3';
+   if(optionIndex===originalIndex&&!ok)b.style.background='#fef3f2';
  });
  feedback(i,ok,q.explicacao);
 }
