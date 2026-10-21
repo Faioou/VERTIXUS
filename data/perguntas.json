@@ -1536,31 +1536,6 @@
     ]
   },
   {
-    "id": "q-1792048827334",
-    "categoria": "Condução prática — Paragem",
-    "tipo": "fill",
-    "pergunta": "Para parar completamente um automóvel de caixa manual:\n\n1. Retira-se o pé do [[1]].\n2. Começa-se a travar com o pé [[2]].\n3. Quando o automóvel estiver quase a parar, carrega-se na [[3]] até ao fundo.\n4. Mantém-se a embraiagem a fundo enquanto se termina a [[4]].\n5. Depois de completamente parado, pode colocar-se a caixa em [[5]].",
-    "explicacao": "",
-    "imagem": "",
-    "respostas": [
-      [
-        "acelerador"
-      ],
-      [
-        "direito"
-      ],
-      [
-        "embraiagem"
-      ],
-      [
-        "travagem"
-      ],
-      [
-        "ponto morto"
-      ]
-    ]
-  },
-  {
     "id": "q-1792048877280",
     "categoria": "Condução prática — Embraiagem",
     "tipo": "fill",
@@ -1578,31 +1553,10 @@
     ]
   },
   {
-    "id": "q-1792048947473",
-    "categoria": "Condução prática — Paragem",
-    "tipo": "fill",
-    "pergunta": "Depois de o automóvel estar completamente parado, pode colocar-se a caixa em [[1]].\n\nDepois de colocar a caixa nessa posição, pode libertar-se a [[2]], mantendo o [[3]] pressionado.",
-    "explicacao": "",
-    "imagem": "",
-    "respostas": [
-      [
-        "ponto morto",
-        "ponto morto (N)",
-        "N"
-      ],
-      [
-        "embraiagem"
-      ],
-      [
-        "travão"
-      ]
-    ]
-  },
-  {
     "id": "q-1792048996512",
     "categoria": "Condução prática — Estacionamento",
     "tipo": "fill",
-    "pergunta": "****Ordem para estacionar um automóvel manual em piso plano****\n\n1. Imobilizar o veículo com o [[1]].\n2. Pressionar a [[2]] até ao fundo antes de o motor ir abaixo.\n3. Colocar a caixa em [[3]].\n4. Acionar o [[4]], mantendo o pé direito no travão.\n5. Desligar o [[5]].\n6. Libertar o pedal da embraiagem.\n7. Libertar o [[6]] depois de confirmar que o veículo está seguro.",
+    "pergunta": "****Ordem para estacionar um automóvel manual em piso plano****\n\n1. Imobilizar o veículo com o [[1]].\n2. Pressionar a [[2]] até ao fundo antes de o motor ir abaixo.\n3. Colocar a caixa em [[3]].\n4. Acionar o [[4]], mantendo o pé direito no travão e o pé esquerdo na embraiagem\n5. Desligar o [[5]].\n6. Libertar o pedal da embraiagem.\n7. Libertar o [[6]] depois de confirmar que o veículo está seguro.",
     "explicacao": "",
     "imagem": "",
     "respostas": [
@@ -1619,7 +1573,7 @@
         "N"
       ],
       [
-        "travão de mão"
+        "travão de mão (puxando-o para cima sem clicar no botão)"
       ],
       [
         "motor"
@@ -1631,87 +1585,17 @@
     ]
   },
   {
-    "id": "q-1792049154482",
-    "categoria": "Condução prática — Arranque em subida",
-    "tipo": "fill",
-    "pergunta": "****Arranque numa subida utilizando o travão de mão****\n\n1. Pressiona-se a [[1]] até ao fundo.\n2. Pressiona-se o [[2]] de pé.\n3. Confirma-se que a caixa está em [[3]].\n4. Liga-se o [[4]].\n5. Engata-se a [[5]].\n6. Confirma-se que o [[6]] está acionado.\n7. Pressiona-se ligeiramente o [[7]].\n8. Levanta-se lentamente a embraiagem até ao [[8]].\n9. Liberta-se o [[9]].\n10. Continua-se a acelerar suavemente enquanto se levanta progressivamente a [[10]].",
-    "explicacao": "",
-    "imagem": "",
-    "respostas": [
-      [
-        "embraiagem"
-      ],
-      [
-        "travão"
-      ],
-      [
-        "ponto morto",
-        "N"
-      ],
-      [
-        "motor"
-      ],
-      [
-        "primeira velocidade",
-        "primeira"
-      ],
-      [
-        "travão de mão"
-      ],
-      [
-        "acelerador"
-      ],
-      [
-        "ponto de embraiagem"
-      ],
-      [
-        "travão de mão"
-      ],
-      [
-        "embraiagem"
-      ]
-    ]
-  },
-  {
-    "id": "q-1792049219720",
-    "categoria": "Condução prática — Arranque em subida",
-    "tipo": "fill",
-    "pergunta": "****Arranque em subida sem utilizar o travão de mão****\n\n1. O pé esquerdo mantém a [[1]] pressionada e engata-se a primeira.\n2. O pé direito mantém o [[2]] pressionado.\n3. Levanta-se suavemente a embraiagem até perto do [[3]].\n4. O pé direito passa rapidamente do [[4]] para o [[5]].\n5. Acelera-se suavemente enquanto se levanta progressivamente a [[6]].",
-    "explicacao": "",
-    "imagem": "",
-    "respostas": [
-      [
-        "embraiagem"
-      ],
-      [
-        "travão"
-      ],
-      [
-        "ponto de embraiagem"
-      ],
-      [
-        "travão"
-      ],
-      [
-        "acelerador"
-      ],
-      [
-        "embraiagem"
-      ]
-    ]
-  },
-  {
     "id": "q-1792049349808",
     "categoria": "Sem categoria",
-    "tipo": "fill",
-    "pergunta": "****Nesta situação, posso inverter o sentido de marcha?****\n\n[[1]]",
+    "tipo": "choice",
+    "pergunta": "Nesta situação, posso inverter o sentido de marcha?",
     "explicacao": "",
     "imagem": "imagens/1792049349827-Screenshot-2026-10-15-082838.png",
-    "respostas": [
-      [
-        "Sim, desde que tome as devidas precauções."
-      ]
-    ]
+    "opcoes": [
+      "Sim, desde que tome as devidas precauções",
+      "Não posso nas passagens de nível"
+    ],
+    "resposta_correta": 0
   },
   {
     "id": "q-1792050691139",
@@ -2445,6 +2329,49 @@
       ],
       [
         "passagem para velocípedes"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792518291047",
+    "categoria": "Prática",
+    "tipo": "fill",
+    "pergunta": "****Se estiveres em 3ª/4.ª/5ª/6ª e quiseres parar numa estrada plana ou subida:****\n1. [[1]]\n2. Carrega progressivamente [[2]] .\n3. À medida que a velocidade diminui e o motor se aproxima das rotações mínimas adequadas à mudança (por exemplo [[3]]rpm), [[4]], antes de o motor começar a soluçar ou ir abaixo e [[5]] até o carro ficar completamente parado.\n5.Se fores arrancar imediatamente, [[6]]. Se fores ficar parado algum tempo, [[7]], mantendo o carro travado.\nNão precisas de reduzir de 4.ª para 3.ª, depois 2.ª e finalmente 1.ª para parar.\n\n---\n\n****Se estiveres em 4.ª e quiseres apenas abrandar****\n\n1. [[8]].\n2. Carrega progressivamente [[9]]\n3. Quando já estiveres a uma velocidade adequada para a 2.ª, por exemplo, [[10]], carrega na embraiagem.\n3. Engata a [[11]]\n\n---\n\nPosso engrenar para uma velocidade inferior, obrigatoriamente com o pedal da embraiagem a fundo e opcionalmente com o travão de pé premido (e até preferível). Mas não posso engrenar para uma velocidade superior, com o pedal de embraiagem a fundo e simultaneamente com o acelerador premido, ou seja, tenho de ter o acelerador solto.\n\n---",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "Tira o pé do acelerador"
+      ],
+      [
+        "no travão, mantendo a velocidade atual engrenada"
+      ],
+      [
+        "1200"
+      ],
+      [
+        "carrega na embraiagem até ao fundo"
+      ],
+      [
+        "continua a travar"
+      ],
+      [
+        "engata a 1.ª velocidade"
+      ],
+      [
+        "coloca em ponto morto e solta a embraiagem"
+      ],
+      [
+        "Tira o pé do acelerador"
+      ],
+      [
+        "no travão, mantendo a 4.ª engrenada"
+      ],
+      [
+        "20 km/h"
+      ],
+      [
+        "2.ª velocidade"
       ]
     ]
   }
