@@ -21,7 +21,8 @@
         "O Veículo",
         "O Veiculo"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "distancia-seguranca",
@@ -38,7 +39,8 @@
       [
         "precedente"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "hierarquia-sinalizacao",
@@ -78,7 +80,8 @@
       ]
     ],
     "explicacao": "A hierarquia é apresentada por ordem, com «prevalece sobre» entre cada elemento.",
-    "imagem": ""
+    "imagem": "",
+    "grupo": "teoria"
   },
   {
     "id": "agente-retaguarda",
@@ -89,7 +92,8 @@
     "palavra_errada": "esquerda",
     "palavra_correta": "retaguarda",
     "explicacao": "A frase está errada. Deve substituir «esquerda» por «retaguarda».",
-    "imagem": "imagens/agente-regulador.png"
+    "imagem": "imagens/agente-regulador.png",
+    "grupo": "teoria"
   },
   {
     "id": "q-1790640205006",
@@ -135,7 +139,8 @@
         "inibição de 3 meses a 3 anos",
         "inibicao de 3 meses a 3 anos"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790640334694",
@@ -151,7 +156,8 @@
       [
         "ceder"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790640506280",
@@ -164,7 +170,8 @@
       [
         "posso prosseguir a marcha"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790640715899",
@@ -180,7 +187,8 @@
       [
         "autorizada"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790641001295",
@@ -208,7 +216,8 @@
       [
         "depressão"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790641723925",
@@ -254,7 +263,8 @@
       [
         "excecionalmente (raramente/salvo exceções) pode ser utilizado dentro das localidades, ou seja, normalmente aparece fora das localidades"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790641896056",
@@ -270,7 +280,8 @@
       [
         "1 mm"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790641979889",
@@ -286,7 +297,8 @@
       [
         "frio"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790642177249",
@@ -311,7 +323,8 @@
       [
         "saída de velocípedes"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790642596585",
@@ -327,7 +340,8 @@
       [
         "pedal do travão"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790852599460",
@@ -352,7 +366,8 @@
       [
         "sem"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790854525125",
@@ -431,7 +446,8 @@
       [
         "Obrigatória"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790854816411",
@@ -450,7 +466,8 @@
       [
         "proibição"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790855000854",
@@ -466,7 +483,8 @@
       [
         "inverter o sentido de marcha"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790855185175",
@@ -480,7 +498,8 @@
         "duas",
         "2"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790855405060",
@@ -495,7 +514,8 @@
       ".",
       "."
     ],
-    "resposta_correta": 0
+    "resposta_correta": 0,
+    "grupo": "teoria"
   },
   {
     "id": "q-1790856325838",
@@ -517,7 +537,8 @@
       [
         "duas contraordenações graves"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790856768623",
@@ -533,7 +554,8 @@
       [
         "salvo se já não for possível parar em segurança."
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790857142187",
@@ -555,7 +577,8 @@
       [
         "não"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790857728866",
@@ -601,7 +624,8 @@
       [
         "triciclos com maior potência de 15kw se tiver mais de 21 anos"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790858396120",
@@ -614,7 +638,8 @@
       [
         "Sempre que for um pesado"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790859923890",
@@ -627,7 +652,8 @@
       [
         "Desligo o movimento das rodas do movimento/da força do motor. O motor fica desligado da transmissão"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790868626198",
@@ -658,7 +684,8 @@
       [
         "5 anos"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790870752373",
@@ -689,7 +716,8 @@
       [
         "entrar na área por elas abrangida"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790871328770",
@@ -702,7 +730,8 @@
       [
         "auto-estrada"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790981823988",
@@ -715,7 +744,8 @@
       [
         "peso do veículo vazio, sem carga"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1790982072003",
@@ -734,7 +764,8 @@
       [
         "mola"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791279430261",
@@ -747,7 +778,8 @@
       [
         "Pressão insuficiente de ar no interior dos pneus"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791280244405",
@@ -916,7 +948,8 @@
       [
         "circular até à próxima área de serviço ou saída mais próxima"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791281015877",
@@ -932,7 +965,8 @@
       [
         "velocidade"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791281148704",
@@ -951,7 +985,8 @@
       [
         "quadriciclos sem caixa"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791284092459",
@@ -964,7 +999,8 @@
       [
         "F"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791284870869",
@@ -980,7 +1016,8 @@
       [
         "de pré-sinalização"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791284892662",
@@ -996,7 +1033,8 @@
       [
         "pré-sinalização"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791284906201",
@@ -1012,7 +1050,8 @@
       [
         "pré-sinalização"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791284919394",
@@ -1028,7 +1067,8 @@
       [
         "de pré-sinalização"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791284936178",
@@ -1044,7 +1084,8 @@
       [
         "de pré-sinalização"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791284950966",
@@ -1060,7 +1101,8 @@
       [
         "pré-sinalização"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791284964882",
@@ -1076,7 +1118,8 @@
       [
         "pré-sinalização"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791284979070",
@@ -1092,7 +1135,8 @@
       [
         "pré-sinalização"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791285087455",
@@ -1108,7 +1152,8 @@
       [
         "confirmação"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791285180250",
@@ -1121,7 +1166,8 @@
       [
         "bandas cromáticas"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791286272579",
@@ -1155,7 +1201,8 @@
       [
         "Guia"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791286537785",
@@ -1168,7 +1215,8 @@
       [
         "o motor"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791299675805",
@@ -1211,7 +1259,8 @@
       [
         "não tiver matrícula ou a mesma estar irregular"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791301315522",
@@ -1227,7 +1276,8 @@
       [
         "via de abrandamento"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791302271560",
@@ -1306,7 +1356,8 @@
       [
         "inversão de sentido de marcha"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791303537004",
@@ -1325,7 +1376,8 @@
       [
         "ligeiro de passageiros"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791303601918",
@@ -1341,7 +1393,8 @@
       [
         "20"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791303616492",
@@ -1357,7 +1410,8 @@
       [
         "20"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791303630780",
@@ -1373,7 +1427,8 @@
       [
         "20"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791303655194",
@@ -1386,7 +1441,8 @@
       [
         "25"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791303676493",
@@ -1402,7 +1458,8 @@
       [
         "30"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791303694350",
@@ -1418,7 +1475,8 @@
       [
         "40"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791303711609",
@@ -1434,7 +1492,8 @@
       [
         "45"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791303728294",
@@ -1450,7 +1509,8 @@
       [
         "45"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791303768652",
@@ -1466,7 +1526,8 @@
       [
         "60"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791303998215",
@@ -1482,7 +1543,8 @@
       [
         "orientação"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791304184033",
@@ -1501,7 +1563,8 @@
       [
         "de aceleração"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791304274936",
@@ -1514,7 +1577,8 @@
       [
         "desvio"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1791308943772",
@@ -1533,7 +1597,8 @@
       [
         "obrigado a ceder passagem"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792048877280",
@@ -1550,7 +1615,8 @@
       [
         "ir abaixo"
       ]
-    ]
+    ],
+    "grupo": "pratica"
   },
   {
     "id": "q-1792048996512",
@@ -1582,7 +1648,8 @@
         "travão",
         "pedal do travão"
       ]
-    ]
+    ],
+    "grupo": "pratica"
   },
   {
     "id": "q-1792049349808",
@@ -1595,7 +1662,8 @@
       "Sim, desde que tome as devidas precauções",
       "Não posso nas passagens de nível"
     ],
-    "resposta_correta": 0
+    "resposta_correta": 0,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792050691139",
@@ -1609,7 +1677,8 @@
       "Quando se cruza com animais",
       "No acesso a uma autoestrada"
     ],
-    "resposta_correta": 1
+    "resposta_correta": 1,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792050838252",
@@ -1623,7 +1692,8 @@
       "Indicação que significa pista obrigatória para peões e velocípedes",
       "Prescrição específica que significa pista obrigatória para peões e velocípedes"
     ],
-    "resposta_correta": 0
+    "resposta_correta": 0,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792050915658",
@@ -1645,7 +1715,8 @@
       [
         "prescrição específica"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792050999191",
@@ -1664,7 +1735,8 @@
       [
         "sinais de zona"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792051191179",
@@ -1680,7 +1752,8 @@
       [
         "seleção de vias"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792051205827",
@@ -1696,7 +1769,8 @@
       [
         "seleção de vias"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792051224391",
@@ -1712,7 +1786,8 @@
       [
         "seleção de vias"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792051246896",
@@ -1728,7 +1803,8 @@
       [
         "afetação de vias"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792051257483",
@@ -1744,7 +1820,8 @@
       [
         "afetação de vias"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792051268189",
@@ -1760,7 +1837,8 @@
       [
         "afetação de vias"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792051276904",
@@ -1776,7 +1854,8 @@
       [
         "afetação de vias"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792051286813",
@@ -1792,7 +1871,8 @@
       [
         "zona"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792271715139",
@@ -1808,7 +1888,8 @@
       [
         "paragem obrigatória"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792272003790",
@@ -1824,7 +1905,8 @@
       [
         "para"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792272125403",
@@ -1840,7 +1922,8 @@
       [
         "2"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792272965798",
@@ -1886,7 +1969,8 @@
       [
         "Paragem de veículos afetos ao transporte de crianças"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792273089880",
@@ -1899,7 +1983,8 @@
       "Ceder a passagem aos veiculos da direita",
       "Passar, conduzindo com cautela necessária à segurança do trânsito"
     ],
-    "resposta_correta": 1
+    "resposta_correta": 1,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792273155441",
@@ -1913,7 +1998,8 @@
       "De modo a evitar ruídos incómodos",
       "Sempre pela retaguarda"
     ],
-    "resposta_correta": 1
+    "resposta_correta": 1,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792307189275",
@@ -1926,7 +2012,8 @@
       "Queda de Pedras",
       "Cais ou precipicio"
     ],
-    "resposta_correta": 0
+    "resposta_correta": 0,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792307441167",
@@ -1939,7 +2026,8 @@
       [
         "descida"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792308469867",
@@ -2048,7 +2136,8 @@
       [
         "via com prioridade"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792308550750",
@@ -2064,7 +2153,8 @@
       [
         "tem de"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792424425570",
@@ -2078,7 +2168,8 @@
       "grave",
       "leve"
     ],
-    "resposta_correta": 0
+    "resposta_correta": 0,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792424600156",
@@ -2092,7 +2183,8 @@
       "indicação",
       "prescrição específica"
     ],
-    "resposta_correta": 1
+    "resposta_correta": 1,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792424833949",
@@ -2106,7 +2198,8 @@
       "Aproximar o veículo da marca rodoviária que está a dividir as vias de trânsito",
       "Aproximar o veículo do eixo da faixa de rodagem"
     ],
-    "resposta_correta": 2
+    "resposta_correta": 2,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792424920344",
@@ -2120,7 +2213,8 @@
       "Deve ser menor",
       "Deve aumentar também"
     ],
-    "resposta_correta": 2
+    "resposta_correta": 2,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792425096745",
@@ -2133,7 +2227,8 @@
       "Certo, porque não significa poder avançar sem cuidado",
       "Errado, porque não significa poder avançar sem cuidado"
     ],
-    "resposta_correta": 0
+    "resposta_correta": 0,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792425261530",
@@ -2146,7 +2241,8 @@
       "O excesso de água sobre o pavimento",
       "A perda de aderência dos pneus"
     ],
-    "resposta_correta": 1
+    "resposta_correta": 1,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792431382263",
@@ -2159,7 +2255,8 @@
       "Trabalhos na estrada",
       "Obras ou obstáculos na via"
     ],
-    "resposta_correta": 1
+    "resposta_correta": 1,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792431594359",
@@ -2172,7 +2269,8 @@
       [
         "sinalização"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792431829145",
@@ -2185,7 +2283,8 @@
       [
         "sem condutor"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792432418430",
@@ -2199,7 +2298,8 @@
       "Sim, mas se tiver apenas mais de 65 anos",
       "Não, apenas se me encontrar doente"
     ],
-    "resposta_correta": 0
+    "resposta_correta": 0,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792432566846",
@@ -2213,7 +2313,8 @@
       "Para a direita, utilizando a berma se necessário",
       "Para a esquerda, aproximando-me do eixo da faixa de rodagem se necessário"
     ],
-    "resposta_correta": 0
+    "resposta_correta": 0,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792432739424",
@@ -2227,7 +2328,8 @@
       "O aumento de aderência ao piso",
       "A diminuição de paragem devido à diminuição da aderência ao piso"
     ],
-    "resposta_correta": 0
+    "resposta_correta": 0,
+    "grupo": "teoria"
   },
   {
     "id": "q-1792433181852",
@@ -2240,7 +2342,8 @@
       [
         "regularmente com o motor a frio"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792433470217",
@@ -2259,7 +2362,8 @@
       [
         "sobe"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792433622314",
@@ -2275,7 +2379,8 @@
       [
         "entrar numa AE/via reservada a automóveis e motociclos"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792433680637",
@@ -2288,7 +2393,8 @@
       [
         "responsabilidade civil"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792433705946",
@@ -2301,7 +2407,8 @@
       [
         "não houver cintos atrás"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792433738007",
@@ -2314,7 +2421,8 @@
       [
         "1.5"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792434268030",
@@ -2330,13 +2438,15 @@
       [
         "passagem para velocípedes"
       ]
-    ]
+    ],
+    "grupo": "teoria"
   },
   {
     "id": "q-1792518291047",
     "categoria": "Prática",
     "tipo": "fill",
-    "pergunta": "****Se estiveres em 3ª/4.ª/5ª/6ª e quiseres parar numa estrada plana ou subida:****\n1. [[1]]\n2. Carrega progressivamente [[2]] .\n3. À medida que a velocidade diminui e o motor se aproxima das rotações mínimas adequadas à mudança (por exemplo [[3]]rpm), [[4]], antes de o motor começar a soluçar ou ir abaixo e [[5]] até o carro ficar completamente parado.\n5.Se fores arrancar imediatamente, [[6]]. Se fores ficar parado algum tempo, [[7]], mantendo o carro travado.\nNão precisas de reduzir de 4.ª para 3.ª, depois 2.ª e finalmente 1.ª para parar.\n\n---\n\n****Se estiveres em 4.ª e quiseres apenas abrandar****\n\n1. [[8]].\n2. Carrega progressivamente [[9]]\n3. Quando já estiveres a uma velocidade adequada para a 2.ª, por exemplo, [[10]], carrega na embraiagem.\n3. Engata a [[11]]\n\n---\n\nPosso engrenar para uma velocidade inferior, obrigatoriamente com o pedal da embraiagem a fundo e opcionalmente com o travão de pé premido (e até preferível). Mas não posso engrenar para uma velocidade superior, com o pedal de embraiagem a fundo e simultaneamente com o acelerador premido, ou seja, tenho de ter o acelerador solto.\n\n---",
+    "pergunta": "****Se estiveres em 3.ª/4.ª/5.ª/6.ª e quiseres parar numa estrada plana ou numa subida:****\n\n1. [[1]].\n2. Carrega progressivamente [[2]].\n3. À medida que a velocidade diminui e o motor se aproxima de rotações demasiado baixas (por exemplo, [[3]], dependendo do motor), [[4]], antes de o motor começar a soluçar ou ir abaixo.\n4. [[5]] até o carro ficar completamente parado.\n5. Se fores arrancar imediatamente, [[6]]. \n\n****Não precisas de reduzir sucessivamente de 4.ª para 3.ª, depois 2.ª e finalmente 1.ª para parar.****",
+    "grupo": "pratica",
     "explicacao": "",
     "imagem": "",
     "respostas": [
@@ -2344,23 +2454,31 @@
         "Tira o pé do acelerador"
       ],
       [
-        "no travão, mantendo a velocidade atual engrenada"
+        "no travão, mantendo a mudança atual engrenada e a embraiagem completamente solta"
       ],
       [
-        "1200"
+        "1.200–1.500 rpm"
       ],
       [
         "carrega na embraiagem até ao fundo"
       ],
       [
-        "continua a travar"
+        "Continua a travar"
       ],
       [
-        "engata a 1.ª velocidade"
-      ],
-      [
-        "coloca em ponto morto e solta a embraiagem"
-      ],
+        "engata a 1.ª velocidade, mantendo a embraiagem a fundo"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792790182724",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "****Se estiveres em 4.ª e quiseres apenas abrandar****\n\n1. [[1]].\n2. Carrega progressivamente [[2]]\n3. Quando já estiveres a uma velocidade adequada para a 2.ª, por exemplo, [[3]], carrega na embraiagem.\n3. Engata a [[4]]",
+    "grupo": "pratica",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
       [
         "Tira o pé do acelerador"
       ],
@@ -2372,6 +2490,283 @@
       ],
       [
         "2.ª velocidade"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792790247162",
+    "categoria": "Sem categoria",
+    "tipo": "correct",
+    "pergunta": "Posso engrenar para uma velocidade inferior, obrigatoriamente com o pedal da embraiagem a fundo e opcionalmente com o travão de pé premido (e até preferível). Mas não posso engrenar para uma velocidade superior, com o pedal de embraiagem a fundo e simultaneamente com o acelerador premido, ou seja, tenho de ter o acelerador solto.",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "frase_correta": true,
+    "palavra_errada": "",
+    "palavra_correta": ""
+  },
+  {
+    "id": "q-1792793460015",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "****Se estiveres em 3.ª/4.ª/5.ª/6.ª e quiseres apenas abrandar numa estrada plana:****\n\n1. [[1]].\n2. [[2]], mantendo [[3]].\n3. Observa brevemente [[4]]. Quando descerem para cerca de [[5]], podes considerar reduzir para a mudança imediatamente inferior, se ainda precisares de abrandar.\n4. [[6]] e [[7]].\n5. [[8]] (por exemplo, [[9]]) e [[10]], evitando solavancos.\n6. As RPM [[11]], por exemplo, de [[12]], dependendo do carro.\n7. [[13]], ajustando a pressão no travão.\n8. [[14]], até chegares à mudança adequada à velocidade pretendida.\n9. [[15]], mantendo a embraiagem solta.\n\n****Exemplo prático de reduções:****\n\n• 6.ª → 5.ª considera reduzir quando as RPM se aproximarem de 1.300–1.500.\n• 5.ª → 4.ª aplica o mesmo princípio.\n• 4.ª → 3.ª: aplica o mesmo princípio.\n• 3.ª → 2.ª: aplica o mesmo princípio, se precisares de circular mais devagar.\n\n****Atenção:****\nAs 1.300–1.500 rpm são apenas uma referência aproximada para um diesel, não uma ordem automática para reduzir. A velocidade também tem de permitir a mudança inferior sem provocar rotações excessivas.\n\nNão precisas de reduzir todas as mudanças se a velocidade pretendida já for adequada à mudança atual.\n\n---",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "Tira o pé do acelerador"
+      ],
+      [
+        "Carrega progressivamente no travão"
+      ],
+      [
+        "a mudança atual engrenada e a embraiagem completamente solta"
+      ],
+      [
+        "as RPM"
+      ],
+      [
+        "1.300–1.500 rpm"
+      ],
+      [
+        "Mantém a pressão necessária no travão"
+      ],
+      [
+        "carrega na embraiagem até ao fundo"
+      ],
+      [
+        "Engata a mudança imediatamente inferior"
+      ],
+      [
+        "5.ª → 4.ª"
+      ],
+      [
+        "solta progressivamente a embraiagem"
+      ],
+      [
+        "aumentam após a redução"
+      ],
+      [
+        "1.400 para 1.900 rpm"
+      ],
+      [
+        "Continua a travar com a embraiagem completamente solta"
+      ],
+      [
+        "Repete o procedimento apenas se necessário"
+      ],
+      [
+        "Alivia o travão e acelera suavemente"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792793675937",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "****Se estiveres em 4.ª/5.ª/6.ª e quiseres controlar a velocidade numa descida longa:****\n\n1. [[1]], mantendo [[2]].\n2. [[3]]. Se o carro estiver a ganhar velocidade na descida, [[4]].\n3. Para aumentar o travão-motor, [[5]].\n4. [[6]]. Num diesel, por exemplo, podes considerar uma redução quando estiveres nas [[7]], mas este valor não garante, por si só, que a redução seja segura.\n5. [[8]] e [[9]].\n6. [[10]] (6.ª → 5.ª, 5.ª → 4.ª ou 4.ª → 3.ª).\n7. [[11]], evitando solavancos e mantendo as RPM abaixo da zona vermelha.\n8. [[12]]. O motor ajuda agora a controlar a velocidade.\n9. [[13]]. Num diesel, cerca de [[14]] podem proporcionar travão-motor útil.\n10. Se o carro [[15]], [[16]] e, se necessário, considera outra redução após diminuíres a velocidade.\n\n****Exemplo ilustrativo — SEAT Ibiza diesel:****\n\nEstás em 5.ª a 70 km/h numa descida.\n\n• Travas até cerca de 50 km/h\n• Carregas na embraiagem até ao fundo\n• Engatas a 4.ª\n• Soltas progressivamente a embraiagem\n• As RPM podem estabilizar, por exemplo, nas 2.000 rpm\n• Manténs o acelerador e a embraiagem soltos\n• Utilizas o travão de pé quando necessário\n\n****Atenção:****\nOs 50 km/h e as 2.000 rpm são apenas um exemplo, não valores garantidos para todos os Ibiza. Não reduzas se isso puder provocar rotações excessivas.\n\nNuma descida longa, não precisas de esperar pelas 1.300 rpm para reduzir. A mudança inferior deve ser selecionada antecipadamente para proporcionar travão-motor.",
+    "grupo": "pratica",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "Tira o pé do acelerador"
+      ],
+      [
+        "a mudança atual engrenada e a embraiagem completamente solta"
+      ],
+      [
+        "Observa o velocímetro"
+      ],
+      [
+        "carrega progressivamente no travão de pé"
+      ],
+      [
+        "reduz a velocidade com o travão de pé antes de engrenar uma mudança inferior"
+      ],
+      [
+        "Observa brevemente as RPM"
+      ],
+      [
+        "1.500–1.800 rpm"
+      ],
+      [
+        "Mantém a pressão necessária no travão"
+      ],
+      [
+        "carrega na embraiagem até ao fundo"
+      ],
+      [
+        "Engata a mudança imediatamente inferior"
+      ],
+      [
+        "Solta progressivamente a embraiagem"
+      ],
+      [
+        "Mantém o acelerador e a embraiagem completamente soltos"
+      ],
+      [
+        "Observa a velocidade e as RPM"
+      ],
+      [
+        "1.800–2.500 rpm"
+      ],
+      [
+        "continuar a ganhar demasiada velocidade"
+      ],
+      [
+        "utiliza o travão de pé"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792793956199",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "****Se estiveres em 3.ª/4.ª/5.ª/6.ª e precisares de reduzir numa subida:****\n\n1. [[1]] para continuares a subir.\n2. [[2]]. Se começar a perder força ou as rotações descerem demasiado (por exemplo, [[3]] num diesel em esforço), prepara uma redução.\n3. [[4]] e [[5]]. Não precisas de travar, salvo se a velocidade o exigir.\n4. [[6]], por exemplo, [[7]].\n5. [[8]], retomando [[9]] para manter a força necessária à subida.\n6. [[10]] e continua a acelerar conforme a inclinação.\n7. [[11]] e se o carro continua a subir sem solavancos.\n\n****Exemplo ilustrativo — SEAT Ibiza diesel:****\n\n• Estás em 4.ª a 1.500 rpm e o carro começa a perder força.\n• Tiras o pé do acelerador e carregas na embraiagem até ao fundo\n• Engatas a 3.ª velocidade\n• Soltas progressivamente a embraiagem, retomando suavemente a aceleração\n• As RPM podem subir, por exemplo, para 2.000 rpm\n• Continuas a subir em 3.ª, com a embraiagem completamente solta.\n\n****Atenção:****\n\nAs 1.500–1.800 rpm são apenas uma referência inicial. Numa subida, podes precisar de reduzir mais cedo, antes de o motor perder demasiada força.\nNão deves esperar que o motor comece a soluçar para começar a reduzir\n\nSe o carro perder tanta velocidade que não consigas continuar a subir, trava até ficar imobilizado e prepara um novo arranque em subida.",
+    "grupo": "pratica",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "Mantém o acelerador pressionado conforme necessário"
+      ],
+      [
+        "Observa brevemente as RPM e sente a resposta do motor"
+      ],
+      [
+        "1.500–1.800 rpm"
+      ],
+      [
+        "Tira o pé do acelerador"
+      ],
+      [
+        "carrega na embraiagem até ao fundo"
+      ],
+      [
+        "Engata a mudança imediatamente inferior"
+      ],
+      [
+        "4.ª → 3.ª"
+      ],
+      [
+        "Solta progressivamente a embraiagem"
+      ],
+      [
+        "suavemente o acelerador"
+      ],
+      [
+        "Solta completamente a embraiagem"
+      ],
+      [
+        "Verifica se o motor recuperou força"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792794171149",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "****Se estiveres parado numa subida e quiseres arrancar sem deixar o carro recuar:****\n\n1. [[1]] e [[2]], garantindo que o carro fica imobilizado.\n2. [[3]] e [[4]].\n3. [[5]], depois de confirmares que o travão de mão segura o carro.\n4. [[6]] até aproximadamente [[7]], como referência inicial num diesel.\n5. [[8]] até encontrares o [[9]]. O motor muda de som, as RPM podem baixar ligeiramente e o carro começa a fazer força para avançar.\n6. [[10]], ajustando o acelerador para evitar uma queda excessiva das RPM.\n7. [[11]] e [[12]] quando o motor estiver a transmitir força suficiente para iniciar o movimento.\n8. Quando o carro começar a avançar, [[13]].\n9. Assim que o carro estiver a avançar de forma estável, [[14]] e continua a subir em 1.ª.\n10. [[15]], sem deixar o motor trabalhar em esforço.",
+    "grupo": "pratica",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "Mantém o travão de pé pressionado"
+      ],
+      [
+        "aciona o travão de mão"
+      ],
+      [
+        "Carrega na embraiagem até ao fundo"
+      ],
+      [
+        "engata a 1.ª velocidade"
+      ],
+      [
+        "Retira o pé do travão de pé"
+      ],
+      [
+        "Pressiona suavemente o acelerador"
+      ],
+      [
+        "1.400–1.800 rpm"
+      ],
+      [
+        "Levanta lentamente a embraiagem"
+      ],
+      [
+        "ponto de fricção"
+      ],
+      [
+        "Mantém momentaneamente a embraiagem no ponto de fricção"
+      ],
+      [
+        "Verifica se podes avançar em segurança"
+      ],
+      [
+        "liberta completamente o travão de mão"
+      ],
+      [
+        "continua a acelerar suavemente e a soltar progressivamente a embraiagem"
+      ],
+      [
+        "solta completamente a embraiagem"
+      ],
+      [
+        "Aumenta para 2.ª apenas quando tiveres velocidade e força suficientes"
+      ]
+    ]
+  },
+  {
+    "id": "q-1792794418777",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "****Se estiveres a subir em 1.ª e quiseres passar para 2.ª sem deixar o motor ir abaixo:****\n\n1. [[1]], mantendo [[2]].\n\n2. [[3]]. Num SEAT Ibiza diesel, podes utilizar aproximadamente [[4]] como referência inicial numa subida moderada. Não mudes demasiado cedo.\n\n3. Quando tiveres ganho velocidade suficiente (por exemplo, [[5]], dependendo do carro e da inclinação), [[6]].\n\n4. Imediatamente a seguir, [[7]].\n\n5. [[8]], sem demora desnecessária.\n\n6. [[9]] e [[10]] quando te aproximares do ponto de acoplamento.\n\n7. [[11]]. As RPM descem normalmente depois da passagem para 2.ª. O motor deve continuar a trabalhar suavemente, sem vibrações ou perda excessiva de força.\n\n8. [[12]] e [[13]], mantendo força suficiente para subir.\n\n****Exemplo ilustrativo — SEAT Ibiza diesel:****",
+    "grupo": "pratica",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "Continua a acelerar em 1.ª"
+      ],
+      [
+        "a embraiagem completamente solta"
+      ],
+      [
+        "Observa brevemente as RPM"
+      ],
+      [
+        "2.300–2.800 rpm"
+      ],
+      [
+        "15–25 km/h"
+      ],
+      [
+        "tira o pé do acelerador"
+      ],
+      [
+        "carrega na embraiagem até ao fundo"
+      ],
+      [
+        "Engata a 2.ª velocidade"
+      ],
+      [
+        "Começa a soltar progressivamente a embraiagem"
+      ],
+      [
+        "retoma suavemente o acelerador"
+      ],
+      [
+        "Observa a resposta do motor"
+      ],
+      [
+        "Solta completamente a embraiagem"
+      ],
+      [
+        "continua a acelerar em 2.ª"
       ]
     ]
   }

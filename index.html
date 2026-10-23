@@ -17,6 +17,7 @@
 
 <nav class="tabs">
 <button class="tab active" data-panel="train">🎯 Treinar</button>
+<button class="tab" data-panel="practice">🚗 Prática de condução</button>
 <button class="tab" data-panel="bank">📚 Base de perguntas</button>
 <button class="tab" data-panel="expressions">🗣️ Expressões informais</button>
 <button class="tab" data-panel="expressionBase">📖 Base de expressões informais</button>
@@ -36,6 +37,23 @@
 <div id="quiz"></div>
 </section>
 
+
+<section id="practice" class="panel">
+<div class="toolbar">
+<div>
+<span class="pill">Perguntas: <span id="practiceTotal">0</span></span>
+<span class="pill">Certas: <span id="practiceCorrect">0</span></span>
+<span class="pill">Respondidas: <span id="practiceAnswered">0</span></span>
+</div>
+<button class="secondary" onclick="restartPracticeTraining()">↻ Novo treino prático</button>
+</div>
+<div class="card">
+<h2 style="margin:0 0 5px">Prática de condução</h2>
+<div class="small">Aqui aparecem apenas as perguntas que marcou como <strong>Prática</strong> na Base de perguntas.</div>
+</div>
+<div id="practiceQuiz"></div>
+</section>
+
 <section id="bank" class="panel">
 <div class="card">
 <div class="toolbar">
@@ -45,6 +63,7 @@
 <div class="grid">
 <div><label>Pesquisar</label><input id="search" oninput="renderBank()" placeholder="Ex.: sinalização"></div>
 <div><label>Tipo</label><select id="filter" onchange="renderBank()"><option value="">Todos</option><option value="fill">Preencher espaços</option><option value="choice">Escolha múltipla</option><option value="correct">Certa/errada + corrigir palavra</option></select></div>
+<div><label>Área</label><select id="areaFilter" onchange="renderBank()"><option value="">Todas</option><option value="teoria">Teoria</option><option value="pratica">Prática de condução</option></select></div>
 </div>
 </div>
 <div id="bankList"></div>
@@ -125,6 +144,7 @@
 <div class="grid">
 <div><label>Categoria</label><input id="category" placeholder="Ex.: Hierarquia da sinalização"></div>
 <div><label>Tipo</label><select id="type" onchange="toggleFields()"><option value="fill">Preencher espaços</option><option value="choice">Escolha múltipla</option><option value="correct">Frase certa/errada + corrigir palavra</option></select></div>
+<div><label>Área de treino</label><select id="questionArea"><option value="teoria">Teoria / Código da Estrada</option><option value="pratica">Prática de condução</option></select></div>
 </div>
 <div class="format-help"><strong>Editor visual:</strong><span><code>[[]]</code> → campo de resposta</span><span><code>****texto****</code> → <strong>negrito</strong></span><span><code>---</code> → linha separadora</span></div>
 <div id="normalPromptBlock"><label>Enunciado</label><textarea id="prompt" oninput="updatePromptPreview()" placeholder="Escreva o enunciado. Ex.: Qual é a **velocidade máxima**?"></textarea></div>

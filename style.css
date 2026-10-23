@@ -88,119 +88,134 @@ input,select,textarea{width:100%;border:1px solid var(--line);border-radius:10px
 }
 
 
-/* Campos de resposta integrados na frase — visual igual ao editor */
-.q{
-  white-space:normal;
+.question-area-tag{
+  margin-left:6px;
+  background:#f8fafc;
+  color:#475467;
+  border:1px solid #eaecf0;
 }
+
+
+/* Feedback diretamente nos campos Fill the Blank — treino teórico */
+.q input.train-fill-input.fill-result-correct,
+.q input.blank.fill-result-correct {
+  background:#ecfdf3 !important;
+  border:2px solid #12b76a !important;
+  border-bottom:2px solid #12b76a !important;
+  color:#067647 !important;
+  -webkit-text-fill-color:#067647 !important;
+  opacity:1 !important;
+  font-weight:800 !important;
+}
+
+.q input.train-fill-input.fill-result-wrong,
+.q input.blank.fill-result-wrong {
+  background:#fef3f2 !important;
+  border:2px solid #f04438 !important;
+  border-bottom:2px solid #f04438 !important;
+  color:#b42318 !important;
+  -webkit-text-fill-color:#b42318 !important;
+  opacity:1 !important;
+  font-weight:800 !important;
+}
+
+
+/* Editor Fill the Blank — separadores mais fáceis de selecionar/apagar */
+#fillVisualEditor hr{
+  cursor:pointer;
+  position:relative;
+  min-height:12px;
+  margin:18px 0;
+  border:0;
+  border-top:2px solid #d0d5dd;
+  transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+#fillVisualEditor hr:hover,
+#fillVisualEditor hr.fill-separator-selected{
+  border-top-color:#528bff;
+  box-shadow:0 -3px 0 rgba(82,139,255,.10);
+}
+
+#fillVisualEditor hr.fill-separator-selected{
+  outline:2px solid rgba(82,139,255,.18);
+  outline-offset:5px;
+}
+
+/* Evita que elementos visuais "atómicos" prendam a seleção */
+#fillVisualEditor [contenteditable="false"],
+#fillVisualEditor .fill-slot,
+#fillVisualEditor .fill-answer-slot{
+  user-select:all;
+}
+
+
+/* =========================================================
+   Fill the Blank inline — Teoria e Prática
+   Os campos ficam integrados no texto e nunca ocupam 100%.
+   ========================================================= */
 
 .q .train-fill-slot{
   display:inline-flex !important;
-  align-items:center;
-  gap:7px;
-  vertical-align:middle;
+  align-items:center !important;
+  vertical-align:middle !important;
   width:auto !important;
-  max-width:100%;
-  margin:4px 5px;
-  padding:4px 6px 4px 9px;
-  border:1px solid #84adff;
-  border-radius:11px;
-  background:#eef4ff;
-  box-shadow:0 2px 5px rgba(21,94,239,.08);
-  white-space:nowrap;
-}
-
-.q .train-fill-label{
-  display:inline-block;
-  width:auto !important;
-  flex:0 0 auto;
-  font-size:10px;
-  line-height:1;
-  text-transform:uppercase;
-  letter-spacing:.05em;
-  font-weight:900;
-  color:#1849a9;
+  max-width:100% !important;
+  margin:3px 4px !important;
+  padding:3px 5px !important;
+  white-space:nowrap !important;
+  line-height:1 !important;
 }
 
 .q input.train-fill-input{
   display:inline-block !important;
   flex:0 0 auto !important;
-  width:clamp(105px, calc(var(--answer-chars, 8) * 0.82ch + 58px), 360px) !important;
-  min-width:105px !important;
-  max-width:min(360px, 55vw) !important;
-  height:auto !important;
+
+  /* A largura acompanha aproximadamente o tamanho da resposta,
+     mas continua suficientemente compacta para caber na frase. */
+  width:clamp(
+    95px,
+    calc(var(--answer-chars, 8) * 0.78ch + 42px),
+    300px
+  ) !important;
+
+  min-width:95px !important;
+  max-width:min(300px, 48vw) !important;
+
   margin:0 !important;
-  padding:7px 9px !important;
+  padding:6px 8px !important;
+
   border:0 !important;
   border-bottom:2px solid #528bff !important;
   border-radius:6px !important;
+
   background:#fff !important;
-  color:#101828 !important;
-  font:inherit;
+  font:inherit !important;
   font-weight:800 !important;
   line-height:1.2 !important;
-  box-shadow:none !important;
+
+  vertical-align:middle !important;
 }
 
-.q input.train-fill-input:focus{
-  outline:none !important;
-  border-bottom-color:#155eef !important;
-  box-shadow:0 0 0 3px rgba(21,94,239,.10) !important;
+/* Mantém vários blanks corridos na mesma linha sempre que houver espaço. */
+.q{
+  white-space:normal !important;
 }
 
-.q input.train-fill-input::placeholder{
-  color:#98a2b3;
-  font-weight:600;
-}
-
-@media(max-width:600px){
+/* Em ecrãs pequenos continuam inline, mas podem quebrar naturalmente
+   apenas quando já não há espaço horizontal suficiente. */
+@media(max-width:760px){
   .q .train-fill-slot{
-    gap:5px;
-    margin:3px 2px;
-    padding:4px 5px 4px 7px;
+    margin:2px 3px !important;
   }
+
   .q input.train-fill-input{
-    width:clamp(95px, calc(var(--answer-chars, 8) * 0.76ch + 50px), 68vw) !important;
-    min-width:95px !important;
-    max-width:68vw !important;
+    min-width:82px !important;
+    max-width:min(250px, 58vw) !important;
+    width:clamp(
+      82px,
+      calc(var(--answer-chars, 8) * 0.72ch + 36px),
+      250px
+    ) !important;
   }
 }
-
-
-/* Campos de preenchimento sem rótulo "RESPOSTA" */
-.q .train-fill-slot{
-  gap:0 !important;
-  padding:4px 6px !important;
-}
-
-.q .train-fill-label{
-  display:none !important;
-}
-
-.q input.train-fill-input{
-  margin:0 !important;
-}
-
-
-/* Mostrar a resposta correta antes de avançar */
-.correct-answer-reveal{
-  margin-top:12px;
-  padding:12px 14px;
-  border-radius:12px;
-  background:#fff;
-  border:1px solid #fda29b;
-  color:#101828;
-}
-.correct-answer-title{
-  margin-bottom:7px;
-  font-size:12px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.05em;
-  color:#b42318;
-}
-.correct-answer-value{
-  font-size:16px;
-  line-height:1.65;
-}
-
-.bank-question-item{scroll-margin-top:24px;transition:border-color .35s ease,box-shadow .35s ease,background-color .35s ease}.bank-question-item.question-edit-highlight{border-color:#528bff !important;background:#f5f8ff !important;box-shadow:0 0 0 4px rgba(21,94,239,.12),0 12px 30px rgba(21,94,239,.12) !important}
