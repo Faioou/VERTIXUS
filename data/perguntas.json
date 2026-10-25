@@ -223,21 +223,25 @@
     "id": "q-1790641723925",
     "categoria": "Sinais de Perigo",
     "tipo": "fill",
-    "pergunta": "A14: [[1]]\nA15: [[2]]\nA21: [[3]]\nA24: [[4]], ATENÇÃO: [[12]]\nA25: [[5]]\nA26: [[6]]\nA27: [[7]]\nA32a: [[8]]\nA32b: [[9]]\nA maior parte dos sinais de perigo são postos a mais de [[10]] e a menos de [[11]]",
+    "pergunta": "A14: [[1]]\nA15: [[2]]\nA21: [[3]]\nA24: [[4]], ATENÇÃO: [[5]]\nA25: [[6]]\nA26: [[7]]\nA27: [[8]]\nA32a: [[9]]\nA32b: [[10]]\nA maior parte dos sinais de perigo são postos a mais de [[11]] e a menos de [[12]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1790641723937-Screenshot-2026-09-29-012117.png",
     "respostas": [
       [
-        "crianças"
+        "lugar frequentado por crianças"
       ],
       [
-        "idosos"
+        "lugar frequentado por idosos"
       ],
       [
         "via que pode ser sobrevoada"
       ],
       [
         "cruzamento ou entroncamento onde vigora a regra geral de prioridade à direita"
+      ],
+      [
+        "excecionalmente (raramente/salvo exceções) pode ser utilizado dentro das localidades, ou seja, normalmente aparece fora das localidades"
       ],
       [
         "trânsito passa a ser de sentido duplo"
@@ -259,12 +263,8 @@
       ],
       [
         "300 m"
-      ],
-      [
-        "excecionalmente (raramente/salvo exceções) pode ser utilizado dentro das localidades, ou seja, normalmente aparece fora das localidades"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1790641896056",
@@ -454,6 +454,7 @@
     "categoria": "Fim de proibições",
     "tipo": "fill",
     "pergunta": "Sinal C20a finaliza todas as proibições anteriores e tem o mesmo efeito de todas aí da imagem exceto [[1]].\nSempre que aparece um ou mais riscos assim \"/\" significa [[2]]\nSempre que não aparece ou aparece um risco assim \"\\\" significa [[3]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1790854816424-Untitled-1.jpg",
     "respostas": [
@@ -461,13 +462,12 @@
         "C21"
       ],
       [
-        "fim de proibição/obrigação..."
+        "fim de proibição/obrigação"
       ],
       [
         "proibição"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1790855000854",
@@ -1283,7 +1283,8 @@
     "id": "q-1791302271560",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "**Inversão do sentido de marcha**\nNeste local posso **inverter o sentido de marcha**? Não, porque o veículo está a sair de um caminho particular ou porque não há boa visibilidade? Ambas estão certas, mas a **mais** certa é a primeira ou a segunda? É a[[1]] opção, uma vez que é **estritamente proibida** em [[2]] , [[3]], [[4]], [[5]], [[6]], [[7]], [[8]]e [[9]], locais estes onde também é proibido de se fazer a manobra de [[10]], à exceção das [[11]].\n\n---\n**Marcha atrás**\nA manobra de **marcha atrás** deve ser feita [[12]] e no [[13]]\n\n---\n**Ultrapassagem**\nNão posso fazer nas [[14]], [[15]], [[16]], [[17]], [[18]], [[19]], [[20]], [[21]]\n\n---\nNuma linha mista, se do seu lado está a linha descontínua, pode pisá-la ou transpô-la para efetuar [[22]] ou [[23]]\n\n---",
+    "pergunta": "**Inversão do sentido de marcha**\nNeste local posso **inverter o sentido de marcha**? Não, porque o veículo está a sair de um caminho particular ou porque não há boa visibilidade? Ambas estão certas, mas a **mais** certa é a primeira ou a segunda? É a[[1]] opção, uma vez que é **estritamente proibida** nos seguintes locais:1. [[2]] , \n2.[[3]], \n3.[[4]], \n4.[[5]], \n5.[[6]], \n6.[[7]], \n7.[[8]]e \n8.[[9]], locais estes onde também é proibido de se fazer a manobra de [[10]], à exceção das [[11]].\n\n---\n\n**Marcha atrás**\nA manobra de **marcha atrás** deve ser feita [[12]] e no [[13]]\n\n---\n\n**Ultrapassagem**\nNão posso fazer nos seguintes locais/momentos:\n2. [[14]], \n1.[[15]], \n3.[[16]], \n4. [[17]], \n5.[[18]], \n6. [[19]],\n7. [[20]], \n8.[[21]]\n\n---\n\nNuma linha mista, ****SE**** do seu lado está a linha descontínua, pode pisá-la ou transpô-la para efetuar [[22]] ou [[23]]\n\n---",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1791302271572-3079.jpg",
     "respostas": [
@@ -1327,10 +1328,10 @@
         "menor trajeto possível"
       ],
       [
-        "lombas"
+        "locais de visibilidade insuficiente"
       ],
       [
-        "locais de visibilidade insuficiente"
+        "lombas"
       ],
       [
         "imediatamente antes e nas passagens de nível"
@@ -1356,19 +1357,19 @@
       [
         "inversão de sentido de marcha"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1791303537004",
     "categoria": "Sem categoria",
     "tipo": "fill",
     "pergunta": "No que diz respeito aos limites de velocidade, um triciclo é equiparável a um [[1]], máquina industrial com matrícula a um [[2]] e um motociclo c/ + de 50 cm3 a um [[3]].",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "",
     "respostas": [
       [
-        "pesado de pessageiros sem reboque"
+        "pesado de passageiros sem reboque"
       ],
       [
         "pesado de mercadorias com reboque"
@@ -1376,8 +1377,7 @@
       [
         "ligeiro de passageiros"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1791303601918",
@@ -1723,6 +1723,7 @@
     "categoria": "Sem categoria",
     "tipo": "fill",
     "pergunta": "Os sinais de prescrição específica podem ser sinais de:\n1. [[1]]\n2. [[2]]\n3. [[3]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "",
     "respostas": [
@@ -1733,10 +1734,9 @@
         "afetação de vias"
       ],
       [
-        "sinais de zona"
+        "zona"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1792051191179",
@@ -2019,41 +2019,42 @@
     "id": "q-1792307441167",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "[[1]] de inclinação acentuada, pois é da esquerda para a direita",
+    "pergunta": "[[1]] de inclinação acentuada, pois sobe da esquerda para a direita",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1792307441197-Screenshot-2026-10-18-080949.png",
     "respostas": [
       [
-        "descida"
+        "subida"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1792308469867",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "****É proibido parar e estacionar:****\n\nNas [[1]], [[2]], [[3]], [[4]], [[5]] e nos locais de [[6]].\n\n---\n****Dentro das localidades, é proibido parar e estacionar:****\n\nA menos de [[7]] metros [[8]]dos cruzamentos, entroncamentos ou rotundas.\n\n---\n\nA menos de [[9]] metros [[10]]e a menos de [[11]] metros [[12]]das paragens dos autocarros.\n\n---\n\nA menos de [[13]] metros [[14]]das paragens dos elétricos.\n\n---\n\nA menos de [[15]] metros [[16]] passagens para peões.\n\n---\n\nA menos de [[17]] metros dos semáforos, quando a altura do veículo possa encobrir os sinais.\n\n---\n\n****É proibido parar e estacionar:****\n\nNa faixa de rodagem, junto a uma linha contínua, quando a distância entre a linha e o veículo for inferior a [[18]]metros.\n\n---\n\n****Fora das localidades****, na faixa de rodagem, a menos de [[19]] metros [[20]] dos cruzamentos, entroncamentos, rotundas, curvas ou lombas de [[21]].\n\n---\n****É proibido estacionar, mas pode-se parar:****\n\nDe modo a impedir a formação de uma [[22]].\n\nEm [[23]].\n\nNas rampas de acesso a [[24]].\n\n---\n\nA menos de [[25]] metros [[26]]das passagens de nível.\n\nA menos de [[27]] metros [[28]]dos postos de abastecimento de combustível.\n\n---\n\nEm locais reservados a [[29]].\n\nVeículos com [[30]].\n\n---\n\nNas faixas de rodagem, de noite ou de dia, [[31]], ainda que na berma seja possível\nNa berma de uma [[32]]\nNas faixas de rodagem de vias com o sinal [[33]].\n\n---",
+    "pergunta": "****É proibido parar e estacionar:****\n\n[[1]],[[2]],[[3]],[[4]]\n[[5]], \n[[6]] \n\n---\n\n****Dentro das localidades, é proibido parar e estacionar:****\n\nA menos de [[7]] metros [[8]]dos cruzamentos, entroncamentos ou rotundas.\n\n---\n\nA menos de [[9]] metros [[10]]e a menos de [[11]] metros [[12]]das paragens dos autocarros.\n\n---\n\nA menos de [[13]] metros [[14]]das paragens dos elétricos.\n\n---\n\nA menos de [[15]] metros [[16]] passagens para peões.\n\n---\n\nA menos de [[17]] metros dos semáforos, quando a altura do veículo possa encobrir os sinais.\n\n---\n\n****É proibido parar e estacionar:****\n\nNa faixa de rodagem, junto a uma linha contínua, quando a distância entre a linha e o veículo for inferior a [[18]]metros.\n\n---\n\n****Fora das localidades****, na faixa de rodagem, a menos de [[19]] metros [[20]] dos cruzamentos, entroncamentos, rotundas, curvas ou lombas de [[21]].\n\n---\n\n****É proibido estacionar, mas pode-se parar:****\n\nDe modo a impedir a formação de uma [[22]].\n\nEm [[23]].\n\nNas rampas de acesso a [[24]].\n\n---\n\nA menos de [[25]] metros [[26]]das passagens de nível.\n\nA menos de [[27]] metros [[28]]dos postos de abastecimento de combustível.\n\n---\n\nEm locais reservados a [[29]].\n\nVeículos com [[30]].\n\n---\n\nNas faixas de rodagem, de noite ou de dia, [[31]], ainda que na berma seja possível\nNa berma de uma [[32]]\nNas faixas de rodagem de vias com o sinal [[33]].\n\n---",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "",
     "respostas": [
       [
-        "rotundas"
+        "locais de visibilidade insuficiente"
       ],
       [
         "pontes"
       ],
       [
+        "passagens de níveis"
+      ],
+      [
         "túneis"
       ],
       [
-        "passagens de nível"
+        "rotundas"
       ],
       [
         "passagens inferiores ou superiores"
-      ],
-      [
-        "visibilidade insuficiente"
       ],
       [
         "5"
@@ -2136,8 +2137,7 @@
       [
         "via com prioridade"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1792308550750",
@@ -2262,15 +2262,15 @@
     "id": "q-1792431594359",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "Posso fazer inversão de marcha no local exato onde me encontro? Não, porque a[[1]] que constitui a marca longitudinal contínua não me permite",
+    "pergunta": "Posso fazer inversão de marcha no local exato onde me encontro? Sim ou não? [[1]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1792431626290-Screenshot-2026-10-19-184009.png",
     "respostas": [
       [
-        "sinalização"
+        "Não, porque a sinalização que constitui a marca longitudinal contínua não me permite"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1792431829145",
@@ -2415,14 +2415,15 @@
     "categoria": "Sem categoria",
     "tipo": "fill",
     "pergunta": "distância de segurança lateral mínimo com os peões : [[1]] metros",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "",
     "respostas": [
       [
-        "1.5"
+        "1.5",
+        "1,5"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1792434268030",

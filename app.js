@@ -801,6 +801,11 @@ function installFillEditorDeletionUX(){
 
  editor.addEventListener('keydown',e=>{
    const key=e.key.toLowerCase();
+   const inAnswerField=e.target.matches&&e.target.matches('[data-fill-answer]');
+
+   if(inAnswerField){
+     return;
+   }
 
    if((e.ctrlKey||e.metaKey) && !e.shiftKey && key==='z'){
      e.preventDefault();
@@ -1039,6 +1044,8 @@ function insertVisualFragmentAtSelection(fragment){
 const fillEditor=document.getElementById('fillVisualEditor');
 if(fillEditor){
  fillEditor.addEventListener('copy',e=>{
+   if(e.target.matches&&e.target.matches('[data-fill-answer]')) return;
+
    const sel=window.getSelection();
    if(!sel || !sel.rangeCount || sel.isCollapsed) return;
    const range=sel.getRangeAt(0);
@@ -1053,6 +1060,11 @@ if(fillEditor){
  });
 
  fillEditor.addEventListener('paste',e=>{
+   if(e.target.matches&&e.target.matches('[data-fill-answer]')){
+     setTimeout(updatePromptPreview,0);
+     return;
+   }
+
    const text=e.clipboardData?.getData('text/plain');
    if(text===undefined || text===null) return;
    e.preventDefault();
