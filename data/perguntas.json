@@ -164,14 +164,14 @@
     "categoria": "Luzes verdes suplementares",
     "tipo": "fill",
     "pergunta": "Mesmo que o semáforo esteja vermelho, se a luz verde suplementar estiver ligada na direção indicada [[1]].",
+    "grupo": "teoria",
     "explicacao": "prosseguir a marcha no sentido indicado pela seta da luz",
     "imagem": "imagens/1790640506291-S4-3.png",
     "respostas": [
       [
-        "posso prosseguir a marcha"
+        "posso prosseguir a marcha apenas para a esquerda"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1790640715899",
@@ -223,7 +223,7 @@
     "id": "q-1790641723925",
     "categoria": "Sinais de Perigo",
     "tipo": "fill",
-    "pergunta": "A14: [[1]]\nA15: [[2]]\nA21: [[3]]\nA24: [[4]], ATENÇÃO: [[5]]\nA25: [[6]]\nA26: [[7]]\nA27: [[8]]\nA32a: [[9]]\nA32b: [[10]]\nA maior parte dos sinais de perigo são postos a mais de [[11]] e a menos de [[12]]",
+    "pergunta": "A14: [[1]]\nA15: [[2]]\nA21: [[3]]\nA24: [[4]], ATENÇÃO: excecionalmente (raramente/salvo exceções) pode ser utilizado dentro das localidades, ou seja, normalmente aparece fora das localidades\nA25: [[5]]\nA26: [[6]]\nA27: [[7]]\nA32a: [[8]]\nA32b: [[9]]\nA maior parte dos sinais de perigo são postos a mais de [[10]] e a menos de [[11]]",
     "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1790641723937-Screenshot-2026-09-29-012117.png",
@@ -239,9 +239,6 @@
       ],
       [
         "cruzamento ou entroncamento onde vigora a regra geral de prioridade à direita"
-      ],
-      [
-        "excecionalmente (raramente/salvo exceções) pode ser utilizado dentro das localidades, ou seja, normalmente aparece fora das localidades"
       ],
       [
         "trânsito passa a ser de sentido duplo"
@@ -506,16 +503,14 @@
     "categoria": "Colocação dos Sinais de obrigação",
     "tipo": "choice",
     "pergunta": "Os sinais de obrigação são colocados",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "",
     "opcoes": [
       "Na proximidade imediata do local",
-      "entre a 150 m e 300 m",
-      ".",
-      "."
+      "entre a 150 m e 300 m"
     ],
-    "resposta_correta": 0,
-    "grupo": "teoria"
+    "resposta_correta": 0
   },
   {
     "id": "q-1790856325838",
@@ -1222,7 +1217,8 @@
     "id": "q-1791299675805",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "Estacionamento abusivo e indevido que leva à [[1]]do carro:\nMais [[2]]num parque de estacionamento pago com taxas por pagar \nMais[[3]] para além do tempo permitido num local de estacionamento limitado \nMais[[4]] numa ZONA PAGA depois de terminar o tempo pago\nMais de [[5]]num LOCAL/PARQUE GRATUITO\nMais de [[6]] num local com sinais claros de abandono\nUm veículo com [[7]] num parque de estacionamento.\nUm veículo sem[[8]]\n\nUm reboque esteja mais de [[9]] num local não autorizado para estes veículos.\n\nO veículo também pode ser **apreendido** se [[10]] ou se [[11]].",
+    "pergunta": "Estacionamento abusivo e indevido  leva à [[1]]do carro\nO veículo também pode ser **apreendido** se [[2]] ou se [[3]].",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "",
     "respostas": [
@@ -1230,37 +1226,12 @@
         "remoção"
       ],
       [
-        "de 5 dias"
-      ],
-      [
-        "de 2 horas"
-      ],
-      [
-        "de 2 horas"
-      ],
-      [
-        "30 dias"
-      ],
-      [
-        "48 horas"
-      ],
-      [
-        "anúncio de venda"
-      ],
-      [
-        "chapa de matrícula"
-      ],
-      [
-        "72 horas"
-      ],
-      [
         "não tiver seguro"
       ],
       [
         "não tiver matrícula ou a mesma estar irregular"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1791301315522",
@@ -2768,6 +2739,118 @@
       ],
       [
         "continua a acelerar em 2.ª"
+      ]
+    ]
+  },
+  {
+    "id": "q-1793010087792",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Estacionamento abusivo/indevido:\nMais de[[1]]num parque de estacionamento pago com taxas por pagar",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "5 dias"
+      ]
+    ]
+  },
+  {
+    "id": "q-1793010139394",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Estacionamento abusivo/indevido:\nMais de[[1]] para além do tempo permitido num local de estacionamento limitado",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "2 horas"
+      ]
+    ]
+  },
+  {
+    "id": "q-1793010180278",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Estacionamento abusivo/indevido\nMais de[[1]] numa ZONA PAGA depois de terminar o tempo pago",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "2 horas"
+      ]
+    ]
+  },
+  {
+    "id": "q-1793010220745",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Estacionamento abusivo:\nMais de [[1]]num LOCAL/PARQUE GRATUITO",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "30 dias"
+      ]
+    ]
+  },
+  {
+    "id": "q-1793010250863",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Estacionamento abusivo:\nMais de [[1]] num local com sinais claros de abandono",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "48 horas"
+      ]
+    ]
+  },
+  {
+    "id": "q-1793010288837",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Estacionamento abusivo: Um veículo com [[1]] num parque de estacionamento.",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "anúncio de venda"
+      ]
+    ]
+  },
+  {
+    "id": "q-1793010327718",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Estacionamento abusivo: Um veículo sem[[1]]",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "chapa de matrícula"
+      ]
+    ]
+  },
+  {
+    "id": "q-1793010342482",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Estacionamento abusivo:Um reboque esteja mais de [[1]] num local não autorizado para estes veículos.",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "72 horas"
       ]
     ]
   }
