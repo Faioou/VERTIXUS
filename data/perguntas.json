@@ -47,10 +47,12 @@
     "categoria": "Hierarquia da sinalização",
     "tipo": "fill",
     "pergunta": "[[1]] prevalece sobre [[2]] prevalece sobre [[3]] prevalece sobre [[4]] prevalece sobre [[5]] prevalece sobre [[6]] prevalece sobre [[7]].",
+    "grupo": "teoria",
+    "explicacao": "A hierarquia é apresentada por ordem, com «prevalece sobre» entre cada elemento.",
+    "imagem": "",
     "respostas": [
       [
-        "Agentes reguladores do trânsito",
-        "Agentes reguladores de trânsito"
+        "Agente regulador do trânsito"
       ],
       [
         "Sinalização temporária",
@@ -78,10 +80,7 @@
         "Regras gerais de trânsito",
         "Regras gerais de transito"
       ]
-    ],
-    "explicacao": "A hierarquia é apresentada por ordem, com «prevalece sobre» entre cada elemento.",
-    "imagem": "",
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "agente-retaguarda",
@@ -1670,10 +1669,23 @@
     "id": "q-1792050915658",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "Os sinais de regulamentação são sinais de:1. [[1]]\n2. [[2]]\n3. [[3]]\n4. [[4]]",
+    "pergunta": "Há os sinais de[[1]],\n[[2]],\n[[3]] e\n[[4]]\nOs sinais de regulamentação podem ser sinais de:\n1. [[5]]\n2. [[6]]\n3. [[7]]\n4. [[8]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "",
     "respostas": [
+      [
+        "Perigo"
+      ],
+      [
+        "Regulamentação"
+      ],
+      [
+        "Indicação"
+      ],
+      [
+        "Turístico-cultural"
+      ],
       [
         "cedência de passagem"
       ],
@@ -1686,8 +1698,7 @@
       [
         "prescrição específica"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1792050999191",
@@ -2482,7 +2493,7 @@
     "categoria": "Sem categoria",
     "tipo": "fill",
     "pergunta": "****Se estiveres em 3.ª/4.ª/5.ª/6.ª e quiseres apenas abrandar numa estrada plana:****\n\n1. [[1]].\n2. [[2]], mantendo [[3]].\n3. Observa brevemente [[4]]. Quando descerem para cerca de [[5]], podes considerar reduzir para a mudança imediatamente inferior, se ainda precisares de abrandar.\n4. [[6]] e [[7]].\n5. [[8]] (por exemplo, [[9]]) e [[10]], evitando solavancos.\n6. As RPM [[11]], por exemplo, de [[12]], dependendo do carro.\n7. [[13]], ajustando a pressão no travão.\n8. [[14]], até chegares à mudança adequada à velocidade pretendida.\n9. [[15]], mantendo a embraiagem solta.\n\n****Exemplo prático de reduções:****\n\n• 6.ª → 5.ª considera reduzir quando as RPM se aproximarem de 1.300–1.500.\n• 5.ª → 4.ª aplica o mesmo princípio.\n• 4.ª → 3.ª: aplica o mesmo princípio.\n• 3.ª → 2.ª: aplica o mesmo princípio, se precisares de circular mais devagar.\n\n****Atenção:****\nAs 1.300–1.500 rpm são apenas uma referência aproximada para um diesel, não uma ordem automática para reduzir. A velocidade também tem de permitir a mudança inferior sem provocar rotações excessivas.\n\nNão precisas de reduzir todas as mudanças se a velocidade pretendida já for adequada à mudança atual.\n\n---",
-    "grupo": "teoria",
+    "grupo": "pratica",
     "explicacao": "",
     "imagem": "",
     "respostas": [
