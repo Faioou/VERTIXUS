@@ -190,21 +190,22 @@
     "id": "q-1790641001295",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "A2a: [[1]] ou [[2]]\nA2b: [[3]] ou [[4]]\nA3c: [[5]] ou [[6]]",
+    "pergunta": "{{img:imagens/1793991264258-image.png}} A2a: [[1]] ou deformação[[2]]\n{{img:imagens/1793991292282-image.png}} A2b: [[3]] ou deformação [[4]]\n{{img:imagens/1793991310978-image.png}} A3c: [[5]] ou [[6]]",
+    "grupo": "teoria",
     "explicacao": "",
-    "imagem": "imagens/1790641001302-Screenshot-2026-09-29-011500.png",
+    "imagem": "",
     "respostas": [
       [
         "lomba"
       ],
       [
-        "deformação convexa"
+        "convexa"
       ],
       [
         "depressão"
       ],
       [
-        "deformação côncava"
+        "côncava"
       ],
       [
         "lomba"
@@ -212,17 +213,16 @@
       [
         "depressão"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1790641723925",
     "categoria": "Sinais de Perigo",
     "tipo": "fill",
-    "pergunta": "A14: [[1]]\nA15: [[2]]\nA21: [[3]]\nA24: [[4]], ATENÇÃO: excecionalmente (raramente/salvo exceções) pode ser utilizado dentro das localidades, ou seja, normalmente aparece fora das localidades\nA25: [[5]]\nA26: [[6]]\nA27: [[7]]\nA32a: [[8]]\nA32b: [[9]]\nA maior parte dos sinais de perigo são postos a mais de [[10]] e a menos de [[11]]",
+    "pergunta": "{{img:imagens/1793991672078-image.png}} A14: [[1]]\n{{img:imagens/1793991684534-image.png}} A15: [[2]]\n{{img:imagens/1793991700867-image.png}} A21: [[3]]\n{{img:imagens/1793991715324-image.png}} A24: [[4]], ATENÇÃO: excecionalmente (raramente/salvo exceções) pode ser utilizado dentro das localidades, ou seja, normalmente aparece fora das localidades\n{{img:imagens/1793991727676-image.png}} A25: [[5]]\n{{img:imagens/1793991740095-image.png}} A26: [[6]]\n{{img:imagens/1793991758166-image.png}} A27: [[7]]\n{{img:imagens/1793991768055-image.png}} A32a: [[8]]\n{{img:imagens/1793991776933-image.png}} A32b: [[9]]\nA maior parte dos sinais de perigo são postos a mais de [[10]] e a menos de [[11]]",
     "grupo": "teoria",
     "explicacao": "",
-    "imagem": "imagens/1790641723937-Screenshot-2026-09-29-012117.png",
+    "imagem": "",
     "respostas": [
       [
         "lugar frequentado por crianças"
@@ -297,9 +297,10 @@
     "id": "q-1790642177249",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "C3e: proibição de [[1]] simples (ou seja, sem carro lateral)\nC3f: proibição de [[2]]\nC3g: proibição de [[3]]\nRepare que o sinal de proibição de [[4]](ou seja, sem carro lateral) é fácil de distinguir porque é o único que tem uma pessoa, mas no de perigo é o de [[5]]",
+    "pergunta": "{{img:imagens/1793992249019-image.png}} C3e: proibição de [[1]] simples (ou seja, sem carro lateral)\n{{img:imagens/1793992258786-image.png}} C3f: proibição de [[2]]\n{{img:imagens/1793992267663-image.png}} C3g: proibição de [[3]]\nRepare que o sinal de proibição de [[4]](ou seja, sem carro lateral) é fácil de distinguir porque é o único que tem uma pessoa, mas no de perigo é o de [[5]]",
+    "grupo": "teoria",
     "explicacao": "",
-    "imagem": "imagens/1791298370461-Screenshot-2026-10-06-154955.png",
+    "imagem": "",
     "respostas": [
       [
         "motociclos"
@@ -316,8 +317,7 @@
       [
         "saída de velocípedes"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1790642596585",
@@ -340,9 +340,10 @@
     "id": "q-1790852599460",
     "categoria": "Cedência de passagem",
     "tipo": "fill",
-    "pergunta": "B1: [[1]] \nB2: [[2]]\nqualquer veículo [[3]] veículos de tração animal ou de animal conduzido\nB7: ceder a passagem aos veículos [[4]]\nB8-B9: interseções com vias [[5]] prioridade, porque nós temos a prioridade",
+    "pergunta": "{{img:imagens/1793992461549-image.png}} B1: devo[[1]] \n{{img:imagens/1793992475286-image.png}} B2: devo[[2]]\nqualquer veículo [[3]] veículos de tração animal ou de animal conduzido\n{{img:imagens/1793992505751-image.png}} B7: ceder a passagem aos veículos [[4]]\n{{img:imagens/1793992518045-image.png}} {{img:imagens/1793992529480-image.png}} B8-B9: interseções com vias [[5]] prioridade, porque nós temos a prioridade",
+    "grupo": "teoria",
     "explicacao": "",
-    "imagem": "imagens/1790852599475-Screenshot-2026-10-01-120252.png",
+    "imagem": "",
     "respostas": [
       [
         "ceder"
@@ -359,8 +360,7 @@
       [
         "sem"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1790854525125",
@@ -1250,7 +1250,7 @@
     "id": "q-1791302271560",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "**Inversão do sentido de marcha**\nNeste local posso **inverter o sentido de marcha**? Não, porque o veículo está a sair de um caminho particular ou porque não há boa visibilidade? Ambas estão certas, mas a **mais** certa é a primeira ou a segunda? É a[[1]] opção, uma vez que é **estritamente proibida** nos seguintes locais:1. [[2]] , \n2.[[3]], \n3.[[4]], \n4.[[5]], \n5.[[6]], \n6.[[7]], \n7.[[8]]e \n8.[[9]], locais estes onde também é proibido de se fazer a manobra de [[10]], à exceção das [[11]].\n\n---\n\n**Marcha atrás**\nA manobra de **marcha atrás** deve ser feita [[12]] e no [[13]]\n\n---\n\n**Ultrapassagem**\nNão posso fazer nos seguintes locais/momentos:\n2. [[14]], \n1.[[15]], \n3.[[16]], \n4. [[17]], \n5.[[18]], \n6. [[19]],\n7. [[20]], \n8.[[21]]\n\n---\n\nNuma linha mista, ****SE**** do seu lado está a linha descontínua, pode pisá-la ou transpô-la para efetuar [[22]] ou [[23]]\n\n---",
+    "pergunta": "**Inversão do sentido de marcha**\nNeste local posso **inverter o sentido de marcha**? Não, porque o veículo está a sair de um caminho particular ou porque não há boa visibilidade? Ambas estão certas, mas a **mais** certa é a primeira ou a segunda? É a[[1]] opção, uma vez que é **estritamente proibida** nos seguintes locais:[[2]]\n , locais estes onde também é proibido de se fazer a manobra de [[3]], à exceção das [[4]].\n\n---\n\n**Marcha atrás**\nA manobra de **marcha atrás** deve ser feita [[5]] e no [[6]]\n\n---\n\n**Ultrapassagem**\nNão posso fazer nos seguintes locais/momentos:\n[[7]]\n\n---\n\nNuma linha mista, ****SE**** do seu lado está a linha descontínua, pode pisá-la ou transpô-la para efetuar [[8]] ou [[9]]\n\n---",
     "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1791302271572-3079.jpg",
@@ -1258,30 +1258,7 @@
       [
         "segunda"
       ],
-      [
-        "locais de visibilidade insuficiente"
-      ],
-      [
-        "lombas"
-      ],
-      [
-        "pontes"
-      ],
-      [
-        "passagens de níveis"
-      ],
-      [
-        "túneis"
-      ],
-      [
-        "auto-estradas e via reservadas"
-      ],
-      [
-        "vias de sentido único"
-      ],
-      [
-        "locais com trânsito intenso"
-      ],
+      [],
       [
         "marcha atrás"
       ],
@@ -1294,36 +1271,84 @@
       [
         "menor trajeto possível"
       ],
-      [
-        "locais de visibilidade insuficiente"
-      ],
-      [
-        "lombas"
-      ],
-      [
-        "imediatamente antes e nas passagens de nível"
-      ],
-      [
-        "imediatamente antes e nos cruazamentos e entroncamentos"
-      ],
-      [
-        "imediatamente antes e nas passagens para peões"
-      ],
-      [
-        "vias com largura insuficiente"
-      ],
-      [
-        "ultrapassar um veículo que já a está a ser ultrapassado"
-      ],
-      [
-        "na presença de uma linha contínua"
-      ],
+      [],
       [
         "ultrapassagem"
       ],
       [
         "inversão de sentido de marcha"
       ]
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "segunda"
+        ]
+      },
+      {
+        "modo": "set",
+        "respostas": [
+          "auto-estradas e vias reservadas a automóveis e motociclos",
+          "locais de visibilidade insuficiente",
+          "locais com trânsito intenso",
+          "lombas",
+          "passagens de níveis",
+          "pontes",
+          "túneis",
+          "vias de sentido único"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "marcha atrás"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "vias de sentido único"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "lentamente"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "menor trajeto possível"
+        ]
+      },
+      {
+        "modo": "set",
+        "respostas": [
+          "locais de visibilidade insuficiente",
+          "lombas",
+          "imediatamente antes e nas passagens de nível",
+          "imediatamente antes e nos cruazamentos e entroncamentos",
+          "imediatamente antes e nas passagens para peões",
+          "vias com largura insuficiente",
+          "ultrapassar um veículo que já a está a ser ultrapassado",
+          "na presença de uma linha contínua"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "ultrapassagem"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "inversão de sentido de marcha"
+        ]
+      }
     ]
   },
   {
@@ -1874,9 +1899,10 @@
     "id": "q-1792272003790",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "O **sinal triangular** significa travessia/passagem [[1]] peões\nJá o **sinal retangular**  indica passagem [[2]] peões",
+    "pergunta": "{{img:imagens/1793992422607-image.png}} O **sinal triangular** significa travessia/passagem [[1]] peões\n{{img:imagens/1793992439116-image.png}} Já o **sinal retangular**  indica passagem [[2]] peões",
+    "grupo": "teoria",
     "explicacao": "",
-    "imagem": "imagens/1792272003803-Screenshot-2026-10-17-221808.png",
+    "imagem": "",
     "respostas": [
       [
         "de"
@@ -1884,8 +1910,7 @@
       [
         "para"
       ]
-    ],
-    "grupo": "teoria"
+    ]
   },
   {
     "id": "q-1792272125403",
@@ -2012,29 +2037,12 @@
     "id": "q-1792308469867",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "****É proibido parar e estacionar:****\n\n[[1]], [[2]][[3]],[[4]],[[5]]\n[[6]], \n\n---\n\n****Dentro das localidades, é proibido parar e estacionar:****\n\nA menos de [[7]] metros [[8]]dos cruzamentos, entroncamentos ou rotundas.\n\n---\n\nA menos de [[9]] metros [[10]]e a menos de [[11]] metros [[12]]das paragens dos autocarros.\n\n---\n\nA menos de [[13]] metros [[14]]das paragens dos elétricos.\n\n---\n\nA menos de [[15]] metros [[16]] passagens para peões.\n\n---\n\nA menos de [[17]] metros dos semáforos, quando a altura do veículo possa encobrir os sinais.\n\n---\n\n****É proibido parar e estacionar:****\n\nNa faixa de rodagem, junto a uma linha contínua, quando a distância entre a linha e o veículo for inferior a [[18]]metros.\n\n---\n\n****Fora das localidades****, na faixa de rodagem, a menos de [[19]] metros [[20]] dos cruzamentos, entroncamentos, rotundas, curvas ou lombas de [[21]].\n\n---\n\n****É proibido estacionar, mas pode-se parar:****\n\nDe modo a impedir a formação de uma [[22]].\n\nEm [[23]].\n\nNas rampas de acesso a [[24]].\n\n---\n\nA menos de [[25]] metros [[26]]das passagens de nível.\n\nA menos de [[27]] metros [[28]]dos postos de abastecimento de combustível.\n\n---\n\nEm locais reservados a [[29]].\n\nVeículos com [[30]].\n\n---\n\nNas faixas de rodagem, de noite ou de dia, [[31]], ainda que na berma seja possível\nNa berma de uma [[32]]\nNas faixas de rodagem de vias com o sinal [[33]].\n\n---",
+    "pergunta": "****É proibido parar e estacionar:****\n[[1]]\n\n---\n\n****Dentro das localidades, é proibido parar e estacionar:****\n\nA menos de [[2]] metros [[3]]dos cruzamentos, entroncamentos ou rotundas.\n\n---\n\nA menos de [[4]] metros [[5]]e a menos de [[6]] metros [[7]]das paragens dos autocarros.\n\n---\n\nA menos de [[8]] metros [[9]]das paragens dos elétricos.\n\n---\n\nA menos de [[10]] metros [[11]] passagens para peões.\n\n---\n\nA menos de [[12]] metros dos semáforos, quando a altura do veículo possa encobrir os sinais.\n\n---\n\n****É proibido parar e estacionar:****\n\nNa faixa de rodagem, junto a uma linha contínua, quando a distância entre a linha e o veículo for inferior a [[13]]metros.\n\n---\n\n****Fora das localidades****, na faixa de rodagem, a menos de [[14]] metros [[15]] dos cruzamentos, entroncamentos, rotundas, curvas ou lombas de [[16]].\n\n---\n\n****É proibido estacionar, mas pode-se parar:****\n\nDe modo a impedir a formação de uma [[17]].\n\nEm [[18]].\n\nNas rampas de acesso a [[19]].\n\n---\n\nA menos de [[20]] metros [[21]]das passagens de nível.\n\nA menos de [[22]] metros [[23]]dos postos de abastecimento de combustível.\n\n---\n\nEm locais reservados a [[24]].\n\nVeículos com [[25]].\n\n---\n\nNas faixas de rodagem, de noite ou de dia, [[26]], ainda que na berma seja possível\nNa berma de uma [[27]]\nNas faixas de rodagem de vias com o sinal [[28]].\n\n---",
     "grupo": "teoria",
     "explicacao": "",
     "imagem": "",
     "respostas": [
-      [
-        "locais de visibilidade insuficiente"
-      ],
-      [
-        "passagens inferiores ou superiores"
-      ],
-      [
-        "passagens de níveis"
-      ],
-      [
-        "Pontes"
-      ],
-      [
-        "rotundas"
-      ],
-      [
-        "Túneis"
-      ],
+      [],
       [
         "5"
       ],
@@ -2116,6 +2124,182 @@
       [
         "via com prioridade"
       ]
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "set",
+        "respostas": [
+          "locais de visibilidade insuficiente",
+          "passagens inferiores ou superiores",
+          "passagens de níveis",
+          "Pontes",
+          "rotundas",
+          "Túneis"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "5"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "antes e depois"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "25"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "antes"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "5"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "depois"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "6"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "antes"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "5"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "antes e nas"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "20"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "3"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "50"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "antes e depois"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "visiblidade reduzida"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "fila de trânsito"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "segunda fila"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "propriedades privadas"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "10"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "antes e depois"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "5"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "antes e depois"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "outros veículos"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "anúncio de venda"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "fora das localidades"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "utoestrada ou via equiparada, ou seja, via reservada a automóveis e motociclos"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "via com prioridade"
+        ]
+      }
     ]
   },
   {
