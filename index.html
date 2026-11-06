@@ -34,6 +34,23 @@
 </div>
 <button class="secondary" onclick="loadQuestions()">↻ Recarregar</button>
 </div>
+
+<div class="card category-training-filter">
+  <div class="category-filter-head">
+    <div>
+      <strong>Treinar apenas determinadas categorias</strong>
+      <div class="small">Comece a escrever e escolha uma categoria existente. Pode selecionar várias.</div>
+    </div>
+    <button type="button" class="secondary category-clear-btn" onclick="clearTrainingCategories('theory')">Todas as categorias</button>
+  </div>
+  <div class="category-picker-row">
+    <input id="theoryCategoryInput" list="theoryCategorySuggestions" placeholder="Escreva uma categoria…" autocomplete="off">
+    <datalist id="theoryCategorySuggestions"></datalist>
+    <button type="button" class="secondary" onclick="addTrainingCategory('theory')">+ Adicionar</button>
+  </div>
+  <div id="theoryCategoryChips" class="category-filter-chips"></div>
+</div>
+
 <div id="quiz"></div>
 </section>
 
@@ -51,6 +68,23 @@
 <h2 style="margin:0 0 5px">Prática de condução</h2>
 <div class="small">Aqui aparecem apenas as perguntas que marcou como <strong>Prática</strong> na Base de perguntas.</div>
 </div>
+
+<div class="card category-training-filter">
+  <div class="category-filter-head">
+    <div>
+      <strong>Treinar apenas determinadas categorias</strong>
+      <div class="small">Comece a escrever e escolha uma categoria existente. Pode selecionar várias.</div>
+    </div>
+    <button type="button" class="secondary category-clear-btn" onclick="clearTrainingCategories('practice')">Todas as categorias</button>
+  </div>
+  <div class="category-picker-row">
+    <input id="practiceCategoryInput" list="practiceCategorySuggestions" placeholder="Escreva uma categoria…" autocomplete="off">
+    <datalist id="practiceCategorySuggestions"></datalist>
+    <button type="button" class="secondary" onclick="addTrainingCategory('practice')">+ Adicionar</button>
+  </div>
+  <div id="practiceCategoryChips" class="category-filter-chips"></div>
+</div>
+
 <div id="practiceQuiz"></div>
 </section>
 
@@ -153,7 +187,30 @@
 <div class="editor-media-toolbar">
   <button type="button" class="secondary" id="insertInlineImageBtn">🖼️ Inserir imagem</button>
   <input type="file" id="inlineImageFile" accept="image/*" multiple hidden>
-  <span class="small">Também pode copiar uma imagem e usar <strong>Ctrl + V</strong> diretamente no enunciado.</span>
+  <button type="button" class="secondary" id="openTableBuilderBtn">▦ Inserir tabela</button>
+  <span class="small">Pode misturar texto, imagens, tabelas e campos <strong>[[]]</strong> no mesmo enunciado.</span>
+</div>
+
+<div id="tableBuilder" class="table-builder hidden">
+  <div class="table-builder-grid">
+    <div>
+      <label>Número de colunas</label>
+      <input type="number" id="tableColumnCount" min="1" max="10" value="3">
+    </div>
+    <div>
+      <label>Número de linhas</label>
+      <input type="number" id="tableRowCount" min="1" max="20" value="3">
+    </div>
+    <label class="table-row-label-option">
+      <input type="checkbox" id="tableHasRowLabels">
+      <span>Usar nomes das linhas</span>
+    </label>
+  </div>
+  <div class="small">Depois de inserir, escreva diretamente nos cabeçalhos e células. Dentro das células pode escrever <strong>[[]]</strong> para criar campos Fill the Blank.</div>
+  <div class="actions" style="margin-top:10px">
+    <button type="button" class="primary" id="confirmInsertTableBtn">Inserir tabela</button>
+    <button type="button" class="secondary" id="cancelInsertTableBtn">Cancelar</button>
+  </div>
 </div>
 <div class="small" id="fillEditorHelp">Escreva normalmente. Em perguntas Fill the Blank, <strong>[[]]</strong> cria um campo de resposta. Use <strong>****texto****</strong> para negrito e <strong>---</strong> para uma linha horizontal.</div>
 <div id="fillVisualEditor" class="visual-fill-editor" contenteditable="true" spellcheck="true" data-placeholder="Escreva o enunciado e distribua texto, respostas e imagens como quiser."></div>

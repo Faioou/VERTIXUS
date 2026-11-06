@@ -323,18 +323,33 @@
     "id": "q-1790642596585",
     "categoria": "Velocidade do motor e travão de serviço",
     "tipo": "fill",
-    "pergunta": "Aumentar a Velocidade do Motor significa [[1]].\n\nO travão de serviço é o [[2]].",
+    "pergunta": "Carregar no acelerador significa [[1]]\n\nO pedal do travão é o [[2]].",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "",
     "respostas": [
       [
-        "carregar no acelerador"
+        "aumentar a Velocidade do Motor"
       ],
       [
-        "pedal do travão"
+        "travão de serviço"
       ]
     ],
-    "grupo": "teoria"
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "aumentar a Velocidade do Motor"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "travão de serviço"
+        ]
+      }
+    ]
   },
   {
     "id": "q-1790852599460",
@@ -1933,9 +1948,10 @@
     "id": "q-1792272965798",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "****Observe os sinais de informação apresentados na imagem e complete o significado de cada um:****\n\nH11 — [[1]]\n\nH14b — [[2]]\nH16a — [[3]]\nH16b — [[4]]\n\n---\n\nH14a — [[5]]\nH14c — [[6]]\nH16d — [[7]]\n\nH16c — [[8]]\n\n---\n\nH17 — [[9]], por exemplo hotel\nH10 — [[10]]\nH18 — [[11]]\n\nH20c — [[12]]",
+    "pergunta": "****Observe os sinais de informação apresentados na imagem e complete o significado de cada um:****\n\n{{img:imagens/1794002955032-image.png}} H11 — [[1]]\n\n{{img:imagens/1794003065196-image.png}} H14b — [[2]]\n{{img:imagens/1794003076641-image.png}} H16a — [[3]]\n{{img:imagens/1794003050441-image.png}} H16b — [[4]]\n\n---\n\n{{img:imagens/1794002978974-image.png}}  H14a — [[5]]\n{{img:imagens/1794003090706-image.png}} H14c — [[6]]\n{{img:imagens/1794003105754-image.png}} H16d — [[7]]\n\n{{img:imagens/1794003131510-image.png}} H16c — [[8]]\n\n---\n\n{{img:imagens/1794002992917-image.png}} H17 — [[9]], por exemplo hotel\n{{img:imagens/1794003011720-image.png}} H10 — [[10]]\n{{img:imagens/1794003023148-image.png}} H18 — [[11]]\n\n{{img:imagens/1794003035741-image.png}} H20c — [[12]]",
+    "grupo": "teoria",
     "explicacao": "",
-    "imagem": "imagens/1792272965809-Screenshot-2026-10-17-223030.png",
+    "imagem": "",
     "respostas": [
       [
         "Oficina"
@@ -1974,7 +1990,81 @@
         "Paragem de veículos afetos ao transporte de crianças"
       ]
     ],
-    "grupo": "teoria"
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "Oficina"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Parque de caravanismo"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Pousada"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Alojamento local"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Parque de campismo"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Parque misto para campismo e caravanismo"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Turismo rural"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Pousada de juventude"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Empreendimento turístico"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Posto de socorros"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Restaurante"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Paragem de veículos afetos ao transporte de crianças"
+        ]
+      }
+    ]
   },
   {
     "id": "q-1792273089880",
@@ -2512,12 +2602,13 @@
     "id": "q-1792433470217",
     "categoria": "Sem categoria",
     "tipo": "fill",
-    "pergunta": "Recua:\n1. Quem está [[1]]\nUm carro está a subir e outro a descer:\nCede quem [[2]], mas recua quem [[3]]",
+    "pergunta": "Recua:\n1. Quem está mais perto [[1]]\nUm carro está a subir e outro a descer:\nCede quem [[2]], mas recua quem [[3]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "",
     "respostas": [
       [
-        "mais perto do cruzamento"
+        "do cruzamento"
       ],
       [
         "desce"
@@ -2526,7 +2617,27 @@
         "sobe"
       ]
     ],
-    "grupo": "teoria"
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "do cruzamento"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "desce"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "sobe"
+        ]
+      }
+    ]
   },
   {
     "id": "q-1792433622314",
@@ -3044,6 +3155,202 @@
       [
         "72 horas"
       ]
+    ]
+  },
+  {
+    "id": "q-1794008773437",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Excesso de velocidade: Dentro de localidades e Fora de Localidades\n{{tbl64:eyJoZWFkZXJzIjpbIkRlbnRybyBkZSBsb2NhbGlkYWRlcyA6IExpZ2Vpcm9zIGUgTW90b2NpY2xvcyIsIkRlbnRybyBkZSBsb2NhbGlkYWRlcyA6IFJlc3RhbnRlcyIsIkZvcmEgZGUgbG9jYWxpZGFkZXMgOiBMaWdlaXJvcyBlIE1vdG9jaWNsb3MiLCJGb3JhIGRlIGxvY2FsaWRhZGVzIDogUmVzdGFudGVzIl0sInJvd0xhYmVscyI6ZmFsc2UsInJvd3MiOlt7Im5hbWUiOiIiLCJjZWxscyI6WyJBdMOpIFtbMV1dIGttL2g6IGxldmUiLCJBdMOpIFtbMl1dIGttL2g6IGxldmUiLCJBdMOpIFtbM11dIGttL2g6IGxldmUiLCJBdMOpIFtbNF1dIGttL2g6IGxldmUiXX0seyJuYW1lIjoiIiwiY2VsbHMiOlsiU3VwZXJpb3IgYSBbWzVdXSBrbS9oOiBncmF2ZSIsIlN1cGVyaW9yIGEgW1s2XV0ga20vaDogZ3JhdmUiLCJTdXBlcmlvciBhIFtbN11dIGttL2g6IGdyYXZlIiwiU3VwZXJpb3IgYSBbWzhdXSBrbS9oOiBncmF2ZSJdfSx7Im5hbWUiOiIiLCJjZWxscyI6WyJTdXBlcmlvciBhIFtbOV1dIGttL2g6IE0tRyIsIlN1cGVyaW9yIGEgW1sxMF1dIGttL2g6IE0tRyIsIlN1cGVyaW9yIGEgW1sxMV1dIGttL2g6IE0tRyIsIlN1cGVyaW9yIGEgW1sxMl1dIGttL2g6IE0tRyJdfV19}}",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "20"
+      ],
+      [
+        "10"
+      ],
+      [
+        "30"
+      ],
+      [
+        "20"
+      ],
+      [
+        "20"
+      ],
+      [
+        "10"
+      ],
+      [
+        "30"
+      ],
+      [
+        "20"
+      ],
+      [
+        "40"
+      ],
+      [
+        "20"
+      ],
+      [
+        "60"
+      ],
+      [
+        "40"
+      ]
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "20"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "10"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "30"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "20"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "20"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "10"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "30"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "20"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "40"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "20"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "60"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "40"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q-1794009229505",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "{{img:imagens/1794009086838-image.png}} Demarcação [[1]]— repete-se a cada [[2]]\n{{img:imagens/1794009153544-image.png}} Demarcação [[3]]— repete-se a cada [[4]]\n{{img:imagens/1794009202864-image.png}} Demarcação [[5]]— repete-se a cada [[6]]",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "hectométrica"
+      ],
+      [
+        "100 metros",
+        "100 m"
+      ],
+      [
+        "quilométrica"
+      ],
+      [
+        "1 quilómetro",
+        "1 km"
+      ],
+      [
+        "miriamétrica"
+      ],
+      [
+        "10 quilómetros",
+        "10 km"
+      ]
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "hectométrica"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "100 metros",
+          "100 m"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "quilométrica"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "1 quilómetro",
+          "1 km"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "miriamétrica"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "10 quilómetros",
+          "10 km"
+        ]
+      }
     ]
   }
 ]

@@ -29,6 +29,209 @@ let persistedTrainingStats = {
 
 const TRAINING_PROGRESS_KEY = 'codigoEstrada.trainingProgress.v2';
 
+const TRAINING_CATEGORY_FILTER_KEY = 'codigoEstrada.trainingCategories.v1';
+
+let trainingCategoryFilters = {
+  theory: [],
+  practice: []
+};
+
+function normalizeCategoryName(value){
+ return String(value??'').trim();
+}
+
+function loadTrainingCategoryFilters(){
+ try{
+   const raw=localStorage.getItem(TRAINING_CATEGORY_FILTER_KEY);
+   if(!raw)return;
+   const data=JSON.parse(raw);
+   trainingCategoryFilters.theory=Array.isArray(data.theory)?data.theory.map(normalizeCategoryName).filter(Boolean):[];
+   trainingCategoryFilters.practice=Array.isArray(data.practice)?data.practice.map(normalizeCategoryName).filter(Boolean):[];
+ }catch{
+   trainingCategoryFilters={theory:[],practice:[]};
+ }
+}
+
+function saveTrainingCategoryFilters(){
+ try{
+   localStorage.setItem(TRAINING_CATEGORY_FILTER_KEY,JSON.stringify(trainingCategoryFilters));
+ }catch{}
+}
+
+function categoryKey(value){
+ return norm(value);
+}
+
+function uniqueCategoriesForMode(mode){
+ const pool=mode==='practice'
+   ? questions.filter(q=>(q.grupo||'teoria')==='pratica')
+   : questions.filter(q=>(q.grupo||'teoria')!=='pratica');
+
+ const map=new Map();
+ pool.forEach(q=>{
+   const category=normalizeCategoryName(q.categoria||'Sem categoria')||'Sem categoria';
+   const key=categoryKey(category);
+   if(!map.has(key))map.set(key,category);
+ });
+
+ return [...map.values()].sort((a,b)=>a.localeCompare(b,'pt',{sensitivity:'base'}));
+}
+
+function selectedCategoriesForMode(mode){
+ return trainingCategoryFilters[mode==='practice'?'practice':'theory']||[];
+}
+
+function questionMatchesTrainingCategories(q,mode){
+ const selected=selectedCategoriesForMode(mode);
+ if(!selected.length)return true;
+ const key=categoryKey(q.categoria||'Sem categoria');
+ return selected.some(c=>categoryKey(c)===key);
+}
+
+function filteredTheoryQuestions(){
+ return questions.filter(q=>(q.grupo||'teoria')!=='pratica' && questionMatchesTrainingCategories(q,'theory'));
+}
+
+function filteredPracticeQuestions(){
+ return questions.filter(q=>(q.grupo||'teoria')==='pratica' && questionMatchesTrainingCategories(q,'practice'));
+}
+
+function syncCategorySuggestions(mode){
+ const inputId=mode==='practice'?'practiceCategorySuggestions':'theoryCategorySuggestions';
+ const list=document.getElementById(inputId);
+ if(!list)return;
+
+ const selectedKeys=new Set(selectedCategoriesForMode(mode).map(categoryKey));
+ const categories=uniqueCategoriesForMode(mode).filter(c=>!selectedKeys.has(categoryKey(c)));
+
+ list.innerHTML=categories.map(c=>`<option value="${esc(c)}"></option>`).join('');
+}
+
+function renderTrainingCategoryFilter(mode){
+ const chipHost=document.getElementById(mode==='practice'?'practiceCategoryChips':'theoryCategoryChips');
+ if(!chipHost)return;
+
+ const selected=selectedCategoriesForMode(mode);
+
+ chipHost.innerHTML=selected.length
+   ? selected.map(c=>`
+       <span class="category-filter-chip">
+         <span>${esc(c)}</span>
+         <button type="button" aria-label="Remover ${esc(c)}" onclick="removeTrainingCategory('${mode}',decodeURIComponent('${encodeURIComponent(c)}'))">×</button>
+       </span>`).join('')
+   : '<span class="small category-filter-all">Todas as categorias estão incluídas.</span>';
+
+ syncCategorySuggestions(mode);
+}
+
+function findExistingCategory(mode,value){
+ const wanted=categoryKey(value);
+ if(!wanted)return null;
+ const categories=uniqueCategoriesForMode(mode);
+
+ // correspondência exata primeiro
+ const exact=categories.find(c=>categoryKey(c)===wanted);
+ if(exact)return exact;
+
+ // Se escreveu parte do nome e só existir uma correspondência, aceita-a.
+ const matches=categories.filter(c=>categoryKey(c).includes(wanted));
+ return matches.length===1?matches[0]:null;
+}
+
+function addTrainingCategory(mode){
+ const input=document.getElementById(mode==='practice'?'practiceCategoryInput':'theoryCategoryInput');
+ if(!input)return;
+
+ const category=findExistingCategory(mode,input.value);
+ if(!category){
+   input.classList.add('category-input-error');
+   input.placeholder='Escolha uma categoria existente';
+   setTimeout(()=>input.classList.remove('category-input-error'),850);
+   return;
+ }
+
+ const target=selectedCategoriesForMode(mode);
+ if(!target.some(c=>categoryKey(c)===categoryKey(category))){
+   target.push(category);
+   target.sort((a,b)=>a.localeCompare(b,'pt',{sensitivity:'base'}));
+   saveTrainingCategoryFilters();
+ }
+
+ input.value='';
+ renderTrainingCategoryFilter(mode);
+ rebuildTrainingForCategoryFilter(mode);
+}
+
+function removeTrainingCategory(mode,category){
+ const key=categoryKey(category);
+ trainingCategoryFilters[mode]=selectedCategoriesForMode(mode).filter(c=>categoryKey(c)!==key);
+ saveTrainingCategoryFilters();
+ renderTrainingCategoryFilter(mode);
+ rebuildTrainingForCategoryFilter(mode);
+}
+
+function clearTrainingCategories(mode){
+ trainingCategoryFilters[mode]=[];
+ saveTrainingCategoryFilters();
+
+ const input=document.getElementById(mode==='practice'?'practiceCategoryInput':'theoryCategoryInput');
+ if(input)input.value='';
+
+ renderTrainingCategoryFilter(mode);
+ rebuildTrainingForCategoryFilter(mode);
+}
+
+function rebuildTrainingForCategoryFilter(mode){
+ if(mode==='practice'){
+   const pool=filteredPracticeQuestions();
+   practicePendingIds=pool.filter(q=>!isQuestionMastered(q.id)).map(q=>q.id);
+   practiceCorrect=pool.filter(q=>isQuestionMastered(q.id)).length;
+   currentPracticeId=null;
+   previousPracticeId=null;
+
+   document.getElementById('practiceTotal').textContent=pool.length;
+   document.getElementById('practiceCorrect').textContent=practiceCorrect;
+
+   if(document.getElementById('practice')?.classList.contains('active')){
+     if(pool.length)nextPracticeQuestion(true);
+     else renderPracticeIdle();
+   }else{
+     renderPracticeIdle();
+   }
+ }else{
+   const pool=filteredTheoryQuestions();
+   trainingPendingIds=pool.filter(q=>!isQuestionMastered(q.id)).map(q=>q.id);
+   correct=pool.filter(q=>isQuestionMastered(q.id)).length;
+   currentTrainingId=null;
+   previousTrainingId=null;
+
+   document.getElementById('total').textContent=pool.length;
+   document.getElementById('correct').textContent=correct;
+
+   nextTrainingQuestion(true);
+ }
+}
+
+function installCategoryFilterInputUX(){
+ [['theory','theoryCategoryInput'],['practice','practiceCategoryInput']].forEach(([mode,id])=>{
+   const input=document.getElementById(id);
+   if(!input||input.dataset.categoryUxInstalled==='1')return;
+   input.dataset.categoryUxInstalled='1';
+
+   input.addEventListener('keydown',e=>{
+     if(e.key==='Enter'){
+       e.preventDefault();
+       addTrainingCategory(mode);
+     }
+   });
+
+   input.addEventListener('change',()=>{
+     if(findExistingCategory(mode,input.value))addTrainingCategory(mode);
+   });
+ });
+}
+
+
 function loadTrainingProgress(){
   try{
     const raw=localStorage.getItem(TRAINING_PROGRESS_KEY);
@@ -150,10 +353,11 @@ async function loadQuestions(){
    questions.forEach(q=>{ if(!q.grupo) q.grupo='teoria'; });
 
    loadTrainingProgress();
+   loadTrainingCategoryFilters();
    pruneTrainingProgress();
 
-   const theory=theoryQuestions();
-   const practice=practiceQuestions();
+   const theory=filteredTheoryQuestions();
+   const practice=filteredPracticeQuestions();
 
    // O progresso é reconstruído por ID. Editar texto, resposta, imagem,
    // categoria ou explicação não altera o estado da pergunta.
@@ -185,6 +389,9 @@ async function loadQuestions(){
    document.getElementById('practiceAnswered').textContent=practiceAnswered;
 
    renderBank();
+   renderTrainingCategoryFilter('theory');
+   renderTrainingCategoryFilter('practice');
+   installCategoryFilterInputUX();
 
    // No treino teórico, continua apenas com o que ainda falta dominar.
    if(trainingPendingIds.length){
@@ -208,11 +415,341 @@ function practiceQuestions(){
  return questions.filter(q=>(q.grupo||'teoria')==='pratica');
 }
 
+
+function encodeTableData(data){
+ try{
+   return btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+ }catch{
+   return '';
+ }
+}
+
+function decodeTableData(encoded){
+ try{
+   return JSON.parse(decodeURIComponent(escape(atob(encoded))));
+ }catch{
+   return null;
+ }
+}
+
+function trainingFieldMarkup(pos,question){
+ const field=question?.campos_resposta?.[pos];
+
+ if(field?.modo==='set'){
+   const values=field.respostas||[];
+   return `<span class="multi-train-slot" data-set-pos="${pos}" data-used="">
+     <span class="multi-train-counter" data-set-counter="${pos}">0/${values.length}</span>
+     <input class="multi-train-input" data-set-input="${pos}" placeholder="escreva uma resposta">
+     <button class="multi-train-submit" data-set-submit="${pos}" type="button">OK</button>
+     <span class="multi-train-accepted" data-set-accepted="${pos}"></span>
+   </span>`;
+ }
+
+ const accepted=(field?.respostas||question?.respostas?.[pos]||[]).map(x=>String(x||''));
+ const longest=accepted.reduce((max,v)=>Math.max(max,v.length),0);
+ const chars=Math.max(4,Math.min(34,longest||8));
+
+ return `<span class="train-fill-slot">
+   <input class="train-fill-input" data-pos="${pos}" placeholder="escreva a resposta" style="--answer-chars:${chars}">
+   <button type="button"
+           class="secondary train-fill-verify"
+           data-verify-pos="${pos}"
+           title="Verificar esta resposta"
+           style="width:auto;min-width:34px;padding:6px 9px;margin-left:4px;border-radius:8px;">✓</button>
+ </span>`;
+}
+
+function formatTableCellContent(raw,fillInputs,question){
+ let text=String(raw??'');
+ const slots=[];
+
+ if(fillInputs){
+   text=text.replace(/\[\[(\d+)\]\]/g,(m,n)=>{
+     const pos=Number(n)-1;
+     const token=`@@TABLE_FILL_${slots.length}@@`;
+     slots.push(trainingFieldMarkup(pos,question));
+     return token;
+   });
+ }else{
+   text=text.replace(/\[\[(\d+)\]\]/g,'____');
+ }
+
+ let h=esc(text);
+ h=h.replace(/\*\*\*\*(.+?)\*\*\*\*/g,'<strong>$1</strong>');
+ h=h.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+ h=h.replace(/\r?\n/g,'<br>');
+
+ slots.forEach((slot,i)=>{
+   h=h.replace(`@@TABLE_FILL_${i}@@`,slot);
+ });
+
+ return h;
+}
+
+function renderQuestionTable(data,fillInputs,question){
+ if(!data||!Array.isArray(data.headers)||!Array.isArray(data.rows))return '';
+
+ const headers=data.headers||[];
+ const rowLabels=!!data.rowLabels;
+
+ const headCells=headers.map(h=>`<th>${esc(h||'')}</th>`).join('');
+ const topLeft=rowLabels?'<th class="question-table-rowname"></th>':'';
+
+ const body=data.rows.map(row=>{
+   const name=rowLabels?`<th class="question-table-rowname">${esc(row.name||'')}</th>`:'';
+   const cells=(row.cells||[]).map(cell=>
+     `<td>${formatTableCellContent(cell,fillInputs,question)}</td>`
+   ).join('');
+   return `<tr>${name}${cells}</tr>`;
+ }).join('');
+
+ return `<div class="question-table-scroll">
+   <table class="question-table">
+     <thead><tr>${topLeft}${headCells}</tr></thead>
+     <tbody>${body}</tbody>
+   </table>
+ </div>`;
+}
+
+
+function clearSelectedEditorTable(){
+ if(selectedEditorTable){
+   selectedEditorTable.classList.remove('editor-table-selected');
+ }
+ selectedEditorTable=null;
+}
+
+function selectEditorTable(wrap){
+ clearSelectedEditorTable();
+ if(!wrap)return;
+ selectedEditorTable=wrap;
+ wrap.classList.add('editor-table-selected');
+}
+
+function cloneSelectedEditorTableData(){
+ if(!selectedEditorTable)return null;
+ const data=collectEditorTableData(selectedEditorTable,node=>{
+   if(node.nodeType===Node.TEXT_NODE)return node.nodeValue||'';
+   if(node.nodeType!==Node.ELEMENT_NODE)return '';
+   const el=node;
+
+   if(el.classList?.contains('fill-slot')){
+     const mode=el.getAttribute('data-slot-mode')==='set'?'set':'single';
+     // Para cópia estrutural, mantém apenas o marcador; os metadados são serializados via pergunta.
+     return '[[]]';
+   }
+
+   if(el.hasAttribute?.('data-editor-bold')){
+     return `****${el.textContent||''}****`;
+   }
+
+   if(el.tagName==='BR')return '\n';
+
+   let out='';
+   el.childNodes.forEach(child=>out+=arguments.callee(child));
+   return out;
+ });
+ return JSON.parse(JSON.stringify(data));
+}
+
+function copySelectedEditorTableToClipboard(){
+ if(!selectedEditorTable)return false;
+
+ const data=collectEditorTableData(selectedEditorTable,node=>{
+   if(node.nodeType===Node.TEXT_NODE)return node.nodeValue||'';
+   if(node.nodeType!==Node.ELEMENT_NODE)return '';
+   const el=node;
+
+   if(el.classList?.contains('fill-slot')){
+     return '[[]]';
+   }
+
+   if(el.hasAttribute?.('data-editor-bold')){
+     return `****${el.textContent||''}****`;
+   }
+
+   if(el.tagName==='BR')return '\n';
+
+   let out='';
+   el.childNodes.forEach(child=>{
+     if(child.nodeType===Node.TEXT_NODE)out+=child.nodeValue||'';
+     else if(child.nodeType===Node.ELEMENT_NODE){
+       const childEl=child;
+       if(childEl.classList?.contains('fill-slot'))out+='[[]]';
+       else if(childEl.hasAttribute?.('data-editor-bold'))out+=`****${childEl.textContent||''}****`;
+       else out+=childEl.textContent||'';
+     }
+   });
+   return out;
+ });
+
+ copiedEditorTableData=JSON.parse(JSON.stringify(data));
+
+ try{
+   const encoded=encodeTableData(data);
+   navigator.clipboard?.writeText(`{{tbl64:${encoded}}}`);
+ }catch{}
+
+ return true;
+}
+
+function pasteCopiedEditorTable(){
+ if(!copiedEditorTableData)return false;
+ pushFillUndoState?.();
+ insertTableAtCaret(JSON.parse(JSON.stringify(copiedEditorTableData)));
+ return true;
+}
+
+function createEditorTableNode(data={}){
+ const headers=Array.isArray(data.headers)&&data.headers.length
+   ? data.headers
+   : ['Coluna 1','Coluna 2'];
+
+ const rows=Array.isArray(data.rows)&&data.rows.length
+   ? data.rows
+   : [{name:'',cells:headers.map(()=> '')}];
+
+ const rowLabels=!!data.rowLabels;
+
+ const wrap=document.createElement('div');
+ wrap.className='editor-table-wrap';
+ wrap.contentEditable='false';
+ wrap.setAttribute('data-editor-table','1');
+
+ const controls=document.createElement('div');
+ controls.className='editor-table-controls';
+
+ const title=document.createElement('span');
+ title.className='editor-table-badge';
+ title.textContent='TABELA';
+
+ const remove=document.createElement('button');
+ remove.type='button';
+ remove.className='editor-table-remove';
+ remove.setAttribute('data-remove-editor-table','1');
+ remove.title='Remover tabela';
+ remove.textContent='×';
+
+ controls.appendChild(title);
+ controls.appendChild(remove);
+
+ const scroll=document.createElement('div');
+ scroll.className='editor-table-scroll';
+
+ const table=document.createElement('table');
+ table.className='editor-question-table';
+ table.setAttribute('data-row-labels',rowLabels?'1':'0');
+
+ const thead=document.createElement('thead');
+ const hr=document.createElement('tr');
+
+ if(rowLabels){
+   const corner=document.createElement('th');
+   corner.className='editor-table-corner';
+   corner.textContent='';
+   hr.appendChild(corner);
+ }
+
+ headers.forEach((value,i)=>{
+   const th=document.createElement('th');
+   const cell=document.createElement('div');
+   cell.className='editor-table-cell editor-table-header-cell';
+   cell.contentEditable='true';
+   cell.setAttribute('data-table-header',String(i));
+   cell.textContent=value||`Coluna ${i+1}`;
+   th.appendChild(cell);
+   hr.appendChild(th);
+ });
+
+ thead.appendChild(hr);
+ table.appendChild(thead);
+
+ const tbody=document.createElement('tbody');
+
+ rows.forEach((row,rIndex)=>{
+   const tr=document.createElement('tr');
+
+   if(rowLabels){
+     const th=document.createElement('th');
+     const name=document.createElement('div');
+     name.className='editor-table-cell editor-table-rowname-cell';
+     name.contentEditable='true';
+     name.setAttribute('data-table-row-name',String(rIndex));
+     name.textContent=row.name||`Linha ${rIndex+1}`;
+     th.appendChild(name);
+     tr.appendChild(th);
+   }
+
+   headers.forEach((_,cIndex)=>{
+     const td=document.createElement('td');
+     const cell=document.createElement('div');
+     cell.className='editor-table-cell editor-table-body-cell';
+     cell.contentEditable='true';
+     cell.setAttribute('data-table-cell',`${rIndex}:${cIndex}`);
+
+     const raw=row.cells?.[cIndex]||'';
+     appendVisualInline(cell,raw,window.__loadingTableAnswers||[]);
+
+     td.appendChild(cell);
+     tr.appendChild(td);
+   });
+
+   tbody.appendChild(tr);
+ });
+
+ table.appendChild(tbody);
+ scroll.appendChild(table);
+
+ wrap.appendChild(controls);
+ wrap.appendChild(scroll);
+ return wrap;
+}
+
+function collectEditorTableData(wrap,walkFn){
+ const headers=[...wrap.querySelectorAll('[data-table-header]')]
+   .map(el=>el.textContent.trim());
+
+ const rowLabels=wrap.querySelector('table')?.getAttribute('data-row-labels')==='1';
+ const rows=[];
+
+ wrap.querySelectorAll('tbody tr').forEach((tr,rIndex)=>{
+   const rowName=rowLabels
+     ? tr.querySelector('[data-table-row-name]')?.textContent.trim()||''
+     : '';
+
+   const cells=[...tr.querySelectorAll('[data-table-cell]')].map(cell=>{
+     let raw='';
+     cell.childNodes.forEach(child=>raw+=walkFn(child));
+     return raw.replace(/\n+$/g,'').trim();
+   });
+
+   rows.push({name:rowName,cells});
+ });
+
+ return {headers,rowLabels,rows};
+}
+
+function insertTableAtCaret(data){
+ const tableNode=createEditorTableNode(data);
+ insertEditorNodeAtCaret(tableNode);
+ requestAnimationFrame(()=>{
+   tableNode.querySelector('[data-table-header]')?.focus();
+ });
+}
+
 function formatQuestionText(raw, fillInputs=false, question=null){
  let text=String(raw??'');
  const slots=[];
  const multiSlots=[];
  const images=[];
+ const tables=[];
+
+ text=text.replace(/\{\{tbl64:([A-Za-z0-9+/=]+)\}\}/g,(m,encoded)=>{
+   const token=`@@INLINE_TABLE_${tables.length}@@`;
+   const data=decodeTableData(encoded);
+   tables.push(renderQuestionTable(data,fillInputs,question));
+   return token;
+ });
 
  // Imagens incorporadas no enunciado.
  text=text.replace(/\[\[\[(\d+)\]\]\]/g,(m,n)=>{
@@ -241,22 +778,7 @@ function formatQuestionText(raw, fillInputs=false, question=null){
      const token=`@@FILL_SLOT_${slots.length}@@`;
      const field=question?.campos_resposta?.[pos];
 
-     if(field?.modo==='set'){
-       const values=field.respostas||[];
-       slots.push(`<span class="multi-train-slot" data-set-pos="${pos}" data-used="">
-         <span class="multi-train-counter" data-set-counter="${pos}">0/${values.length}</span>
-         <input class="multi-train-input" data-set-input="${pos}" placeholder="escreva uma resposta">
-         <button class="multi-train-submit" data-set-submit="${pos}" type="button">OK</button>
-         <span class="multi-train-accepted" data-set-accepted="${pos}"></span>
-       </span>`);
-     }else{
-       const accepted=(field?.respostas||question?.respostas?.[pos]||[]).map(x=>String(x||''));
-       const longest=accepted.reduce((max,v)=>Math.max(max,v.length),0);
-       const chars=Math.max(4,Math.min(34,longest||8));
-       slots.push(`<span class="train-fill-slot">
-         <input class="train-fill-input" data-pos="${pos}" placeholder="escreva a resposta" style="--answer-chars:${chars}">
-       </span>`);
-     }
+     slots.push(trainingFieldMarkup(pos,question));
      return token;
    });
  }else{
@@ -277,6 +799,7 @@ function formatQuestionText(raw, fillInputs=false, question=null){
  slots.forEach((slot,i)=>{h=h.replace(`@@FILL_SLOT_${i}@@`,slot);});
  multiSlots.forEach((slot,i)=>{h=h.replace(`@@MULTI_SLOT_${i}@@`,slot);});
  images.forEach((img,i)=>{h=h.replace(`@@INLINE_IMAGE_${i}@@`,img);});
+ tables.forEach((tbl,i)=>{h=h.replace(`@@INLINE_TABLE_${i}@@`,tbl);});
  return h;
 }
 function promptHTML(q){return formatQuestionText(q.pergunta,q.tipo==='fill',q);}
@@ -295,9 +818,12 @@ function randomPendingId(){
 }
 
 function nextTrainingQuestion(initial=false){
- const pool=theoryQuestions();
+ const pool=filteredTheoryQuestions();
  if(!pool.length){
-   document.getElementById('quiz').innerHTML='<div class="card small">Ainda não existem perguntas na base de dados.</div>';
+   const hasFilter=selectedCategoriesForMode('theory').length>0;
+   document.getElementById('quiz').innerHTML=hasFilter
+     ? '<div class="card small">Não existem perguntas teóricas nas categorias selecionadas. Remova um filtro ou escolha outra categoria.</div>'
+     : '<div class="card small">Ainda não existem perguntas na base de dados.</div>';
    return;
  }
  if(!trainingPendingIds.length){
@@ -316,7 +842,7 @@ function nextTrainingQuestion(initial=false){
 }
 
 function restartTraining(){
- const theoryIds=theoryQuestions().map(q=>q.id);
+ const theoryIds=filteredTheoryQuestions().map(q=>q.id);
  resetProgressForQuestionIds(theoryIds);
 
  persistedTrainingStats.theoryAnswered=0;
@@ -334,7 +860,7 @@ function restartTraining(){
 }
 
 function currentTrainingQuestion(){
- return theoryQuestions().find(q=>q.id===currentTrainingId) || null;
+ return filteredTheoryQuestions().find(q=>q.id===currentTrainingId) || null;
 }
 
 function shuffledChoiceOrder(q){
@@ -363,7 +889,7 @@ function renderQuiz(){
    <div id="fix${i}" class="ans hidden">Altere <strong>${esc(q.palavra_errada||'')}</strong> para <input id="fixInput${i}" class="blank" value="${esc(q.palavra_errada||'')}"> <button class="primary" onclick="finishCorrection(${i})">Validar</button></div>`;
  }
  const mastered=correct;
- const remaining=theoryQuestions().length-mastered;
+ const remaining=filteredTheoryQuestions().length-mastered;
  document.getElementById('quiz').innerHTML=`
    <div class="card" id="q${i}" data-done="0">
      <div class="toolbar" style="margin-bottom:10px">
@@ -376,7 +902,12 @@ function renderQuiz(){
      <div id="fb${i}" class="feedback"></div>
      <div id="next${i}" class="actions hidden" style="margin-top:12px"><button class="primary" onclick="nextTrainingQuestion()">Próxima pergunta →</button></div>
    </div>`;
- setTimeout(()=>{const c=document.getElementById('q'+i);initMultiRuntime(c);bindSetFieldRuntime(c,false);},0);
+ setTimeout(()=>{
+   const c=document.getElementById('q'+i);
+   initMultiRuntime(c);
+   bindSetFieldRuntime(c,false);
+   bindImmediateFillValidation(c,i,false);
+ },0);
 }
 
 function registerAttempt(i,ok){
@@ -407,7 +938,11 @@ function registerAttempt(i,ok){
  document.getElementById('answered').textContent=answered;
 
  const next=document.getElementById('next'+i);
- if(next) next.classList.remove('hidden');
+ if(next){
+   next.classList.remove('hidden');
+   const btn=next.querySelector('button');
+   if(btn)btn.disabled=false;
+ }
  return true;
 }
 
@@ -526,6 +1061,24 @@ function getSetFieldValues(q,pos){
  return [];
 }
 
+
+function revealMissingSetAnswers(slot,values,usedIndexes){
+ if(!slot)return;
+
+ const used=new Set((usedIndexes||[]).map(Number));
+ const host=slot.querySelector('[data-set-accepted]');
+ if(!host)return;
+
+ values.forEach((value,idx)=>{
+   if(used.has(idx))return;
+
+   const chip=document.createElement('span');
+   chip.className='multi-train-chip multi-train-missing';
+   chip.textContent=value;
+   host.appendChild(chip);
+ });
+}
+
 function submitSetFieldAnswer(i,pos,isPractice=false){
  const card=document.getElementById((isPractice?'pq':'q')+i);
  const q=questions[i];
@@ -552,7 +1105,13 @@ function submitSetFieldAnswer(i,pos,isPractice=false){
 
  if(matched<0){
    input.classList.add('multi-train-wrong');
+
+   // Mostra imediatamente, a vermelho, todas as respostas obrigatórias
+   // que ainda não tinham sido dadas.
+   revealMissingSetAnswers(slot,values,used);
+
    lockFillQuestion(card);
+
    if(isPractice){
      if(registerPracticeAttempt(i,false))practiceFeedback(i,false,q.explicacao);
    }else{
@@ -587,13 +1146,8 @@ function submitSetFieldAnswer(i,pos,isPractice=false){
    return (s.dataset.used||'').split(',').filter(Boolean).length===getSetFieldValues(q,p).length;
  });
 
- if(!hasNormal && allSets){
-   lockFillQuestion(card);
-   if(isPractice){
-     if(registerPracticeAttempt(i,true))practiceFeedback(i,true,q.explicacao);
-   }else{
-     if(registerAttempt(i,true))feedback(i,true,q.explicacao);
-   }
+ if(allSets){
+   maybeFinishFillQuestion(i,isPractice);
  }
 }
 
@@ -672,7 +1226,24 @@ function allFillAndMultiAnsweredCorrect(card,q){
 }
 
 function lockFillQuestion(card){
- card.querySelectorAll('input,button').forEach(el=>el.disabled=true);
+ if(!card)return;
+
+ // Bloqueia apenas elementos de resposta.
+ // O botão "Próxima pergunta" tem de continuar utilizável.
+ card.querySelectorAll('input').forEach(el=>{
+   el.disabled=true;
+ });
+
+ card.querySelectorAll('button').forEach(btn=>{
+   const isNavigation=
+     btn.closest('[id^="next"]') ||
+     btn.closest('[id^="pnext"]') ||
+     /próxima pergunta/i.test(btn.textContent||'');
+
+   if(!isNavigation){
+     btn.disabled=true;
+   }
+ });
 }
 
 function submitMultiSlotAnswer(i,pos,isPractice=false){
@@ -770,56 +1341,136 @@ function initPracticeMultiRuntime(card){
  });
 }
 
-function checkFill(i){
- const q=questions[i],card=document.getElementById('q'+i);let ok=true;
- if(!card || card.dataset.done==='1') return;
 
- card.querySelectorAll('[data-pos]').forEach(inp=>{
+function normalFillFieldsComplete(card,q){
+ const inputs=[...card.querySelectorAll('[data-pos]')];
+ if(!inputs.length)return true;
+
+ return inputs.every(inp=>{
+   if(inp.dataset.validated!=='1')return false;
    const pos=Number(inp.dataset.pos);
-   const respostas=q.respostas?.[pos]||[];
-   const arr=respostas.map(normAnswer);
-   const userValue=inp.value.trim();
-   const hit=arr.includes(normAnswer(userValue));
-
-   inp.classList.remove('fill-result-correct','fill-result-wrong');
-
-   if(hit){
-     inp.classList.add('fill-result-correct');
-     inp.title='Resposta correta';
-   }else{
-     ok=false;
-     const correctValue=respostas[0]||'';
-     inp.dataset.userAnswer=userValue;
-     inp.value=correctValue;
-     inp.classList.add('fill-result-wrong');
-     inp.title=userValue
-       ? `A sua resposta: ${userValue} | Correta: ${correctValue}`
-       : `Resposta correta: ${correctValue}`;
-   }
-
-   inp.disabled=true;
+   const field=q.campos_resposta?.[pos];
+   const accepted=(field?.modo==='single' ? field.respostas : q.respostas?.[pos]) || [];
+   return accepted.map(normAnswer).includes(normAnswer(inp.dataset.originalValue ?? inp.value));
  });
-
- if(ok){
-   const allMulti=[...card.querySelectorAll('[data-multi-pos]')].every(slot=>{
-     const pos=Number(slot.dataset.multiPos);
-     const total=getMultiSlotValues(q,pos).length;
-     const used=(slot.dataset.used||'').split(',').filter(Boolean).length;
-     return used===total;
-   });
-   const allSets=[...card.querySelectorAll('[data-set-pos]')].every(slot=>{
-     const pos=Number(slot.dataset.setPos);
-     const total=getSetFieldValues(q,pos).length;
-     const used=(slot.dataset.used||'').split(',').filter(Boolean).length;
-     return used===total;
-   });
-   if(!allMulti||!allSets){
-     return;
-   }
- }
- if(registerAttempt(i,ok)) feedback(i,ok,q.explicacao);
 }
 
+function setFieldsComplete(card,q){
+ const slots=[...card.querySelectorAll('[data-set-pos]')];
+ if(!slots.length)return true;
+
+ return slots.every(slot=>{
+   const pos=Number(slot.dataset.setPos);
+   const total=getSetFieldValues(q,pos).length;
+   const used=(slot.dataset.used||'').split(',').filter(Boolean).length;
+   return total>0 && used===total;
+ });
+}
+
+function maybeFinishFillQuestion(i,isPractice=false){
+ const card=document.getElementById((isPractice?'pq':'q')+i);
+ const q=questions[i];
+ if(!card||!q||card.dataset.done==='1')return;
+
+ if(normalFillFieldsComplete(card,q) && setFieldsComplete(card,q)){
+   lockFillQuestion(card);
+
+   if(isPractice){
+     if(registerPracticeAttempt(i,true))practiceFeedback(i,true,q.explicacao);
+   }else{
+     if(registerAttempt(i,true))feedback(i,true,q.explicacao);
+   }
+ }
+}
+
+function validateSingleFillField(i,input,isPractice=false){
+ const card=document.getElementById((isPractice?'pq':'q')+i);
+ const q=questions[i];
+ if(!card||!q||!input||card.dataset.done==='1'||input.dataset.validated==='1')return;
+
+ const value=input.value.trim();
+ if(!value)return;
+
+ const pos=Number(input.dataset.pos);
+ const field=q.campos_resposta?.[pos];
+ const respostas=
+   field?.modo==='single'
+     ? (field.respostas||[])
+     : (q.respostas?.[pos]||[]);
+
+ const hit=respostas.map(normAnswer).includes(normAnswer(value));
+
+ input.dataset.validated='1';
+ input.dataset.originalValue=value;
+ input.disabled=true;
+
+ const verifyButton=card.querySelector(`[data-verify-pos="${pos}"]`);
+ if(verifyButton)verifyButton.disabled=true;
+
+ input.classList.remove('fill-result-correct','fill-result-wrong');
+
+ if(hit){
+   input.classList.add('fill-result-correct');
+   input.title='Resposta correta';
+   maybeFinishFillQuestion(i,isPractice);
+
+   return;
+ }
+
+ const correctValue=respostas[0]||'';
+ input.classList.add('fill-result-wrong');
+ input.value=correctValue;
+ input.title=value
+   ? `A sua resposta: ${value} | Correta: ${correctValue}`
+   : `Resposta correta: ${correctValue}`;
+
+ lockFillQuestion(card);
+
+ if(isPractice){
+   if(registerPracticeAttempt(i,false))practiceFeedback(i,false,q.explicacao);
+ }else{
+   if(registerAttempt(i,false))feedback(i,false,q.explicacao);
+ }
+}
+
+function bindImmediateFillValidation(card,i,isPractice=false){
+ if(!card)return;
+
+ // A validação dos campos normais é exclusivamente manual.
+ // Mudar de campo, clicar fora ou carregar Enter não corrige a resposta.
+ card.querySelectorAll('[data-verify-pos]').forEach(button=>{
+   if(button.dataset.manualValidationBound==='1')return;
+   button.dataset.manualValidationBound='1';
+
+   button.addEventListener('click',()=>{
+     const pos=Number(button.dataset.verifyPos);
+     const input=card.querySelector(`input[data-pos="${pos}"]`);
+     if(!input || input.disabled)return;
+
+     validateSingleFillField(i,input,isPractice);
+
+     if(input.dataset.validated==='1'){
+       button.disabled=true;
+     }
+   });
+ });
+}
+function checkFill(i){
+ const q=questions[i];
+ const card=document.getElementById('q'+i);
+ if(!card||card.dataset.done==='1')return;
+
+ const pending=[...card.querySelectorAll('input[data-pos]')]
+   .filter(inp=>inp.dataset.validated!=='1');
+
+ for(const input of pending){
+   if(!input.value.trim())continue;
+   validateSingleFillField(i,input,false);
+   if(card.dataset.done==='1')return;
+ }
+
+ maybeFinishFillQuestion(i,false);
+}
 function checkChoice(i,originalIndex,btn){
  const q=questions[i],ok=originalIndex===q.resposta_correta;
  if(!registerAttempt(i,ok)) return;
@@ -1510,6 +2161,8 @@ async function uploadInlineImageFile(file){
 }
 
 let lastFillEditorRange=null;
+let selectedEditorTable=null;
+let copiedEditorTableData=null;
 
 function rememberFillEditorRange(){
  const editor=fillVisualEditorEl();
@@ -1613,8 +2266,7 @@ function createSeparatorNode(){
 function appendVisualInline(container,text,respostas){
  if(!text)return;
 
- // Prioridade: imagem, campo legado triplo, campo normal numerado e negrito.
- const tokenRe=/(\{\{img:([^}]+)\}\}|\[\[\[(\d+)\]\]\]|\[\[(\d+)\]\]|\*\*\*\*(.+?)\*\*\*\*)/g;
+ const tokenRe=/(\{\{tbl64:([A-Za-z0-9+/=]+)\}\}|\{\{img:([^}]+)\}\}|\[\[\[(\d+)\]\]\]|\[\[(\d+)\]\]|\*\*\*\*(.+?)\*\*\*\*)/g;
 
  let last=0,m;
  while((m=tokenRe.exec(text))){
@@ -1623,14 +2275,16 @@ function appendVisualInline(container,text,respostas){
    }
 
    if(m[2]!==undefined){
-     container.appendChild(createEditorImageNode(String(m[2]||'').trim()));
+     const data=decodeTableData(m[2]);
+     if(data)container.appendChild(createEditorTableNode(data));
    }else if(m[3]!==undefined){
-     // Compatibilidade com a versão anterior que chegou a usar [[[n]]].
-     const pos=Number(m[3])-1;
-     const legacy=(window.__loadingMultiAnswers||[])[pos]||[];
-     container.appendChild(createFillSlot([], 'set', legacy));
+     container.appendChild(createEditorImageNode(String(m[3]||'').trim()));
    }else if(m[4]!==undefined){
      const pos=Number(m[4])-1;
+     const legacy=(window.__loadingMultiAnswers||[])[pos]||[];
+     container.appendChild(createFillSlot([], 'set', legacy));
+   }else if(m[5]!==undefined){
+     const pos=Number(m[5])-1;
      const fields=window.__loadingAnswerFields||[];
      const field=fields[pos];
 
@@ -1647,7 +2301,7 @@ function appendVisualInline(container,text,respostas){
        container.appendChild(createFillSlot(accepted, 'single', []));
      }
    }else{
-     container.appendChild(createBoldNode(m[5]||''));
+     container.appendChild(createBoldNode(m[6]||''));
    }
 
    last=tokenRe.lastIndex;
@@ -1660,6 +2314,7 @@ function appendVisualInline(container,text,respostas){
 function loadFillVisualEditor(pergunta='',respostas=[],respostasMultiplas=[],camposResposta=[]){
  window.__loadingMultiAnswers=Array.isArray(respostasMultiplas)?respostasMultiplas:[];
  window.__loadingAnswerFields=Array.isArray(camposResposta)?camposResposta:[];
+ window.__loadingTableAnswers=Array.isArray(respostas)?respostas:[];
 
  setTimeout(installFillEditorDeletionUX,0);
 
@@ -1685,6 +2340,7 @@ function loadFillVisualEditor(pergunta='',respostas=[],respostasMultiplas=[],cam
 
  window.__loadingMultiAnswers=[];
  window.__loadingAnswerFields=[];
+ window.__loadingTableAnswers=[];
 }
 function setCaretAfter(node){
  const editor=document.getElementById('fillVisualEditor');
@@ -1704,7 +2360,7 @@ function processFillEditorTokens(){
  const walker=document.createTreeWalker(editor,NodeFilter.SHOW_TEXT,{
    acceptNode(node){
      const p=node.parentElement;
-     if(p&&(p.closest('.fill-slot')||p.closest('[data-editor-bold]')||p.closest('[data-editor-separator]'))){
+     if(p&&(p.closest('.fill-slot')||p.closest('[data-editor-bold]')||p.closest('[data-editor-separator]')||p.closest('.editor-table-controls'))){
        return NodeFilter.FILTER_REJECT;
      }
      const v=node.nodeValue||'';
@@ -1772,6 +2428,7 @@ function normalizeFillEditorAfterDelete(){
 
  // Remove contentores vazios deixados pelo browser.
  [...editor.querySelectorAll('div,p')].forEach(el=>{
+   if(el.closest('[data-editor-table]'))return;
    const hasMeaningfulChild=[...el.childNodes].some(n=>{
      if(n.nodeType===3)return n.textContent.replace(/\u200B/g,'').trim()!=='';
      if(n.nodeType===1)return !n.matches('br');
@@ -1819,6 +2476,54 @@ function removeSelectedFillAtomicNodes(){
  }
 
  return removed;
+}
+
+
+function adjacentTableForCaret(range,key){
+ let container=range.startContainer;
+ let offset=range.startOffset;
+
+ function previousMeaningful(node){
+   let n=node;
+   while(n && n.nodeType===3 && !n.textContent.trim()) n=n.previousSibling;
+   return n;
+ }
+
+ function nextMeaningful(node){
+   let n=node;
+   while(n && n.nodeType===3 && !n.textContent.trim()) n=n.nextSibling;
+   return n;
+ }
+
+ if(container.nodeType===3){
+   const text=container.textContent||'';
+
+   if(key==='Backspace' && offset===0){
+     const n=previousMeaningful(container.previousSibling);
+     return n?.nodeType===1 && n.matches?.('[data-editor-table]') ? n : null;
+   }
+
+   if(key==='Delete' && offset===text.length){
+     const n=nextMeaningful(container.nextSibling);
+     return n?.nodeType===1 && n.matches?.('[data-editor-table]') ? n : null;
+   }
+
+   return null;
+ }
+
+ if(container.nodeType===1){
+   if(key==='Backspace' && offset>0){
+     const n=previousMeaningful(container.childNodes[offset-1]);
+     return n?.nodeType===1 && n.matches?.('[data-editor-table]') ? n : null;
+   }
+
+   if(key==='Delete' && offset<container.childNodes.length){
+     const n=nextMeaningful(container.childNodes[offset]);
+     return n?.nodeType===1 && n.matches?.('[data-editor-table]') ? n : null;
+   }
+ }
+
+ return null;
 }
 
 function adjacentAtomicForCaret(range,key){
@@ -1941,6 +2646,17 @@ function installFillEditorDeletionUX(){
 
  editor.addEventListener('keydown',e=>{
    const key=e.key.toLowerCase();
+
+   if((e.ctrlKey||e.metaKey) && key==='c' && selectedEditorTable){
+     e.preventDefault();
+     copySelectedEditorTableToClipboard();
+     return;
+   }
+
+   if((e.ctrlKey||e.metaKey) && key==='v' && copiedEditorTableData && !e.target.matches?.('[data-fill-answer],[data-alt-answer],[data-set-answer],[data-multi-answer]')){
+     // O evento paste tratará o clipboard real; este atalho serve como fallback.
+     rememberFillEditorRange();
+   }
    const inAnswerField=e.target.matches&&e.target.matches('[data-fill-answer],[data-alt-answer],[data-set-answer],[data-multi-answer]');
 
    if(inAnswerField){
@@ -1973,10 +2689,25 @@ function installFillEditorDeletionUX(){
    // Se há uma seleção, Delete/Backspace deve mesmo apagar tudo o que foi selecionado,
    // incluindo inputs e linhas horizontais.
    if(sel && sel.rangeCount && !sel.getRangeAt(0).collapsed){
+     const range=sel.getRangeAt(0);
+
+     const protectedTables=[...editor.querySelectorAll('[data-editor-table]')]
+       .filter(tbl=>{
+         try{return range.intersectsNode(tbl)}catch{return false}
+       });
+
+     if(protectedTables.length){
+       e.preventDefault();
+       protectedTables.forEach(tbl=>{
+         tbl.classList.add('editor-table-protected-flash');
+         setTimeout(()=>tbl.classList.remove('editor-table-protected-flash'),450);
+       });
+       return;
+     }
+
      e.preventDefault();
      pushFillUndoState();
 
-     const range=sel.getRangeAt(0);
      removeSelectedFillAtomicNodes();
 
      try{
@@ -1997,6 +2728,17 @@ function installFillEditorDeletionUX(){
    // Permite apagar HR / campos especiais diretamente com Backspace/Delete.
    if(sel && sel.rangeCount){
      const range=sel.getRangeAt(0);
+
+     // A tabela é estruturalmente protegida:
+     // Backspace/Delete junto dela não a pode remover.
+     const protectedTable=adjacentTableForCaret(range,e.key);
+     if(protectedTable){
+       e.preventDefault();
+       protectedTable.classList.add('editor-table-protected-flash');
+       setTimeout(()=>protectedTable.classList.remove('editor-table-protected-flash'),450);
+       return;
+     }
+
      const atomic=adjacentAtomicForCaret(range,e.key);
      if(atomic){
        e.preventDefault();
@@ -2109,6 +2851,12 @@ function serializeFillEditor(){
      return `[[${counter}]]`;
    }
 
+   if(el.hasAttribute?.('data-editor-table')){
+     const data=collectEditorTableData(el,walk);
+     const encoded=encodeTableData(data);
+     return encoded?`{{tbl64:${encoded}}}`:'';
+   }
+
    if(el.hasAttribute?.('data-editor-image')){
      const src=
        el.getAttribute('data-src')||
@@ -2188,6 +2936,11 @@ function visualFragmentToClipboardText(root){
          .filter(Boolean);
        return `[[${[primary,...alternatives].filter(Boolean).join('|')}]]`;
      }
+     if(el.hasAttribute?.('data-editor-table')){
+       const data=collectEditorTableData(el,walk);
+       const encoded=encodeTableData(data);
+       return encoded?`{{tbl64:${encoded}}}`:'';
+     }
      if(el.hasAttribute?.('data-editor-image')){
        const src=el.getAttribute('data-src')||el.querySelector('img')?.getAttribute('src')||'';
        return src?`{{img:${src}}}`:'';
@@ -2214,18 +2967,21 @@ function clipboardTextToVisualFragment(text){
  const lines=String(text||'').split(/\r?\n/);
 
  function appendInline(line){
-   const tokenRe=/(\{\{img:([^}]+)\}\}|\[\[([\s\S]*?)\]\]|\*\*\*\*([\s\S]+?)\*\*\*\*)/g;
+   const tokenRe=/(\{\{tbl64:([A-Za-z0-9+/=]+)\}\}|\{\{img:([^}]+)\}\}|\[\[([\s\S]*?)\]\]|\*\*\*\*([\s\S]+?)\*\*\*\*)/g;
    let last=0,m;
    while((m=tokenRe.exec(line))){
      if(m.index>last) frag.appendChild(document.createTextNode(line.slice(last,m.index)));
 
      if(m[2]!==undefined){
-       frag.appendChild(createEditorImageNode(String(m[2]||'').trim()));
+       const data=decodeTableData(m[2]);
+       if(data)frag.appendChild(createEditorTableNode(data));
      }else if(m[3]!==undefined){
-       if(document.getElementById('type')?.value==='fill') frag.appendChild(createFillSlot(m[3]));
-       else frag.appendChild(document.createTextNode(`[[${m[3]}]]`));
+       frag.appendChild(createEditorImageNode(String(m[3]||'').trim()));
+     }else if(m[4]!==undefined){
+       if(document.getElementById('type')?.value==='fill') frag.appendChild(createFillSlot(m[4]));
+       else frag.appendChild(document.createTextNode(`[[${m[4]}]]`));
      }else{
-       frag.appendChild(createBoldNode(m[4]||''));
+       frag.appendChild(createBoldNode(m[5]||''));
      }
      last=tokenRe.lastIndex;
    }
@@ -2257,6 +3013,14 @@ function insertVisualFragmentAtSelection(fragment){
 const fillEditor=document.getElementById('fillVisualEditor');
 if(fillEditor){
  fillEditor.addEventListener('click',e=>{
+   const tableWrap=e.target.closest?.('[data-editor-table]');
+   const removeTableBtn=e.target.closest?.('[data-remove-editor-table]');
+   if(tableWrap && !removeTableBtn){
+     selectEditorTable(tableWrap);
+   }else if(!tableWrap){
+     clearSelectedEditorTable();
+   }
+
    const add=e.target.closest?.('[data-add-alt]');
    if(add){
      e.preventDefault();
@@ -2304,6 +3068,17 @@ if(fillEditor){
      return;
    }
 
+   const removeTable=e.target.closest?.('[data-remove-editor-table]');
+   if(removeTable){
+     e.preventDefault();
+     pushFillUndoState?.();
+     const table=removeTable.closest('[data-editor-table]');
+     if(table===selectedEditorTable)clearSelectedEditorTable();
+     table?.remove();
+     updatePromptPreview?.();
+     return;
+   }
+
    const removeImage=e.target.closest?.('[data-remove-editor-image]');
    if(removeImage){
      e.preventDefault();
@@ -2319,6 +3094,12 @@ if(fillEditor){
  });
 
  fillEditor.addEventListener('copy',e=>{
+   if(selectedEditorTable){
+     e.preventDefault();
+     copySelectedEditorTableToClipboard();
+     return;
+   }
+
    if(e.target.matches&&e.target.matches('[data-fill-answer],[data-alt-answer],[data-set-answer],[data-multi-answer]')) return;
 
    const sel=window.getSelection();
@@ -2349,6 +3130,15 @@ if(fillEditor){
    }
 
    const text=e.clipboardData?.getData('text/plain');
+
+   // Se a tabela foi copiada dentro deste editor, Ctrl+V duplica a tabela
+   // no ponto atual, mesmo que o browser não preserve HTML estruturado.
+   if(copiedEditorTableData && (!text || !text.trim())){
+     e.preventDefault();
+     pasteCopiedEditorTable();
+     return;
+   }
+
    if(text===undefined || text===null) return;
    e.preventDefault();
    const fragment=clipboardTextToVisualFragment(text);
@@ -2380,6 +3170,48 @@ if(fillEditor){
    if(!e.ctrlKey&&!e.metaKey&&!e.altKey)processFillEditorTokens();
  });
 }
+
+
+const openTableBuilderBtn=document.getElementById('openTableBuilderBtn');
+const tableBuilder=document.getElementById('tableBuilder');
+const confirmInsertTableBtn=document.getElementById('confirmInsertTableBtn');
+const cancelInsertTableBtn=document.getElementById('cancelInsertTableBtn');
+
+function closeTableBuilder(){
+ tableBuilder?.classList.add('hidden');
+}
+
+openTableBuilderBtn?.addEventListener('mousedown',()=>{
+ rememberFillEditorRange();
+});
+
+openTableBuilderBtn?.addEventListener('click',()=>{
+ rememberFillEditorRange();
+ tableBuilder?.classList.remove('hidden');
+ document.getElementById('tableColumnCount')?.focus();
+});
+
+cancelInsertTableBtn?.addEventListener('click',closeTableBuilder);
+
+confirmInsertTableBtn?.addEventListener('click',()=>{
+ const cols=Math.max(1,Math.min(10,Number(document.getElementById('tableColumnCount')?.value)||1));
+ const rows=Math.max(1,Math.min(20,Number(document.getElementById('tableRowCount')?.value)||1));
+ const rowLabels=!!document.getElementById('tableHasRowLabels')?.checked;
+
+ const data={
+   headers:Array.from({length:cols},(_,i)=>`Coluna ${i+1}`),
+   rowLabels,
+   rows:Array.from({length:rows},(_,r)=>({
+     name:rowLabels?`Linha ${r+1}`:'',
+     cells:Array.from({length:cols},()=> '')
+   }))
+ };
+
+ pushFillUndoState?.();
+ insertTableAtCaret(data);
+ closeTableBuilder();
+ updatePromptPreview();
+});
 
 const inlineImageBtn=document.getElementById('insertInlineImageBtn');
 const inlineImageFile=document.getElementById('inlineImageFile');
@@ -2481,7 +3313,7 @@ function clearEditor(returnAfterCancel=true){
  document.getElementById('editorTitle').textContent='Criar nova pergunta';
  ['editId','category','prompt','explanation','wrongWord','correctWord'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
  document.getElementById('type').value='fill';
- document.getElementById('questionArea').value='teoria';document.getElementById('choiceCount').value='4';document.getElementById('statementCorrect').value='false';document.getElementById('imageFile').value='';document.getElementById('preview').innerHTML='';document.getElementById('fillVisualEditor').innerHTML='';resetFillUndoHistory();lastFillEditorRange=null;currentImage='';updateGeneralImageRemoveButton();renderChoiceEditor([],0);toggleFields();const msg=document.getElementById('saveMessage');if(msg)msg.className='feedback';updatePromptPreview();
+ document.getElementById('questionArea').value='teoria';document.getElementById('choiceCount').value='4';document.getElementById('statementCorrect').value='false';document.getElementById('imageFile').value='';document.getElementById('preview').innerHTML='';document.getElementById('fillVisualEditor').innerHTML='';resetFillUndoHistory();lastFillEditorRange=null;clearSelectedEditorTable();copiedEditorTableData=null;currentImage='';updateGeneralImageRemoveButton();renderChoiceEditor([],0);toggleFields();const msg=document.getElementById('saveMessage');if(msg)msg.className='feedback';updatePromptPreview();
  if(cancelTarget)returnToEditedQuestion(cancelTarget,false);else if(returnAfterCancel){questionEditContext=null;updateEditorSecondaryButton()}
 }
 
@@ -2528,16 +3360,19 @@ async function deleteQuestion(id){
 function renderPracticeIdle(){
  const host=document.getElementById('practiceQuiz');
  if(!host)return;
- const pool=practiceQuestions();
+ const pool=filteredPracticeQuestions();
  if(!pool.length){
-   host.innerHTML='<div class="card small">Ainda não existem perguntas marcadas como <strong>Prática de condução</strong>. Na Base de perguntas, use o botão <strong>Mover para prática</strong>.</div>';
+   const hasFilter=selectedCategoriesForMode('practice').length>0;
+   host.innerHTML=hasFilter
+     ? '<div class="card small">Não existem perguntas de prática nas categorias selecionadas. Remova um filtro ou escolha outra categoria.</div>'
+     : '<div class="card small">Ainda não existem perguntas marcadas como <strong>Prática de condução</strong>. Na Base de perguntas, use o botão <strong>Mover para prática</strong>.</div>';
    return;
  }
  host.innerHTML='<div class="card small">Abra esta aba para iniciar o treino prático, ou carregue em <strong>Novo treino prático</strong>.</div>';
 }
 
 function ensurePracticeTraining(){
- const pool=practiceQuestions();
+ const pool=filteredPracticeQuestions();
  document.getElementById('practiceTotal').textContent=pool.length;
  if(!pool.length){ renderPracticeIdle(); return; }
  if(!currentPracticeId && practicePendingIds.length===pool.length && practiceAnswered===0){
@@ -2565,7 +3400,7 @@ function randomPracticePendingId(){
 }
 
 function nextPracticeQuestion(initial=false){
- const pool=practiceQuestions();
+ const pool=filteredPracticeQuestions();
  if(!pool.length){renderPracticeIdle();return}
  if(!practicePendingIds.length){
    currentPracticeId=null;
@@ -2577,7 +3412,7 @@ function nextPracticeQuestion(initial=false){
 }
 
 function renderPracticeCompleted(){
- const pool=practiceQuestions();
+ const pool=filteredPracticeQuestions();
  document.getElementById('practiceQuiz').innerHTML=`
    <div class="card">
      <span class="tag">Treino prático concluído</span>
@@ -2588,7 +3423,7 @@ function renderPracticeCompleted(){
 }
 
 function restartPracticeTraining(){
- const pool=practiceQuestions();
+ const pool=filteredPracticeQuestions();
  const practiceIds=pool.map(q=>q.id);
 
  resetProgressForQuestionIds(practiceIds);
@@ -2609,7 +3444,7 @@ function restartPracticeTraining(){
 }
 
 function currentPracticeQuestion(){
- return practiceQuestions().find(q=>q.id===currentPracticeId)||null;
+ return filteredPracticeQuestions().find(q=>q.id===currentPracticeId)||null;
 }
 
 function renderPracticeQuiz(){
@@ -2643,7 +3478,7 @@ function renderPracticeQuiz(){
    <div id="pfix${i}" class="ans hidden">Altere <strong>${esc(q.palavra_errada||'')}</strong> para <input id="pfixInput${i}" class="blank" value="${esc(q.palavra_errada||'')}"> <button class="primary" onclick="practiceFinishCorrection(${i})">Validar</button></div>`;
  }
 
- const remaining=practiceQuestions().length-practiceCorrect;
+ const remaining=filteredPracticeQuestions().length-practiceCorrect;
  document.getElementById('practiceQuiz').innerHTML=`
    <div class="card" id="pq${i}" data-done="0">
      <div class="toolbar" style="margin-bottom:10px">
@@ -2656,7 +3491,12 @@ function renderPracticeQuiz(){
      <div id="pfb${i}" class="feedback"></div>
      <div id="pnext${i}" class="actions hidden" style="margin-top:12px"><button class="primary" onclick="nextPracticeQuestion()">Próxima pergunta →</button></div>
    </div>`;
- setTimeout(()=>{const c=document.getElementById('pq'+i);initPracticeMultiRuntime(c);bindSetFieldRuntime(c,true);},0);
+ setTimeout(()=>{
+   const c=document.getElementById('pq'+i);
+   initPracticeMultiRuntime(c);
+   bindSetFieldRuntime(c,true);
+   bindImmediateFillValidation(c,i,true);
+ },0);
 }
 
 function registerPracticeAttempt(i,ok){
@@ -2688,7 +3528,11 @@ function registerPracticeAttempt(i,ok){
  document.getElementById('practiceAnswered').textContent=practiceAnswered;
 
  const next=document.getElementById('pnext'+i);
- if(next)next.classList.remove('hidden');
+ if(next){
+   next.classList.remove('hidden');
+   const btn=next.querySelector('button');
+   if(btn)btn.disabled=false;
+ }
  return true;
 }
 
@@ -2798,57 +3642,21 @@ function practiceSubmitUnorderedAnswer(i){
 }
 
 function practiceCheckFill(i){
- const q=questions[i],card=document.getElementById('pq'+i);
+ const q=questions[i];
+ const card=document.getElementById('pq'+i);
  if(!card||card.dataset.done==='1')return;
 
- let ok=true;
+ const pending=[...card.querySelectorAll('input[data-pos]')]
+   .filter(inp=>inp.dataset.validated!=='1');
 
- card.querySelectorAll('[data-pos]').forEach(inp=>{
-   const pos=Number(inp.dataset.pos);
-   const respostas=q.respostas?.[pos]||[];
-   const arr=respostas.map(normAnswer);
-   const userValue=inp.value.trim();
-   const hit=arr.includes(normAnswer(userValue));
-
-   inp.classList.remove('fill-result-correct','fill-result-wrong');
-
-   if(hit){
-     inp.classList.add('fill-result-correct');
-     inp.title='Resposta correta';
-   }else{
-     ok=false;
-     const correctValue=respostas[0]||'';
-     inp.dataset.userAnswer=userValue;
-     inp.value=correctValue;
-     inp.classList.add('fill-result-wrong');
-     inp.title=userValue
-       ? `A sua resposta: ${userValue} | Correta: ${correctValue}`
-       : `Resposta correta: ${correctValue}`;
-   }
-
-   inp.disabled=true;
- });
-
- if(ok){
-   const allMulti=[...card.querySelectorAll('[data-multi-pos]')].every(slot=>{
-     const pos=Number(slot.dataset.multiPos);
-     const total=getMultiSlotValues(q,pos).length;
-     const used=(slot.dataset.used||'').split(',').filter(Boolean).length;
-     return used===total;
-   });
-   const allSets=[...card.querySelectorAll('[data-set-pos]')].every(slot=>{
-     const pos=Number(slot.dataset.setPos);
-     const total=getSetFieldValues(q,pos).length;
-     const used=(slot.dataset.used||'').split(',').filter(Boolean).length;
-     return used===total;
-   });
-   if(!allMulti||!allSets){
-     return;
-   }
+ for(const input of pending){
+   if(!input.value.trim())continue;
+   validateSingleFillField(i,input,true);
+   if(card.dataset.done==='1')return;
  }
- if(registerPracticeAttempt(i,ok))practiceFeedback(i,ok,q.explicacao);
-}
 
+ maybeFinishFillQuestion(i,true);
+}
 function practiceCheckChoice(i,originalIndex,btn){
  const q=questions[i],ok=originalIndex===q.resposta_correta;
  if(!registerPracticeAttempt(i,ok))return;
