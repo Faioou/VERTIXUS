@@ -29,6 +29,441 @@ let persistedTrainingStats = {
 
 const TRAINING_PROGRESS_KEY = 'codigoEstrada.trainingProgress.v2';
 
+const CATEGORY_GAME_PROGRESS_KEY = 'codigoEstrada.categoryGameProgress.v1';
+const CATEGORY_GAME_SELECTION_KEY = 'codigoEstrada.categoryGameSelection.v1';
+
+let categoryGameSelections = {
+  theory: [],
+  practice: []
+};
+
+let categoryGame = {
+  active: false,
+  mode: 'theory',
+  selected: [],
+  sessionKey: '',
+  pendingIds: [],
+  masteredIds: new Set(),
+  answered: 0,
+  correct: 0,
+  currentId: null,
+  previousId: null,
+  choiceOrder: []
+};
+
+function loadCategoryGameSelections(){
+  try{
+    const raw=localStorage.getItem(CATEGORY_GAME_SELECTION_KEY);
+    if(!raw)return;
+    const data=JSON.parse(raw);
+    categoryGameSelections.theory=Array.isArray(data.theory)?data.theory.filter(Boolean):[];
+    categoryGameSelections.practice=Array.isArray(data.practice)?data.practice.filter(Boolean):[];
+  }catch{}
+}
+
+function saveCategoryGameSelections(){
+  try{
+    localStorage.setItem(CATEGORY_GAME_SELECTION_KEY,JSON.stringify(categoryGameSelections));
+  }catch{}
+}
+
+function loadAllCategoryGameSessions(){
+  try{
+    return JSON.parse(localStorage.getItem(CATEGORY_GAME_PROGRESS_KEY)||'{}')||{};
+  }catch{
+    return {};
+  }
+}
+
+function saveAllCategoryGameSessions(data){
+  try{
+    localStorage.setItem(CATEGORY_GAME_PROGRESS_KEY,JSON.stringify(data||{}));
+  }catch{}
+}
+
+function categoryGameSessionKey(mode,categories){
+  const keys=(categories||[]).map(categoryKey).sort();
+  return `${mode}::${keys.join('||')}`;
+}
+
+function categoryGameBasePool(mode=categoryGame.mode,selected=categoryGame.selected){
+  const source=mode==='practice'?practiceQuestions():theoryQuestions();
+  const wanted=new Set((selected||[]).map(categoryKey));
+  if(!wanted.size)return [];
+  return source.filter(q=>wanted.has(categoryKey(q.categoria||'Sem categoria')));
+}
+
+function loadCategoryGameSession(mode,selected){
+  const key=categoryGameSessionKey(mode,selected);
+  const sessions=loadAllCategoryGameSessions();
+  const saved=sessions[key]||{};
+
+  const pool=categoryGameBasePool(mode,selected);
+  const validIds=new Set(pool.map(q=>String(q.id)));
+  const mastered=new Set(
+    (Array.isArray(saved.masteredIds)?saved.masteredIds:[])
+      .map(String)
+      .filter(id=>validIds.has(id))
+  );
+
+  categoryGame={
+    active:true,
+    mode,
+    selected:[...selected],
+    sessionKey:key,
+    pendingIds:pool.filter(q=>!mastered.has(String(q.id))).map(q=>q.id),
+    masteredIds:mastered,
+    answered:Number(saved.answered)||0,
+    correct:mastered.size,
+    currentId:null,
+    previousId:null,
+    choiceOrder:[]
+  };
+
+  saveCategoryGameSession();
+}
+
+function saveCategoryGameSession(){
+  if(!categoryGame.sessionKey)return;
+  const sessions=loadAllCategoryGameSessions();
+  sessions[categoryGame.sessionKey]={
+    mode:categoryGame.mode,
+    categories:[...categoryGame.selected],
+    masteredIds:[...categoryGame.masteredIds],
+    answered:categoryGame.answered,
+    updatedAt:Date.now()
+  };
+  saveAllCategoryGameSessions(sessions);
+}
+
+function resetCurrentCategoryGameSession(){
+  if(!categoryGame.sessionKey)return;
+  const sessions=loadAllCategoryGameSessions();
+  sessions[categoryGame.sessionKey]={
+    mode:categoryGame.mode,
+    categories:[...categoryGame.selected],
+    masteredIds:[],
+    answered:0,
+    updatedAt:Date.now()
+  };
+  saveAllCategoryGameSessions(sessions);
+
+  const pool=categoryGameBasePool();
+  categoryGame.pendingIds=pool.map(q=>q.id);
+  categoryGame.masteredIds=new Set();
+  categoryGame.answered=0;
+  categoryGame.correct=0;
+  categoryGame.currentId=null;
+  categoryGame.previousId=null;
+  categoryGame.choiceOrder=[];
+}
+
+function categoryGameCategories(mode){
+  return uniqueCategoriesForMode(mode);
+}
+
+function currentCategoryGameSelection(){
+  const mode=document.getElementById('categoryGameMode')?.value||'theory';
+  return categoryGameSelections[mode]||[];
+}
+
+function syncCategoryGameSuggestions(){
+  const mode=document.getElementById('categoryGameMode')?.value||'theory';
+  const list=document.getElementById('categoryGameSuggestions');
+  if(!list)return;
+  const selectedKeys=new Set(currentCategoryGameSelection().map(categoryKey));
+  list.innerHTML=categoryGameCategories(mode)
+    .filter(c=>!selectedKeys.has(categoryKey(c)))
+    .map(c=>`<option value="${esc(c)}"></option>`)
+    .join('');
+}
+
+function renderCategoryGameSelection(){
+  const mode=document.getElementById('categoryGameMode')?.value||'theory';
+  const host=document.getElementById('categoryGameChips');
+  if(!host)return;
+
+  const selected=categoryGameSelections[mode]||[];
+  host.innerHTML=selected.length
+    ? selected.map(c=>`
+        <span class="category-filter-chip">
+          <span>${esc(c)}</span>
+          <button type="button" onclick="removeCategoryGameSelection(decodeURIComponent('${encodeURIComponent(c)}'))">×</button>
+        </span>`).join('')
+    : '<span class="small category-filter-all">Escolha pelo menos uma categoria.</span>';
+
+  syncCategoryGameSuggestions();
+}
+
+function categoryGameModeChanged(){
+  const input=document.getElementById('categoryGameInput');
+  if(input)input.value='';
+  renderCategoryGameSelection();
+}
+
+function addCategoryGameSelection(){
+  const mode=document.getElementById('categoryGameMode')?.value||'theory';
+  const input=document.getElementById('categoryGameInput');
+  if(!input)return;
+
+  const wanted=categoryKey(input.value);
+  const categories=categoryGameCategories(mode);
+  const exact=categories.find(c=>categoryKey(c)===wanted);
+  const matches=categories.filter(c=>categoryKey(c).includes(wanted));
+  const category=exact||(matches.length===1?matches[0]:null);
+
+  if(!category){
+    const msg=document.getElementById('categoryGameSetupMessage');
+    if(msg){
+      msg.className='feedback bad';
+      msg.textContent='Escolha uma categoria existente.';
+    }
+    return;
+  }
+
+  const target=categoryGameSelections[mode];
+  if(!target.some(c=>categoryKey(c)===categoryKey(category))){
+    target.push(category);
+    target.sort((a,b)=>a.localeCompare(b,'pt',{sensitivity:'base'}));
+    saveCategoryGameSelections();
+  }
+
+  input.value='';
+  const msg=document.getElementById('categoryGameSetupMessage');
+  if(msg){msg.className='feedback';msg.textContent='';}
+  renderCategoryGameSelection();
+}
+
+function removeCategoryGameSelection(category){
+  const mode=document.getElementById('categoryGameMode')?.value||'theory';
+  const key=categoryKey(category);
+  categoryGameSelections[mode]=(categoryGameSelections[mode]||[]).filter(c=>categoryKey(c)!==key);
+  saveCategoryGameSelections();
+  renderCategoryGameSelection();
+}
+
+function clearCategoryGameSelection(){
+  const mode=document.getElementById('categoryGameMode')?.value||'theory';
+  categoryGameSelections[mode]=[];
+  saveCategoryGameSelections();
+  const input=document.getElementById('categoryGameInput');
+  if(input)input.value='';
+  renderCategoryGameSelection();
+}
+
+function installCategoryGameInputUX(){
+  const input=document.getElementById('categoryGameInput');
+  if(!input||input.dataset.bound==='1')return;
+  input.dataset.bound='1';
+
+  input.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){
+      e.preventDefault();
+      addCategoryGameSelection();
+    }
+  });
+
+  input.addEventListener('change',()=>{
+    const mode=document.getElementById('categoryGameMode')?.value||'theory';
+    const exact=categoryGameCategories(mode).some(c=>categoryKey(c)===categoryKey(input.value));
+    if(exact)addCategoryGameSelection();
+  });
+}
+
+function showCategoryTrainingSelection(){
+  document.getElementById('categoryTrainingSetup')?.classList.remove('hidden');
+  document.getElementById('categoryGameStats')?.classList.add('hidden');
+  const quiz=document.getElementById('categoryGameQuiz');
+  if(quiz)quiz.innerHTML='';
+  categoryGame.active=false;
+  renderCategoryGameSelection();
+}
+
+function startCategoryTraining(){
+  const mode=document.getElementById('categoryGameMode')?.value||'theory';
+  const selected=[...(categoryGameSelections[mode]||[])];
+  const msg=document.getElementById('categoryGameSetupMessage');
+
+  if(!selected.length){
+    if(msg){
+      msg.className='feedback bad';
+      msg.textContent='Escolha pelo menos uma categoria.';
+    }
+    return;
+  }
+
+  const pool=categoryGameBasePool(mode,selected);
+  if(!pool.length){
+    if(msg){
+      msg.className='feedback bad';
+      msg.textContent='Não existem perguntas nessas categorias.';
+    }
+    return;
+  }
+
+  if(msg){msg.className='feedback';msg.textContent='';}
+  loadCategoryGameSession(mode,selected);
+
+  document.getElementById('categoryTrainingSetup')?.classList.add('hidden');
+  document.getElementById('categoryGameStats')?.classList.remove('hidden');
+  updateCategoryGameStats();
+  nextCategoryGameQuestion(true);
+}
+
+function updateCategoryGameStats(){
+  const pool=categoryGameBasePool();
+  const total=document.getElementById('categoryGameTotal');
+  const correctEl=document.getElementById('categoryGameCorrect');
+  const answeredEl=document.getElementById('categoryGameAnswered');
+  const modeLabel=document.getElementById('categoryGameModeLabel');
+
+  if(total)total.textContent=pool.length;
+  if(correctEl)correctEl.textContent=categoryGame.correct;
+  if(answeredEl)answeredEl.textContent=categoryGame.answered;
+  if(modeLabel)modeLabel.textContent=categoryGame.mode==='practice'?'🚗 Prática':'📘 Teoria';
+}
+
+function categoryRandomPendingId(){
+  if(!categoryGame.pendingIds.length)return null;
+  let candidates=categoryGame.pendingIds;
+
+  if(categoryGame.pendingIds.length>1&&categoryGame.previousId){
+    const filtered=categoryGame.pendingIds.filter(id=>id!==categoryGame.previousId);
+    if(filtered.length)candidates=filtered;
+  }
+
+  const chosen=candidates[Math.floor(Math.random()*candidates.length)];
+  const pos=categoryGame.pendingIds.indexOf(chosen);
+  if(pos>=0)categoryGame.pendingIds.splice(pos,1);
+  return chosen;
+}
+
+function currentCategoryGameQuestion(){
+  return categoryGameBasePool().find(q=>String(q.id)===String(categoryGame.currentId))||null;
+}
+
+function nextCategoryGameQuestion(initial=false){
+  const pool=categoryGameBasePool();
+
+  if(!pool.length){
+    document.getElementById('categoryGameQuiz').innerHTML=
+      '<div class="card small">Não existem perguntas para esta seleção.</div>';
+    return;
+  }
+
+  if(!categoryGame.pendingIds.length){
+    categoryGame.currentId=null;
+    saveCategoryGameSession();
+    renderCategoryGameCompleted();
+    return;
+  }
+
+  categoryGame.currentId=categoryRandomPendingId();
+  renderCategoryGameQuiz();
+}
+
+function renderCategoryGameCompleted(){
+  const pool=categoryGameBasePool();
+  document.getElementById('categoryGameQuiz').innerHTML=`
+    <div class="card">
+      <span class="tag">Treino por categorias concluído</span>
+      <div class="q" style="margin-top:12px"><strong>🎉 Acertou todas as ${pool.length} perguntas deste conjunto.</strong></div>
+      <div class="small" style="margin-top:8px">Foram necessárias ${categoryGame.answered} tentativa${categoryGame.answered===1?'':'s'}.</div>
+      <div class="q" style="margin-top:16px"><strong>Quer repetir este mesmo conjunto?</strong></div>
+      <div class="actions" style="margin-top:12px">
+        <button class="primary" onclick="repeatCategoryTraining()">Sim, repetir</button>
+        <button class="secondary" onclick="finishCategoryTraining()">Não, terminar</button>
+      </div>
+    </div>`;
+}
+
+function repeatCategoryTraining(){
+  resetCurrentCategoryGameSession();
+  updateCategoryGameStats();
+  nextCategoryGameQuestion(true);
+}
+
+function finishCategoryTraining(){
+  showCategoryTrainingSelection();
+}
+
+function categoryGameRegisterAttempt(i,ok){
+  const card=document.getElementById('cq'+i);
+  if(!card||card.dataset.done==='1')return false;
+
+  card.dataset.done='1';
+  categoryGame.answered++;
+
+  const id=String(categoryGame.currentId);
+  if(ok){
+    if(!categoryGame.masteredIds.has(id)){
+      categoryGame.masteredIds.add(id);
+      categoryGame.correct++;
+    }
+  }else{
+    categoryGame.masteredIds.delete(id);
+    if(categoryGame.currentId&&!categoryGame.pendingIds.includes(categoryGame.currentId)){
+      categoryGame.pendingIds.push(categoryGame.currentId);
+    }
+  }
+
+  categoryGame.previousId=categoryGame.currentId;
+  saveCategoryGameSession();
+  updateCategoryGameStats();
+
+  const next=document.getElementById('cnext'+i);
+  if(next){
+    next.classList.remove('hidden');
+    const btn=next.querySelector('button');
+    if(btn)btn.disabled=false;
+  }
+  return true;
+}
+
+function categoryCorrectAnswerHTML(q){
+  if(q.tipo==='fill'){
+    return correctAnswerHTML(q);
+  }
+
+  if(q.tipo==='choice'){
+    const idx=Number(q.resposta_correta||0);
+    const displayIndex=categoryGame.choiceOrder.indexOf(idx);
+    const letter=displayIndex>=0?String.fromCharCode(65+displayIndex):'';
+    return `<div>${letter?`<strong>${letter}.</strong> `:''}${esc(q.opcoes?.[idx]||'')}</div>`;
+  }
+
+  if(q.tipo==='correct'){
+    if(q.frase_correta)return '<div><strong>A frase está correta.</strong></div>';
+    return `<div>Substituir <strong>${esc(q.palavra_errada||'')}</strong> por <strong>${esc(q.palavra_correta||'')}</strong>.</div>`;
+  }
+
+  return '';
+}
+
+function categoryGameFeedback(i,ok,text){
+  const f=document.getElementById('cfb'+i);
+  const q=questions[i];
+  if(!f||!q)return;
+
+  f.className='feedback '+(ok?'ok':'bad');
+
+  if(ok){
+    f.innerHTML='✅ Correto. '+esc(text||'');
+  }else if(q.tipo==='fill'){
+    f.innerHTML=`❌ Incorreto.${text?` ${esc(text)}`:''}
+      <div style="margin-top:8px"><strong>Os campos a vermelho mostram a resposta correta ou as respostas em falta.</strong></div>
+      <div style="margin-top:8px"><strong>Esta pergunta voltará a aparecer mais tarde neste treino por categorias.</strong></div>`;
+  }else{
+    f.innerHTML=`❌ Incorreto.${text?` ${esc(text)}`:''}
+      <div class="correct-answer-reveal">
+        <div class="correct-answer-title">Resposta correta</div>
+        <div class="correct-answer-value">${categoryCorrectAnswerHTML(q)}</div>
+      </div>
+      <div style="margin-top:8px"><strong>Esta pergunta voltará a aparecer mais tarde neste treino por categorias.</strong></div>`;
+  }
+}
+
+
 const TRAINING_CATEGORY_FILTER_KEY = 'codigoEstrada.trainingCategories.v1';
 
 let trainingCategoryFilters = {
@@ -89,11 +524,15 @@ function questionMatchesTrainingCategories(q,mode){
 }
 
 function filteredTheoryQuestions(){
- return questions.filter(q=>(q.grupo||'teoria')!=='pratica' && questionMatchesTrainingCategories(q,'theory'));
+ // Mantida apenas por compatibilidade com versões anteriores.
+ // O treino geral teórico usa sempre todas as perguntas teóricas.
+ return theoryQuestions();
 }
 
 function filteredPracticeQuestions(){
- return questions.filter(q=>(q.grupo||'teoria')==='pratica' && questionMatchesTrainingCategories(q,'practice'));
+ // Mantida apenas por compatibilidade com versões anteriores.
+ // O treino geral prático usa sempre todas as perguntas práticas.
+ return practiceQuestions();
 }
 
 function syncCategorySuggestions(mode){
@@ -329,6 +768,10 @@ document.querySelectorAll('.tab').forEach(btn=>{
    document.getElementById(btn.dataset.panel).classList.add('active');
    if(btn.dataset.panel==='bank') renderBank();
    if(btn.dataset.panel==='practice') ensurePracticeTraining();
+   if(btn.dataset.panel==='categoryTraining'){
+     renderCategoryGameSelection();
+     installCategoryGameInputUX();
+   }
    if(btn.dataset.panel==='expressions') renderExpressionQuiz();
    if(btn.dataset.panel==='expressionBase') renderExpressionBank();
  });
@@ -354,6 +797,7 @@ async function loadQuestions(){
 
    loadTrainingProgress();
    loadTrainingCategoryFilters();
+   loadCategoryGameSelections();
    pruneTrainingProgress();
 
    const theory=filteredTheoryQuestions();
@@ -389,9 +833,8 @@ async function loadQuestions(){
    document.getElementById('practiceAnswered').textContent=practiceAnswered;
 
    renderBank();
-   renderTrainingCategoryFilter('theory');
-   renderTrainingCategoryFilter('practice');
-   installCategoryFilterInputUX();
+   renderCategoryGameSelection();
+   installCategoryGameInputUX();
 
    // No treino teórico, continua apenas com o que ainda falta dominar.
    if(trainingPendingIds.length){
@@ -1106,9 +1549,8 @@ function submitSetFieldAnswer(i,pos,isPractice=false){
  if(matched<0){
    input.classList.add('multi-train-wrong');
 
-   // Mostra imediatamente, a vermelho, todas as respostas obrigatórias
-   // que ainda não tinham sido dadas.
-   revealMissingSetAnswers(slot,values,used);
+   // Revela também todos os restantes campos da pergunta.
+   revealAllRemainingFillAnswers(card,q);
 
    lockFillQuestion(card);
 
@@ -1273,6 +1715,7 @@ function submitMultiSlotAnswer(i,pos,isPractice=false){
 
  if(matched<0){
    input.classList.add('multi-train-wrong');
+   revealAllRemainingFillAnswers(card,q);
    lockFillQuestion(card);
    if(isPractice){
      if(registerPracticeAttempt(i,false))practiceFeedback(i,false,q.explicacao);
@@ -1383,6 +1826,65 @@ function maybeFinishFillQuestion(i,isPractice=false){
  }
 }
 
+
+function revealMissingLegacyMultiAnswers(slot,values,usedIndexes){
+ if(!slot || slot.dataset.missingRevealed==='1')return;
+
+ const used=new Set((usedIndexes||[]).map(Number));
+ const host=slot.querySelector('[data-multi-accepted]');
+ if(!host)return;
+
+ values.forEach((value,idx)=>{
+   if(used.has(idx))return;
+   const chip=document.createElement('span');
+   chip.className='multi-train-chip multi-train-missing';
+   chip.textContent=value;
+   host.appendChild(chip);
+ });
+
+ slot.dataset.missingRevealed='1';
+}
+
+function revealAllRemainingFillAnswers(card,q){
+ if(!card||!q)return;
+
+ // Campos normais ainda não confirmados: mostram a primeira resposta correta a vermelho.
+ card.querySelectorAll('input[data-pos]').forEach(inp=>{
+   if(inp.dataset.validated==='1')return;
+
+   const pos=Number(inp.dataset.pos);
+   const field=q.campos_resposta?.[pos];
+   const accepted=(field?.modo==='single' ? field.respostas : q.respostas?.[pos]) || [];
+   const correctValue=accepted[0]||'';
+
+   inp.dataset.revealedAfterFail='1';
+   inp.value=correctValue;
+   inp.disabled=true;
+   inp.classList.remove('fill-result-correct');
+   inp.classList.add('fill-result-wrong');
+   inp.title=`Resposta correta: ${correctValue}`;
+
+   const verify=card.querySelector(`[data-verify-pos="${pos}"]`);
+   if(verify)verify.disabled=true;
+ });
+
+ // Conjuntos sem ordem: acrescenta a vermelho todas as respostas ainda em falta.
+ card.querySelectorAll('[data-set-pos]').forEach(slot=>{
+   const pos=Number(slot.dataset.setPos);
+   const values=getSetFieldValues(q,pos);
+   const used=(slot.dataset.used||'').split(',').filter(Boolean).map(Number);
+   revealMissingSetAnswers(slot,values,used);
+ });
+
+ // Compatibilidade com campos múltiplos antigos.
+ card.querySelectorAll('[data-multi-pos]').forEach(slot=>{
+   const pos=Number(slot.dataset.multiPos);
+   const values=getMultiSlotValues(q,pos);
+   const used=(slot.dataset.used||'').split(',').filter(Boolean).map(Number);
+   revealMissingLegacyMultiAnswers(slot,values,used);
+ });
+}
+
 function validateSingleFillField(i,input,isPractice=false){
  const card=document.getElementById((isPractice?'pq':'q')+i);
  const q=questions[i];
@@ -1424,6 +1926,7 @@ function validateSingleFillField(i,input,isPractice=false){
    ? `A sua resposta: ${value} | Correta: ${correctValue}`
    : `Resposta correta: ${correctValue}`;
 
+ revealAllRemainingFillAnswers(card,q);
  lockFillQuestion(card);
 
  if(isPractice){
@@ -1547,6 +2050,103 @@ function answerSummary(q){
    ? 'A frase está correta'
    : `Não. Alterar “${q.palavra_errada}” para “${q.palavra_correta}”`;
 }
+
+function bankCategorySuggestions(){
+ const seen=new Map();
+ questions.forEach(q=>{
+   const value=String(q.categoria||'Sem categoria').trim()||'Sem categoria';
+   const key=norm(value);
+   if(!seen.has(key))seen.set(key,value);
+ });
+ return [...seen.values()].sort((a,b)=>a.localeCompare(b,'pt',{sensitivity:'base'}));
+}
+
+function bankCategoryDatalistHTML(){
+ return bankCategorySuggestions()
+   .map(c=>`<option value="${esc(c)}"></option>`)
+   .join('');
+}
+
+function startInlineCategoryEdit(id){
+ if(!IS_ADMIN)return;
+ const card=document.querySelector(`[data-question-id="${CSS.escape(String(id))}"]`);
+ if(!card)return;
+
+ const input=card.querySelector('[data-inline-category-input]');
+ const editBtn=card.querySelector('[data-inline-category-edit]');
+ const actions=card.querySelector('[data-inline-category-actions]');
+ if(!input)return;
+
+ input.dataset.originalValue=input.value;
+ input.readOnly=false;
+ input.classList.add('is-editing');
+ editBtn?.classList.add('hidden');
+ actions?.classList.remove('hidden');
+
+ requestAnimationFrame(()=>{
+   input.focus();
+   input.select();
+ });
+}
+
+function cancelInlineCategoryEdit(id){
+ const card=document.querySelector(`[data-question-id="${CSS.escape(String(id))}"]`);
+ if(!card)return;
+
+ const input=card.querySelector('[data-inline-category-input]');
+ const editBtn=card.querySelector('[data-inline-category-edit]');
+ const actions=card.querySelector('[data-inline-category-actions]');
+
+ if(input){
+   input.value=input.dataset.originalValue||input.value;
+   input.readOnly=true;
+   input.classList.remove('is-editing');
+ }
+ editBtn?.classList.remove('hidden');
+ actions?.classList.add('hidden');
+}
+
+async function saveInlineCategoryEdit(id){
+ if(!IS_ADMIN)return;
+
+ const card=document.querySelector(`[data-question-id="${CSS.escape(String(id))}"]`);
+ const input=card?.querySelector('[data-inline-category-input]');
+ if(!input)return;
+
+ const q=questions.find(x=>String(x.id)===String(id));
+ if(!q)return;
+
+ const newCategory=input.value.trim()||'Sem categoria';
+ const oldCategory=q.categoria||'Sem categoria';
+
+ if(newCategory===oldCategory){
+   cancelInlineCategoryEdit(id);
+   return;
+ }
+
+ const viewportOffset=card.getBoundingClientRect().top;
+ q.categoria=newCategory;
+
+ try{
+   await persistQuestions();
+   renderBank();
+
+   requestAnimationFrame(()=>{
+     const updated=document.querySelector(`[data-question-id="${CSS.escape(String(id))}"]`);
+     if(updated){
+       const newTop=updated.getBoundingClientRect().top;
+       window.scrollTo({top:window.scrollY+(newTop-viewportOffset),behavior:'auto'});
+       updated.classList.add('question-edit-highlight');
+       setTimeout(()=>updated.classList.remove('question-edit-highlight'),1800);
+     }
+   });
+ }catch(e){
+   q.categoria=oldCategory;
+   input.value=oldCategory;
+   saveMsg?.(e.message||'Não foi possível guardar a categoria.',false);
+ }
+}
+
 function renderBank(){
  const s=norm(document.getElementById('search')?.value||'');
  const f=document.getElementById('filter')?.value||'';
@@ -1558,11 +2158,40 @@ function renderBank(){
           (!s||norm(q.categoria+' '+q.pergunta+' '+answerSummary(q)).includes(s));
  });
  document.getElementById('bankCount').textContent=questions.length;
+
+ let bankDatalist=document.getElementById('bankCategorySuggestions');
+ if(!bankDatalist){
+   bankDatalist=document.createElement('datalist');
+   bankDatalist.id='bankCategorySuggestions';
+   document.body.appendChild(bankDatalist);
+ }
+ bankDatalist.innerHTML=bankCategoryDatalistHTML();
  document.getElementById('bankList').innerHTML=A.map(q=>`
  <div class="item bank-question-item" id="bank-question-${esc(q.id)}" data-question-id="${esc(q.id)}">
    <div class="head">
-     <div>
-       <span class="tag">${esc(q.categoria)}</span>
+     <div class="bank-category-block">
+       <div class="bank-category-inline">
+         <input
+           class="bank-category-input"
+           data-inline-category-input
+           list="bankCategorySuggestions"
+           value="${esc(q.categoria||'Sem categoria')}"
+           readonly
+           aria-label="Categoria da pergunta">
+         ${IS_ADMIN?`
+           <button type="button"
+                   class="secondary bank-category-edit"
+                   data-inline-category-edit
+                   onclick="startInlineCategoryEdit('${q.id}')">✎ Editar categoria</button>
+           <span class="bank-category-actions hidden" data-inline-category-actions>
+             <button type="button"
+                     class="primary"
+                     onclick="saveInlineCategoryEdit('${q.id}')">Guardar</button>
+             <button type="button"
+                     class="secondary"
+                     onclick="cancelInlineCategoryEdit('${q.id}')">Cancelar</button>
+           </span>`:''}
+       </div>
        <span class="tag question-area-tag">${(q.grupo||'teoria')==='pratica'?'🚗 Prática':'📘 Teoria'}</span>
      </div>
      ${IS_ADMIN?`<div class="actions">
@@ -3357,6 +3986,378 @@ async function deleteQuestion(id){
 
 
 
+
+function renderCategoryGameQuiz(){
+  const q=currentCategoryGameQuestion();
+  if(!q){nextCategoryGameQuestion();return;}
+
+  const i=questions.findIndex(x=>String(x.id)===String(q.id));
+  let controls='';
+
+  if(q.tipo==='fill'){
+    controls=`<div class="actions"><button class="primary" onclick="categoryCheckFill(${i})">Corrigir resposta</button></div>`;
+  }
+
+  if(q.tipo==='choice'){
+    categoryGame.choiceOrder=shuffledChoiceOrder(q);
+    controls=categoryGame.choiceOrder.map((originalIndex,displayIndex)=>
+      `<button class="choice" data-original-index="${originalIndex}" onclick="categoryCheckChoice(${i},${originalIndex},this)">${String.fromCharCode(65+displayIndex)}. ${esc(q.opcoes[originalIndex])}</button>`
+    ).join('');
+  }else{
+    categoryGame.choiceOrder=[];
+  }
+
+  if(q.tipo==='correct'){
+    controls=`<div id="cyn${i}" class="actions">
+      <button class="secondary" onclick="categoryCorrectStep(${i},true,this)">Sim, está certa</button>
+      <button class="secondary" onclick="categoryCorrectStep(${i},false,this)">Não, está errada</button>
+    </div>
+    <div id="cfix${i}" class="ans hidden">
+      Altere <strong>${esc(q.palavra_errada||'')}</strong> para
+      <input id="cfixInput${i}" class="blank" value="${esc(q.palavra_errada||'')}">
+      <button class="primary" onclick="categoryFinishCorrection(${i})">Validar</button>
+    </div>`;
+  }
+
+  const remaining=categoryGameBasePool().length-categoryGame.correct;
+
+  document.getElementById('categoryGameQuiz').innerHTML=`
+    <div class="card" id="cq${i}" data-done="0">
+      <div class="toolbar" style="margin-bottom:10px">
+        <span class="tag">${esc(q.categoria)}</span>
+        <span class="pill">Faltam dominar: ${remaining}</span>
+      </div>
+      ${q.imagem?`<div class="img"><img src="${esc(q.imagem)}" alt="Imagem da questão"></div>`:''}
+      <div class="q">${promptHTML(q)}</div>
+      ${controls}
+      <div id="cfb${i}" class="feedback"></div>
+      <div id="cnext${i}" class="actions hidden" style="margin-top:12px">
+        <button class="primary" onclick="nextCategoryGameQuestion()">Próxima pergunta →</button>
+      </div>
+    </div>`;
+
+  setTimeout(()=>{
+    const card=document.getElementById('cq'+i);
+    categoryBindSetFields(card,i);
+    categoryBindLegacyMulti(card,i);
+    categoryBindNormalFill(card,i);
+  },0);
+}
+
+function categoryFillComplete(card,q){
+  const normal=[...card.querySelectorAll('input[data-pos]')].every(inp=>{
+    if(inp.dataset.validated!=='1')return false;
+    const pos=Number(inp.dataset.pos);
+    const field=q.campos_resposta?.[pos];
+    const accepted=(field?.modo==='single'?field.respostas:q.respostas?.[pos])||[];
+    return accepted.map(normAnswer).includes(normAnswer(inp.dataset.originalValue??inp.value));
+  });
+
+  const sets=[...card.querySelectorAll('[data-set-pos]')].every(slot=>{
+    const pos=Number(slot.dataset.setPos);
+    const total=getSetFieldValues(q,pos).length;
+    const used=(slot.dataset.used||'').split(',').filter(Boolean).length;
+    return total>0&&used===total;
+  });
+
+  const legacy=[...card.querySelectorAll('[data-multi-pos]')].every(slot=>{
+    const pos=Number(slot.dataset.multiPos);
+    const total=getMultiSlotValues(q,pos).length;
+    const used=(slot.dataset.used||'').split(',').filter(Boolean).length;
+    return total>0&&used===total;
+  });
+
+  return normal&&sets&&legacy;
+}
+
+function categoryMaybeFinishFill(i){
+  const card=document.getElementById('cq'+i);
+  const q=questions[i];
+  if(!card||!q||card.dataset.done==='1')return;
+  if(categoryFillComplete(card,q)){
+    lockFillQuestion(card);
+    if(categoryGameRegisterAttempt(i,true))categoryGameFeedback(i,true,q.explicacao);
+  }
+}
+
+function categoryValidateSingleFill(i,input){
+  const card=document.getElementById('cq'+i);
+  const q=questions[i];
+  if(!card||!q||!input||card.dataset.done==='1'||input.dataset.validated==='1')return;
+
+  const value=input.value.trim();
+  if(!value)return;
+
+  const pos=Number(input.dataset.pos);
+  const field=q.campos_resposta?.[pos];
+  const respostas=field?.modo==='single'?(field.respostas||[]):(q.respostas?.[pos]||[]);
+  const hit=respostas.map(normAnswer).includes(normAnswer(value));
+
+  input.dataset.validated='1';
+  input.dataset.originalValue=value;
+  input.disabled=true;
+
+  const verify=card.querySelector(`[data-verify-pos="${pos}"]`);
+  if(verify)verify.disabled=true;
+
+  input.classList.remove('fill-result-correct','fill-result-wrong');
+
+  if(hit){
+    input.classList.add('fill-result-correct');
+    input.title='Resposta correta';
+    categoryMaybeFinishFill(i);
+    return;
+  }
+
+  const correctValue=respostas[0]||'';
+  input.classList.add('fill-result-wrong');
+  input.value=correctValue;
+  input.title=value?`A sua resposta: ${value} | Correta: ${correctValue}`:`Resposta correta: ${correctValue}`;
+
+  revealAllRemainingFillAnswers(card,q);
+  lockFillQuestion(card);
+  if(categoryGameRegisterAttempt(i,false))categoryGameFeedback(i,false,q.explicacao);
+}
+
+function categoryBindNormalFill(card,i){
+  if(!card)return;
+  card.querySelectorAll('[data-verify-pos]').forEach(button=>{
+    if(button.dataset.categoryBound==='1')return;
+    button.dataset.categoryBound='1';
+    button.addEventListener('click',()=>{
+      const pos=Number(button.dataset.verifyPos);
+      const input=card.querySelector(`input[data-pos="${pos}"]`);
+      categoryValidateSingleFill(i,input);
+    });
+  });
+}
+
+function categoryCheckFill(i){
+  const card=document.getElementById('cq'+i);
+  if(!card||card.dataset.done==='1')return;
+
+  const pending=[...card.querySelectorAll('input[data-pos]')].filter(inp=>inp.dataset.validated!=='1');
+  for(const input of pending){
+    if(!input.value.trim())continue;
+    categoryValidateSingleFill(i,input);
+    if(card.dataset.done==='1')return;
+  }
+  categoryMaybeFinishFill(i);
+}
+
+function categorySubmitSetAnswer(i,pos){
+  const card=document.getElementById('cq'+i);
+  const q=questions[i];
+  if(!card||!q||card.dataset.done==='1')return;
+
+  const slot=card.querySelector(`[data-set-pos="${pos}"]`);
+  const input=slot?.querySelector('[data-set-input]');
+  if(!slot||!input||input.disabled)return;
+
+  const value=input.value.trim();
+  if(!value)return;
+
+  const values=getSetFieldValues(q,pos);
+  const used=(slot.dataset.used||'').split(',').filter(Boolean).map(Number);
+
+  const duplicate=values.findIndex((v,idx)=>used.includes(idx)&&normAnswer(v)===normAnswer(value));
+  if(duplicate>=0){
+    input.value='';
+    input.placeholder='Resposta já indicada';
+    return;
+  }
+
+  const matched=values.findIndex((v,idx)=>!used.includes(idx)&&normAnswer(v)===normAnswer(value));
+
+  if(matched<0){
+    input.classList.add('multi-train-wrong');
+    revealAllRemainingFillAnswers(card,q);
+    lockFillQuestion(card);
+    if(categoryGameRegisterAttempt(i,false))categoryGameFeedback(i,false,q.explicacao);
+    return;
+  }
+
+  used.push(matched);
+  slot.dataset.used=used.join(',');
+
+  const accepted=slot.querySelector('[data-set-accepted]');
+  if(accepted){
+    const chip=document.createElement('span');
+    chip.className='multi-train-chip';
+    chip.textContent=values[matched];
+    accepted.appendChild(chip);
+  }
+
+  const counter=slot.querySelector('[data-set-counter]');
+  if(counter)counter.textContent=`${used.length}/${values.length}`;
+  input.value='';
+
+  if(used.length===values.length){
+    input.disabled=true;
+    slot.querySelector('[data-set-submit]')?.setAttribute('disabled','disabled');
+  }
+
+  categoryMaybeFinishFill(i);
+}
+
+function categoryBindSetFields(card,i){
+  if(!card)return;
+  card.querySelectorAll('[data-set-pos]').forEach(slot=>{
+    const pos=Number(slot.dataset.setPos);
+    const input=slot.querySelector('[data-set-input]');
+    const btn=slot.querySelector('[data-set-submit]');
+
+    if(input&&!input.dataset.categoryBound){
+      input.dataset.categoryBound='1';
+      input.addEventListener('keydown',e=>{
+        if(e.key==='Enter'){
+          e.preventDefault();
+          categorySubmitSetAnswer(i,pos);
+        }
+      });
+    }
+
+    if(btn&&!btn.dataset.categoryBound){
+      btn.dataset.categoryBound='1';
+      btn.addEventListener('click',()=>categorySubmitSetAnswer(i,pos));
+    }
+  });
+}
+
+function categorySubmitLegacyMulti(i,pos){
+  const card=document.getElementById('cq'+i);
+  const q=questions[i];
+  if(!card||!q||card.dataset.done==='1')return;
+
+  const slot=card.querySelector(`[data-multi-pos="${pos}"]`);
+  const input=slot?.querySelector('[data-multi-input]');
+  if(!slot||!input||input.disabled)return;
+
+  const value=input.value.trim();
+  if(!value)return;
+
+  const values=getMultiSlotValues(q,pos);
+  const used=(slot.dataset.used||'').split(',').filter(Boolean).map(Number);
+  const duplicate=values.findIndex((v,idx)=>used.includes(idx)&&normAnswer(v)===normAnswer(value));
+
+  if(duplicate>=0){
+    input.value='';
+    input.placeholder='Resposta já indicada';
+    return;
+  }
+
+  const matched=values.findIndex((v,idx)=>!used.includes(idx)&&normAnswer(v)===normAnswer(value));
+  if(matched<0){
+    input.classList.add('multi-train-wrong');
+    revealAllRemainingFillAnswers(card,q);
+    lockFillQuestion(card);
+    if(categoryGameRegisterAttempt(i,false))categoryGameFeedback(i,false,q.explicacao);
+    return;
+  }
+
+  used.push(matched);
+  slot.dataset.used=used.join(',');
+
+  const accepted=slot.querySelector('[data-multi-accepted]');
+  if(accepted){
+    const chip=document.createElement('span');
+    chip.className='multi-train-chip';
+    chip.textContent=values[matched];
+    accepted.appendChild(chip);
+  }
+
+  const counter=slot.querySelector('[data-multi-counter]');
+  if(counter)counter.textContent=`${used.length}/${values.length}`;
+  input.value='';
+
+  if(used.length===values.length){
+    input.disabled=true;
+    slot.querySelector('[data-multi-submit]')?.setAttribute('disabled','disabled');
+  }
+
+  categoryMaybeFinishFill(i);
+}
+
+function categoryBindLegacyMulti(card,i){
+  if(!card)return;
+  card.querySelectorAll('[data-multi-pos]').forEach(slot=>{
+    const pos=Number(slot.dataset.multiPos);
+    const input=slot.querySelector('[data-multi-input]');
+    const btn=slot.querySelector('[data-multi-submit]');
+
+    if(input&&!input.dataset.categoryBound){
+      input.dataset.categoryBound='1';
+      input.addEventListener('keydown',e=>{
+        if(e.key==='Enter'){
+          e.preventDefault();
+          categorySubmitLegacyMulti(i,pos);
+        }
+      });
+    }
+
+    if(btn&&!btn.dataset.categoryBound){
+      btn.dataset.categoryBound='1';
+      btn.addEventListener('click',()=>categorySubmitLegacyMulti(i,pos));
+    }
+  });
+}
+
+function categoryCheckChoice(i,originalIndex,btn){
+  const q=questions[i];
+  const ok=originalIndex===q.resposta_correta;
+  if(!categoryGameRegisterAttempt(i,ok))return;
+
+  document.querySelectorAll(`#cq${i} .choice`).forEach(b=>{
+    b.disabled=true;
+    const optionIndex=Number(b.dataset.originalIndex);
+    if(optionIndex===q.resposta_correta)b.style.background='#ecfdf3';
+    if(optionIndex===originalIndex&&!ok)b.style.background='#fef3f2';
+  });
+
+  categoryGameFeedback(i,ok,q.explicacao);
+}
+
+function categoryCorrectStep(i,yes,btn){
+  const q=questions[i];
+  const card=document.getElementById('cq'+i);
+  if(!card||card.dataset.done==='1')return;
+
+  if(q.frase_correta){
+    if(categoryGameRegisterAttempt(i,yes)){
+      document.querySelectorAll(`#cyn${i} button`).forEach(b=>b.disabled=true);
+      categoryGameFeedback(i,yes,q.explicacao);
+    }
+    return;
+  }
+
+  if(yes){
+    if(categoryGameRegisterAttempt(i,false)){
+      document.querySelectorAll(`#cyn${i} button`).forEach(b=>b.disabled=true);
+      categoryGameFeedback(i,false,q.explicacao);
+    }
+  }else{
+    document.getElementById('cfix'+i)?.classList.remove('hidden');
+    document.querySelectorAll(`#cyn${i} button`).forEach(b=>b.disabled=true);
+    btn.style.background='#ecfdf3';
+  }
+}
+
+function categoryFinishCorrection(i){
+  const q=questions[i];
+  const inp=document.getElementById('cfixInput'+i);
+  const card=document.getElementById('cq'+i);
+  if(!card||!inp||card.dataset.done==='1')return;
+
+  const ok=normAnswer(inp.value)===normAnswer(q.palavra_correta);
+  inp.style.background=ok?'#ecfdf3':'#fef3f2';
+  inp.disabled=true;
+
+  if(categoryGameRegisterAttempt(i,ok)){
+    categoryGameFeedback(i,ok,q.explicacao);
+  }
+}
+
+
 function renderPracticeIdle(){
  const host=document.getElementById('practiceQuiz');
  if(!host)return;
@@ -3979,3 +4980,20 @@ initMode();renderChoiceEditor([],0);toggleFields();updatePromptPreview();loadQue
 setTimeout(installFillEditorDeletionUX,0);
 
 setTimeout(updateGeneralImageRemoveButton,0);
+
+document.addEventListener('keydown',e=>{
+ const input=e.target.closest?.('[data-inline-category-input]');
+ if(!input || input.readOnly)return;
+
+ const card=input.closest('[data-question-id]');
+ const id=card?.getAttribute('data-question-id');
+ if(!id)return;
+
+ if(e.key==='Enter'){
+   e.preventDefault();
+   saveInlineCategoryEdit(id);
+ }else if(e.key==='Escape'){
+   e.preventDefault();
+   cancelInlineCategoryEdit(id);
+ }
+});

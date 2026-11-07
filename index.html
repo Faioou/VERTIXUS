@@ -18,6 +18,7 @@
 <nav class="tabs">
 <button class="tab active" data-panel="train">🎯 Treinar</button>
 <button class="tab" data-panel="practice">🚗 Prática de condução</button>
+<button class="tab" data-panel="categoryTraining">🧩 Treino por categorias</button>
 <button class="tab" data-panel="bank">📚 Base de perguntas</button>
 <button class="tab" data-panel="expressions">🗣️ Expressões informais</button>
 <button class="tab" data-panel="expressionBase">📖 Base de expressões informais</button>
@@ -35,21 +36,6 @@
 <button class="secondary" onclick="loadQuestions()">↻ Recarregar</button>
 </div>
 
-<div class="card category-training-filter">
-  <div class="category-filter-head">
-    <div>
-      <strong>Treinar apenas determinadas categorias</strong>
-      <div class="small">Comece a escrever e escolha uma categoria existente. Pode selecionar várias.</div>
-    </div>
-    <button type="button" class="secondary category-clear-btn" onclick="clearTrainingCategories('theory')">Todas as categorias</button>
-  </div>
-  <div class="category-picker-row">
-    <input id="theoryCategoryInput" list="theoryCategorySuggestions" placeholder="Escreva uma categoria…" autocomplete="off">
-    <datalist id="theoryCategorySuggestions"></datalist>
-    <button type="button" class="secondary" onclick="addTrainingCategory('theory')">+ Adicionar</button>
-  </div>
-  <div id="theoryCategoryChips" class="category-filter-chips"></div>
-</div>
 
 <div id="quiz"></div>
 </section>
@@ -69,23 +55,60 @@
 <div class="small">Aqui aparecem apenas as perguntas que marcou como <strong>Prática</strong> na Base de perguntas.</div>
 </div>
 
-<div class="card category-training-filter">
-  <div class="category-filter-head">
-    <div>
-      <strong>Treinar apenas determinadas categorias</strong>
-      <div class="small">Comece a escrever e escolha uma categoria existente. Pode selecionar várias.</div>
-    </div>
-    <button type="button" class="secondary category-clear-btn" onclick="clearTrainingCategories('practice')">Todas as categorias</button>
-  </div>
-  <div class="category-picker-row">
-    <input id="practiceCategoryInput" list="practiceCategorySuggestions" placeholder="Escreva uma categoria…" autocomplete="off">
-    <datalist id="practiceCategorySuggestions"></datalist>
-    <button type="button" class="secondary" onclick="addTrainingCategory('practice')">+ Adicionar</button>
-  </div>
-  <div id="practiceCategoryChips" class="category-filter-chips"></div>
-</div>
 
 <div id="practiceQuiz"></div>
+</section>
+
+
+<section id="categoryTraining" class="panel">
+  <div class="card">
+    <div class="toolbar">
+      <div>
+        <h2 style="margin:0">Treino por categorias</h2>
+        <div class="small">Jogo independente dos treinos gerais. O progresso deste conjunto é guardado separadamente.</div>
+      </div>
+      <button type="button" class="secondary" onclick="showCategoryTrainingSelection()">Alterar seleção</button>
+    </div>
+
+    <div id="categoryTrainingSetup">
+      <div class="grid">
+        <div>
+          <label>Área</label>
+          <select id="categoryGameMode" onchange="categoryGameModeChanged()">
+            <option value="theory">Teoria / Código da Estrada</option>
+            <option value="practice">Prática de condução</option>
+          </select>
+        </div>
+        <div>
+          <label>Adicionar categoria</label>
+          <div class="category-picker-row">
+            <input id="categoryGameInput" list="categoryGameSuggestions" placeholder="Comece a escrever uma categoria…" autocomplete="off">
+            <datalist id="categoryGameSuggestions"></datalist>
+            <button type="button" class="secondary" onclick="addCategoryGameSelection()">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="categoryGameChips" class="category-filter-chips"></div>
+
+      <div class="actions" style="margin-top:14px">
+        <button type="button" class="primary" onclick="startCategoryTraining()">Começar / retomar treino</button>
+        <button type="button" class="secondary" onclick="clearCategoryGameSelection()">Limpar categorias</button>
+      </div>
+      <div id="categoryGameSetupMessage" class="feedback"></div>
+    </div>
+  </div>
+
+  <div id="categoryGameStats" class="toolbar hidden">
+    <div>
+      <span class="pill">Perguntas: <span id="categoryGameTotal">0</span></span>
+      <span class="pill">Certas: <span id="categoryGameCorrect">0</span></span>
+      <span class="pill">Respondidas: <span id="categoryGameAnswered">0</span></span>
+    </div>
+    <span class="pill" id="categoryGameModeLabel">Teoria</span>
+  </div>
+
+  <div id="categoryGameQuiz"></div>
 </section>
 
 <section id="bank" class="panel">

@@ -355,7 +355,7 @@
     "id": "q-1790852599460",
     "categoria": "Cedência de passagem",
     "tipo": "fill",
-    "pergunta": "{{img:imagens/1793992461549-image.png}} B1: devo[[1]] \n{{img:imagens/1793992475286-image.png}} B2: devo[[2]]\nqualquer veículo [[3]] veículos de tração animal ou de animal conduzido\n{{img:imagens/1793992505751-image.png}} B7: ceder a passagem aos veículos [[4]]\n{{img:imagens/1793992518045-image.png}} {{img:imagens/1793992529480-image.png}} B8-B9: interseções com vias [[5]] prioridade, porque nós temos a prioridade",
+    "pergunta": "{{img:imagens/1793992461549-image.png}} B1: devo[[1]] \n{{img:imagens/1793992475286-image.png}} B2: devo[[2]]\nAo avistar estes dois sinais, tenho de proceder a cedência a [[3]] inclusive [[4]]\nqualquer veículo [[5]] veículos de tração animal ou de animal conduzido\n{{img:imagens/1793992505751-image.png}} B7: ceder a passagem aos veículos [[6]]\n{{img:imagens/1793992518045-image.png}} {{img:imagens/1793992529480-image.png}} B8-B9: interseções com vias [[7]] prioridade, porque nós temos a prioridade",
     "grupo": "teoria",
     "explicacao": "",
     "imagem": "",
@@ -367,6 +367,10 @@
         "parar e ceder"
       ],
       [
+        "QUALQUER condutor"
+      ],
+      [],
+      [
         "até"
       ],
       [
@@ -375,6 +379,53 @@
       [
         "sem"
       ]
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "ceder"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "parar e ceder"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "QUALQUER condutor"
+        ]
+      },
+      {
+        "modo": "set",
+        "respostas": [
+          "veículos de tração animal",
+          "velocípedes",
+          "cavaleiros"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "até"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "que nela transitem"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "sem"
+        ]
+      }
     ]
   },
   {
@@ -1010,7 +1061,7 @@
   },
   {
     "id": "q-1791284870869",
-    "categoria": "Sinalização",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "são sinais de [[1]] , especificamente de [[2]]",
     "grupo": "teoria",
@@ -1023,13 +1074,29 @@
       [
         "pré-sinalização"
       ]
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "indicação"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "pré-sinalização"
+        ]
+      }
     ]
   },
   {
     "id": "q-1791284892662",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "São sinais de [[1]], especificamente sinais de [[2]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1791284892670-Screenshot-2026-10-06-120705.png",
     "respostas": [
@@ -1040,11 +1107,25 @@
         "pré-sinalização"
       ]
     ],
-    "grupo": "teoria"
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "indicação"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "pré-sinalização"
+        ]
+      }
+    ]
   },
   {
     "id": "q-1791284906201",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "São sinais de [[1]], especificamente sinais de [[2]]",
     "explicacao": "",
@@ -1061,7 +1142,7 @@
   },
   {
     "id": "q-1791284919394",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "São sinais de [[1]], especificamente sinais [[2]]",
     "explicacao": "",
@@ -1078,7 +1159,7 @@
   },
   {
     "id": "q-1791284936178",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "São sinais de [[1]], especificamente sinais [[2]]",
     "explicacao": "",
@@ -1095,7 +1176,7 @@
   },
   {
     "id": "q-1791284950966",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "São sinais de [[1]], especificamente sinais de [[2]]",
     "explicacao": "",
@@ -1112,7 +1193,7 @@
   },
   {
     "id": "q-1791284964882",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "São sinais de [[1]], especificamente sinais de [[2]]",
     "explicacao": "",
@@ -1129,7 +1210,7 @@
   },
   {
     "id": "q-1791284979070",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "São sinais de [[1]], especificamente sinais de [[2]]",
     "explicacao": "",
@@ -1146,7 +1227,7 @@
   },
   {
     "id": "q-1791285087455",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "São sinais de [[1]], especificamente sinais de [[2]]",
     "explicacao": "",
@@ -1388,7 +1469,7 @@
   },
   {
     "id": "q-1791303601918",
-    "categoria": "Sem categoria",
+    "categoria": "Velocidade máxima",
     "tipo": "fill",
     "pergunta": "**Velocidade máxima**\nMáquina Agrícola\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
     "explicacao": "",
@@ -1405,7 +1486,7 @@
   },
   {
     "id": "q-1791303616492",
-    "categoria": "Sem categoria",
+    "categoria": "Velocidade máxima",
     "tipo": "fill",
     "pergunta": "**Velocidade máxima**\nMulticultivador\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
     "explicacao": "",
@@ -1422,7 +1503,7 @@
   },
   {
     "id": "q-1791303630780",
-    "categoria": "Sem categoria",
+    "categoria": "Velocidade máxima",
     "tipo": "fill",
     "pergunta": "**Velocidade máxima**\nTratocarro\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
     "explicacao": "",
@@ -1439,7 +1520,7 @@
   },
   {
     "id": "q-1791303655194",
-    "categoria": "Sem categoria",
+    "categoria": "Velocidade máxima",
     "tipo": "fill",
     "pergunta": "**Velocidade máxima**\nComboio turístico\nD.L: [[1]]km/h",
     "explicacao": "",
@@ -1453,7 +1534,7 @@
   },
   {
     "id": "q-1791303676493",
-    "categoria": "Sem categoria",
+    "categoria": "Velocidade máxima",
     "tipo": "fill",
     "pergunta": "**Velocidade máxima**\nMáquina Industrial sem matrícula\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
     "explicacao": "",
@@ -1470,7 +1551,7 @@
   },
   {
     "id": "q-1791303694350",
-    "categoria": "Sem categoria",
+    "categoria": "Velocidade máxima",
     "tipo": "fill",
     "pergunta": "**Velocidade máxima**\nTrator Agrícola\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
     "explicacao": "",
@@ -1487,7 +1568,7 @@
   },
   {
     "id": "q-1791303711609",
-    "categoria": "Sem categoria",
+    "categoria": "Velocidade máxima",
     "tipo": "fill",
     "pergunta": "**Velocidade máxima**\nCiclomotor\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
     "explicacao": "",
@@ -1504,7 +1585,7 @@
   },
   {
     "id": "q-1791303728294",
-    "categoria": "Sem categoria",
+    "categoria": "Velocidade máxima",
     "tipo": "fill",
     "pergunta": "**Velocidade máxima**\nQuadriciclo\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
     "explicacao": "",
@@ -1521,7 +1602,7 @@
   },
   {
     "id": "q-1791303768652",
-    "categoria": "Sem categoria",
+    "categoria": "Velocidade máxima",
     "tipo": "fill",
     "pergunta": "**Velocidade máxima**\nMotociclo até 50cm3\nD.L: [[1]]km/h\nF.L: [[2]]km/h",
     "explicacao": "",
@@ -1704,7 +1785,7 @@
   },
   {
     "id": "q-1792050915658",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "Há os sinais de[[1]],\n[[2]],\n[[3]] e\n[[4]]\nOs sinais de regulamentação podem ser sinais de:\n1. [[5]]\n2. [[6]]\n3. [[7]]\n4. [[8]]",
     "grupo": "teoria",
@@ -1735,11 +1816,62 @@
       [
         "prescrição específica"
       ]
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "Perigo"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Regulamentação"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Indicação"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "Turístico-cultural"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "cedência de passagem"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "proibição"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "obrigação"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "prescrição específica"
+        ]
+      }
     ]
   },
   {
     "id": "q-1792050999191",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "Os sinais de prescrição específica podem ser sinais de:\n1. [[1]]\n2. [[2]]\n3. [[3]]",
     "grupo": "teoria",
@@ -1755,13 +1887,35 @@
       [
         "zona"
       ]
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "seleção de vias"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "afetação de vias"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "zona"
+        ]
+      }
     ]
   },
   {
     "id": "q-1792051191179",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1792051191189-images--1-.jpg",
     "respostas": [
@@ -1772,13 +1926,28 @@
         "seleção de vias"
       ]
     ],
-    "grupo": "teoria"
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "prescrição específica"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "seleção de vias"
+        ]
+      }
+    ]
   },
   {
     "id": "q-1792051205827",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1792051205837-images--2-.jpg",
     "respostas": [
@@ -1789,13 +1958,28 @@
         "seleção de vias"
       ]
     ],
-    "grupo": "teoria"
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "prescrição específica"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "seleção de vias"
+        ]
+      }
+    ]
   },
   {
     "id": "q-1792051224391",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1792051224397-images--3-.jpg",
     "respostas": [
@@ -1806,13 +1990,28 @@
         "seleção de vias"
       ]
     ],
-    "grupo": "teoria"
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "prescrição específica"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "seleção de vias"
+        ]
+      }
+    ]
   },
   {
     "id": "q-1792051246896",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1792051246909-F1b-2-480x489.jpg",
     "respostas": [
@@ -1823,13 +2022,28 @@
         "afetação de vias"
       ]
     ],
-    "grupo": "teoria"
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "prescrição específica"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "afetação de vias"
+        ]
+      }
+    ]
   },
   {
     "id": "q-1792051257483",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1792051257492-F1c-1-480x489.jpg",
     "respostas": [
@@ -1840,13 +2054,28 @@
         "afetação de vias"
       ]
     ],
-    "grupo": "teoria"
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "prescrição específica"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "afetação de vias"
+        ]
+      }
+    ]
   },
   {
     "id": "q-1792051268189",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1792051268195-images.png",
     "respostas": [
@@ -1857,13 +2086,28 @@
         "afetação de vias"
       ]
     ],
-    "grupo": "teoria"
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "prescrição específica"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "afetação de vias"
+        ]
+      }
+    ]
   },
   {
     "id": "q-1792051276904",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1792051276914-F2-1-480x489.jpg",
     "respostas": [
@@ -1874,13 +2118,28 @@
         "afetação de vias"
       ]
     ],
-    "grupo": "teoria"
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "prescrição específica"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "afetação de vias"
+        ]
+      }
+    ]
   },
   {
     "id": "q-1792051286813",
-    "categoria": "Sem categoria",
+    "categoria": "Sinais Verticais",
     "tipo": "fill",
     "pergunta": "É um sinal de [[1]], especificamente de [[2]]",
+    "grupo": "teoria",
     "explicacao": "",
     "imagem": "imagens/1792051286819-G5a-1-480x480.jpg",
     "respostas": [
@@ -1891,7 +2150,21 @@
         "zona"
       ]
     ],
-    "grupo": "teoria"
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "prescrição específica"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "zona"
+        ]
+      }
+    ]
   },
   {
     "id": "q-1792271715139",
@@ -3349,6 +3622,184 @@
         "respostas": [
           "10 quilómetros",
           "10 km"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q-1794091185217",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "Dos seguintes combustíveis qual é o menos poluente?",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "opcoes": [
+      "Gás",
+      "Gasolina com chumbo",
+      "Gasolina sem chumbo"
+    ],
+    "resposta_correta": 0
+  },
+  {
+    "id": "q-1794091486401",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "{{img:imagens/1794091345623-image.png}} Considera-se estacionamento abusivo, a permanência deste veículo, no mesmo espaço, por um período de: **ATENÇÃO, ESTE CARRO NÃO APRESENTA  sinais exteriores evidentes de abandono.**",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "opcoes": [
+      "40 dias",
+      "10 dias",
+      "20 dias"
+    ],
+    "resposta_correta": 0
+  },
+  {
+    "id": "q-1794091702713",
+    "categoria": "Sem categoria",
+    "tipo": "correct",
+    "pergunta": "Os sistemas de retenção devem ser adequados à idade da criança.",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "frase_correta": false,
+    "palavra_errada": "idade",
+    "palavra_correta": "tamanho e peso"
+  },
+  {
+    "id": "q-1794091886682",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "{{img:imagens/1794091791779-image.png}} O condutor do veículo que me precede está a deixar cair carga e a projetar detritos, logo incorre numa contra-ordenação: [[1]]",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "leve"
+      ]
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "leve"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q-1794093354210",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "{{tbl64:eyJoZWFkZXJzIjpbIlRheGEgZGUgw6FsY29vbCBubyBzYW5ndWUiLCJDb25kdXRvcmVzIG5vcm1haXMiLCJDb25kdXRvcmVzIGVzcGVjaWFpcyJdLCJyb3dMYWJlbHMiOmZhbHNlLCJyb3dzIjpbeyJuYW1lIjoiIiwiY2VsbHMiOlsiW1sxXV1hIG1lbm9zIGRlIFtbMl1dZy9sIiwiUGVybWl0aWRhIiwiR3JhdmUiXX0seyJuYW1lIjoiIiwiY2VsbHMiOlsiW1szXV0gYSBtZW5vcyBkZSBbWzRdXSBnL2wiLCJHcmF2ZSIsIk11aXRvIEdyYXZlIl19LHsibmFtZSI6IiIsImNlbGxzIjpbIltbNV1dIGEgbWVub3MgZGUgW1s2XV0gZy9sIiwiTXVpdG8gR3JhdmUiLCJDcmltZSJdfSx7Im5hbWUiOiIiLCJjZWxscyI6WyJbWzddXWcvbCBvdSBzdXBlcmlvciIsIkNyaW1lIiwiQ3JpbWUiXX1dfQ==}}",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "0,2"
+      ],
+      [
+        "0,5"
+      ],
+      [
+        "0,5"
+      ],
+      [
+        "0,8"
+      ],
+      [
+        "0,8"
+      ],
+      [
+        "1,2"
+      ],
+      [
+        "1,2"
+      ]
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "0,2"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "0,5"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "0,5"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "0,8"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "0,8"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "1,2"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "1,2"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q-1794093839657",
+    "categoria": "Sem categoria",
+    "tipo": "choice",
+    "pergunta": "{{img:imagens/1794093491706-image.png}} Se o peão não sair da faixa de rodagem, devo:",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "opcoes": [
+      "Parar",
+      "Utilizar os sinais sonoros até que se aperceba da minha presença"
+    ],
+    "resposta_correta": 0
+  },
+  {
+    "id": "q-1794094067804",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "Apenas sou autorizado a buzinar:[[1]]",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      []
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "set",
+        "respostas": [
+          "Em caso de perigo iminente",
+          "Fora das localidades, para assinalar aproximação num local de visibilidade reduzida, seja essa uma curva, lomba, entroncamento ou cruzamento"
         ]
       }
     ]

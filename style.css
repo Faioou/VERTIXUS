@@ -1160,3 +1160,87 @@ input,select,textarea{width:100%;border:1px solid var(--line);border-radius:10px
   content:" • selecionada";
   font-weight:800;
 }
+
+
+/* Edição direta da categoria na Base de perguntas */
+.bank-category-block{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.bank-category-inline{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.bank-category-input{
+  width:auto !important;
+  min-width:180px;
+  max-width:min(360px,70vw);
+  padding:7px 10px !important;
+  border:1px solid #d0d5dd !important;
+  border-radius:999px !important;
+  background:#f8fafc !important;
+  color:#344054 !important;
+  font-weight:800 !important;
+  cursor:default;
+}
+
+.bank-category-input.is-editing{
+  background:#fff !important;
+  border-color:#528bff !important;
+  color:#101828 !important;
+  cursor:text;
+  box-shadow:0 0 0 3px rgba(82,139,255,.12) !important;
+}
+
+.bank-category-edit{
+  padding:6px 9px !important;
+  font-size:12px !important;
+}
+
+.bank-category-actions{
+  display:inline-flex;
+  gap:6px;
+}
+
+.bank-category-actions.hidden{
+  display:none !important;
+}
+
+@media(max-width:760px){
+  .bank-category-inline{
+    width:100%;
+  }
+
+  .bank-category-input{
+    flex:1 1 210px;
+    max-width:100%;
+  }
+}
+
+
+/* =========================================================
+   Treino por categorias — jogo independente
+   ========================================================= */
+#categoryTrainingSetup .category-filter-chips{
+  margin-top:12px;
+}
+
+#categoryGameStats{
+  margin:12px 0;
+}
+
+#categoryGameQuiz .card{
+  margin-top:12px;
+}
+
+@media(max-width:760px){
+  #categoryTrainingSetup .grid{
+    grid-template-columns:1fr;
+  }
+}
