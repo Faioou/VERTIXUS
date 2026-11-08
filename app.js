@@ -749,6 +749,375 @@ function normAnswer(s){
    .replace(/[^a-z0-9]/g,'');
 }
 
+let answerWordVocabularyCache = null;
+let answerAutocompleteBox = null;
+let answerAutocompleteTarget = null;
+let answerAutocompleteInlineHost = null;
+
+function invalidateAnswerWordVocabulary(){
+ answerWordVocabularyCache=null;
+}
+
+function collectCorrectAnswerTexts(){
+ const texts=[];
+
+ questions.forEach(q=>{
+   if(q.tipo==='fill'){
+     (q.respostas||[]).forEach(arr=>{
+       (Array.isArray(arr)?arr:[]).forEach(v=>texts.push(String(v||'')));
+     });
+
+     (q.campos_resposta||[]).forEach(field=>{
+       (Array.isArray(field?.respostas)?field.respostas:[])
+         .forEach(v=>texts.push(String(v||'')));
+     });
+
+     (q.respostas_multiplas||[]).forEach(arr=>{
+       (Array.isArray(arr)?arr:[]).forEach(v=>texts.push(String(v||'')));
+     });
+   }
+
+   if(q.tipo==='choice'){
+     const correct=q.opcoes?.[Number(q.resposta_correta||0)];
+     if(correct)texts.push(String(correct));
+   }
+
+   if(q.tipo==='correct' && q.palavra_correta){
+     texts.push(String(q.palavra_correta));
+   }
+ });
+
+ return texts;
+}
+
+function buildAnswerWordVocabulary(){
+ if(answerWordVocabularyCache)return answerWordVocabularyCache;
+
+ const map=new Map();
+
+ collectCorrectAnswerTexts().forEach(text=>{
+   const words=String(text)
+     .match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu) || [];
+
+   words.forEach(word=>{
+     const clean=word.trim();
+     const key=normAnswer(clean);
+     if(key.length<2)return;
+     if(!map.has(key))map.set(key,clean);
+   });
+ });
+
+ answerWordVocabularyCache=[...map.values()]
+   .sort((a,b)=>a.localeCompare(b,'pt',{sensitivity:'base'}));
+
+ return answerWordVocabularyCache;
+}
+
+function currentAnswerTokenInfo(input){
+ const value=String(input.value||'');
+ const caret=typeof input.selectionStart==='number'
+   ? input.selectionStart
+   : value.length;
+
+ const before=value.slice(0,caret);
+ const match=before.match(/([\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]*)?)$/u);
+
+ if(!match){
+   return {token:'',start:caret,end:caret};
+ }
+
+ return {
+   token:match[1],
+   start:caret-match[1].length,
+   end:caret
+ };
+}
+
+function isAnswerAutocompleteInput(el){
+ if(!el || el.disabled || el.readOnly)return false;
+
+ return el.matches?.(
+   '.train-fill-input,'+
+   '.multi-train-input,'+
+   '[data-set-input],'+
+   '[data-multi-input],'+
+   '[id^="fixInput"],'+
+   '[id^="pfixInput"],'+
+   '[id^="cfixInput"]'
+ );
+}
+
+function ensureAnswerAutocompleteBox(){
+ if(answerAutocompleteBox && document.body.contains(answerAutocompleteBox)){
+   return answerAutocompleteBox;
+ }
+
+ const box=document.createElement('div');
+ box.id='answerAutocompleteBox';
+ box.className='answer-autocomplete-box hidden';
+ box.setAttribute('role','listbox');
+ document.body.appendChild(box);
+
+ answerAutocompleteBox=box;
+ return box;
+}
+
+function closeAnswerAutocomplete(){
+ if(answerAutocompleteBox){
+   answerAutocompleteBox.classList.add('hidden');
+   answerAutocompleteBox.innerHTML='';
+ }
+
+ if(answerAutocompleteInlineHost){
+   answerAutocompleteInlineHost.remove();
+   answerAutocompleteInlineHost=null;
+ }
+
+ answerAutocompleteTarget=null;
+}
+
+function positionAnswerAutocomplete(input){
+ const box=ensureAnswerAutocompleteBox();
+ const rect=input.getBoundingClientRect();
+
+ const width=Math.max(170,Math.min(340,rect.width));
+ const left=Math.min(
+   Math.max(8,rect.left+window.scrollX),
+   Math.max(8,window.scrollX+window.innerWidth-width-8)
+ );
+
+ box.style.left=`${left}px`;
+ box.style.top=`${rect.bottom+window.scrollY+5}px`;
+ box.style.width=`${width}px`;
+}
+
+function answerWordSuggestionsFor(token){
+ const needle=normAnswer(token);
+ if(needle.length<2)return [];
+
+ return buildAnswerWordVocabulary()
+   .filter(word=>{
+     const normalized=normAnswer(word);
+     return normalized.includes(needle) && normalized!==needle;
+   })
+   .sort((a,b)=>{
+     const an=normAnswer(a);
+     const bn=normAnswer(b);
+
+     const aStarts=an.startsWith(needle)?0:1;
+     const bStarts=bn.startsWith(needle)?0:1;
+     if(aStarts!==bStarts)return aStarts-bStarts;
+
+     if(a.length!==b.length)return a.length-b.length;
+     return a.localeCompare(b,'pt',{sensitivity:'base'});
+   })
+   .slice(0,8);
+}
+
+function insertAnswerSuggestion(input,word){
+ if(!input)return;
+
+ const info=currentAnswerTokenInfo(input);
+ const value=String(input.value||'');
+
+ const next=value.slice(0,info.start)+word+value.slice(info.end);
+ input.value=next;
+
+ const caret=info.start+word.length;
+ try{ input.setSelectionRange(caret,caret); }catch{}
+
+ input.dispatchEvent(new Event('input',{bubbles:true}));
+ input.focus();
+ closeAnswerAutocomplete();
+}
+
+
+function useInlineAnswerSuggestions(){
+ return window.matchMedia('(min-width: 900px)').matches;
+}
+
+function answerSuggestionAnchor(input){
+ return input.closest(
+   '.train-fill-slot,'+
+   '.multi-train-slot,'+
+   '.ans,'+
+   '.q'
+ ) || input.parentElement;
+}
+
+function showInlineAnswerSuggestions(input,suggestions){
+ if(answerAutocompleteBox){
+   answerAutocompleteBox.classList.add('hidden');
+   answerAutocompleteBox.innerHTML='';
+ }
+
+ if(answerAutocompleteInlineHost){
+   answerAutocompleteInlineHost.remove();
+   answerAutocompleteInlineHost=null;
+ }
+
+ const anchor=answerSuggestionAnchor(input);
+ if(!anchor)return false;
+
+ const tray=document.createElement('div');
+ tray.className='answer-autocomplete-inline';
+ tray.setAttribute('data-answer-inline-suggestions','1');
+
+ tray.innerHTML=`
+   <span class="answer-autocomplete-inline-label">Sugestões:</span>
+   <span class="answer-autocomplete-inline-items">
+     ${suggestions.slice(0,6).map(word=>`
+       <button type="button"
+               class="answer-autocomplete-chip"
+               data-answer-suggestion="${esc(word)}">${esc(word)}</button>
+     `).join('')}
+   </span>`;
+
+ // Coloca a faixa a seguir ao bloco do campo.
+ anchor.insertAdjacentElement('afterend',tray);
+ answerAutocompleteInlineHost=tray;
+ answerAutocompleteTarget=input;
+ return true;
+}
+
+function showAnswerAutocomplete(input){
+ if(!isAnswerAutocompleteInput(input)){
+   closeAnswerAutocomplete();
+   return;
+ }
+
+ const info=currentAnswerTokenInfo(input);
+ const suggestions=answerWordSuggestionsFor(info.token);
+
+ if(!suggestions.length){
+   closeAnswerAutocomplete();
+   return;
+ }
+
+ answerAutocompleteTarget=input;
+
+ if(useInlineAnswerSuggestions()){
+   showInlineAnswerSuggestions(input,suggestions);
+   return;
+ }
+
+ const box=ensureAnswerAutocompleteBox();
+
+ box.innerHTML=suggestions.map(word=>`
+   <button type="button"
+           class="answer-autocomplete-item"
+           data-answer-suggestion="${esc(word)}"
+           role="option">${esc(word)}</button>
+ `).join('');
+
+ positionAnswerAutocomplete(input);
+ box.classList.remove('hidden');
+}
+
+function installAnswerAutocomplete(){
+ if(document.documentElement.dataset.answerAutocompleteInstalled==='1')return;
+ document.documentElement.dataset.answerAutocompleteInstalled='1';
+
+ document.addEventListener('input',e=>{
+   if(isAnswerAutocompleteInput(e.target)){
+     showAnswerAutocomplete(e.target);
+   }
+ });
+
+ document.addEventListener('focusin',e=>{
+   if(isAnswerAutocompleteInput(e.target) && e.target.value){
+     showAnswerAutocomplete(e.target);
+   }
+ });
+
+ document.addEventListener('keydown',e=>{
+   if(!isAnswerAutocompleteInput(e.target))return;
+
+   if(e.key==='Escape'){
+     closeAnswerAutocomplete();
+     return;
+   }
+
+   if(e.key==='ArrowDown'){
+     const firstFloating=
+       answerAutocompleteBox &&
+       !answerAutocompleteBox.classList.contains('hidden')
+         ? answerAutocompleteBox.querySelector('.answer-autocomplete-item')
+         : null;
+
+     const firstInline=answerAutocompleteInlineHost?.querySelector('.answer-autocomplete-chip');
+
+     const target=firstInline||firstFloating;
+     if(target){
+       e.preventDefault();
+       target.focus();
+     }
+   }
+ });
+
+ document.addEventListener('mousedown',e=>{
+   const item=e.target.closest?.('[data-answer-suggestion]');
+   if(item){
+     e.preventDefault();
+     const word=item.getAttribute('data-answer-suggestion')||'';
+     insertAnswerSuggestion(answerAutocompleteTarget,word);
+     return;
+   }
+
+   const insideFloating=answerAutocompleteBox?.contains(e.target);
+   const insideInline=answerAutocompleteInlineHost?.contains(e.target);
+
+   if(!insideFloating && !insideInline && e.target!==answerAutocompleteTarget){
+     closeAnswerAutocomplete();
+   }
+ });
+
+ document.addEventListener('keydown',e=>{
+   const item=e.target.closest?.('[data-answer-suggestion]');
+   if(!item)return;
+
+   const container=item.closest('.answer-autocomplete-box,.answer-autocomplete-inline');
+   const items=[...(container?.querySelectorAll('[data-answer-suggestion]')||[])];
+   const index=items.indexOf(item);
+
+   if(e.key==='ArrowDown'){
+     e.preventDefault();
+     items[(index+1)%items.length]?.focus();
+   }else if(e.key==='ArrowUp'){
+     e.preventDefault();
+     if(index===0){
+       answerAutocompleteTarget?.focus();
+     }else{
+       items[index-1]?.focus();
+     }
+   }else if(e.key==='Enter'){
+     e.preventDefault();
+     insertAnswerSuggestion(
+       answerAutocompleteTarget,
+       item.getAttribute('data-answer-suggestion')||''
+     );
+   }else if(e.key==='Escape'){
+     e.preventDefault();
+     closeAnswerAutocomplete();
+     answerAutocompleteTarget?.focus();
+   }
+ });
+
+ window.addEventListener('scroll',()=>{
+   if(answerAutocompleteTarget && answerAutocompleteBox &&
+      !answerAutocompleteBox.classList.contains('hidden')){
+     positionAnswerAutocomplete(answerAutocompleteTarget);
+   }
+ },true);
+
+ window.addEventListener('resize',()=>{
+   if(answerAutocompleteTarget){
+     showAnswerAutocomplete(answerAutocompleteTarget);
+   }
+ });
+}
+
+
 function initMode(){
  const st=document.getElementById('modeStatus');
  if(IS_ADMIN){
@@ -784,6 +1153,7 @@ async function fetchQuestions(){
  return await r.json();
 }
 async function persistQuestions(){
+ invalidateAnswerWordVocabulary();
  if(!IS_ADMIN)throw new Error('A edição só está disponível em localhost.');
  const r=await fetch('/api/questions',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(questions)});
  if(!r.ok)throw new Error('Não foi possível gravar data/perguntas.json.');
@@ -791,6 +1161,7 @@ async function persistQuestions(){
 async function loadQuestions(){
  try{
    questions=await fetchQuestions();
+   invalidateAnswerWordVocabulary();
 
    // Compatibilidade: perguntas antigas sem "grupo" são consideradas teóricas.
    questions.forEach(q=>{ if(!q.grupo) q.grupo='teoria'; });
@@ -1966,10 +2337,39 @@ function checkFill(i){
  const pending=[...card.querySelectorAll('input[data-pos]')]
    .filter(inp=>inp.dataset.validated!=='1');
 
+ const emptyPending=pending.find(inp=>!inp.value.trim());
+
+ if(emptyPending){
+   revealAllRemainingFillAnswers(card,q);
+   lockFillQuestion(card);
+   if(registerAttempt(i,false))feedback(i,false,q.explicacao);
+   return;
+ }
+
  for(const input of pending){
-   if(!input.value.trim())continue;
    validateSingleFillField(i,input,false);
    if(card.dataset.done==='1')return;
+ }
+
+ const incompleteSet=[...card.querySelectorAll('[data-set-pos]')].some(slot=>{
+   const pos=Number(slot.dataset.setPos);
+   const total=getSetFieldValues(q,pos).length;
+   const used=(slot.dataset.used||'').split(',').filter(Boolean).length;
+   return used<total;
+ });
+
+ const incompleteLegacy=[...card.querySelectorAll('[data-multi-pos]')].some(slot=>{
+   const pos=Number(slot.dataset.multiPos);
+   const total=getMultiSlotValues(q,pos).length;
+   const used=(slot.dataset.used||'').split(',').filter(Boolean).length;
+   return used<total;
+ });
+
+ if(incompleteSet||incompleteLegacy){
+   revealAllRemainingFillAnswers(card,q);
+   lockFillQuestion(card);
+   if(registerAttempt(i,false))feedback(i,false,q.explicacao);
+   return;
  }
 
  maybeFinishFillQuestion(i,false);
@@ -4133,18 +4533,50 @@ function categoryBindNormalFill(card,i){
 }
 
 function categoryCheckFill(i){
-  const card=document.getElementById('cq'+i);
-  if(!card||card.dataset.done==='1')return;
+ const q=questions[i];
+ const card=document.getElementById('cq'+i);
+ if(!card||card.dataset.done==='1')return;
 
-  const pending=[...card.querySelectorAll('input[data-pos]')].filter(inp=>inp.dataset.validated!=='1');
-  for(const input of pending){
-    if(!input.value.trim())continue;
-    categoryValidateSingleFill(i,input);
-    if(card.dataset.done==='1')return;
-  }
-  categoryMaybeFinishFill(i);
+ const pending=[...card.querySelectorAll('input[data-pos]')]
+   .filter(inp=>inp.dataset.validated!=='1');
+
+ const emptyPending=pending.find(inp=>!inp.value.trim());
+
+ if(emptyPending){
+   revealAllRemainingFillAnswers(card,q);
+   lockFillQuestion(card);
+   if(categoryGameRegisterAttempt(i,false))categoryGameFeedback(i,false,q.explicacao);
+   return;
+ }
+
+ for(const input of pending){
+   categoryValidateSingleFill(i,input);
+   if(card.dataset.done==='1')return;
+ }
+
+ const incompleteSet=[...card.querySelectorAll('[data-set-pos]')].some(slot=>{
+   const pos=Number(slot.dataset.setPos);
+   const total=getSetFieldValues(q,pos).length;
+   const used=(slot.dataset.used||'').split(',').filter(Boolean).length;
+   return used<total;
+ });
+
+ const incompleteLegacy=[...card.querySelectorAll('[data-multi-pos]')].some(slot=>{
+   const pos=Number(slot.dataset.multiPos);
+   const total=getMultiSlotValues(q,pos).length;
+   const used=(slot.dataset.used||'').split(',').filter(Boolean).length;
+   return used<total;
+ });
+
+ if(incompleteSet||incompleteLegacy){
+   revealAllRemainingFillAnswers(card,q);
+   lockFillQuestion(card);
+   if(categoryGameRegisterAttempt(i,false))categoryGameFeedback(i,false,q.explicacao);
+   return;
+ }
+
+ categoryMaybeFinishFill(i);
 }
-
 function categorySubmitSetAnswer(i,pos){
   const card=document.getElementById('cq'+i);
   const q=questions[i];
@@ -4650,10 +5082,39 @@ function practiceCheckFill(i){
  const pending=[...card.querySelectorAll('input[data-pos]')]
    .filter(inp=>inp.dataset.validated!=='1');
 
+ const emptyPending=pending.find(inp=>!inp.value.trim());
+
+ if(emptyPending){
+   revealAllRemainingFillAnswers(card,q);
+   lockFillQuestion(card);
+   if(registerPracticeAttempt(i,false))practiceFeedback(i,false,q.explicacao);
+   return;
+ }
+
  for(const input of pending){
-   if(!input.value.trim())continue;
    validateSingleFillField(i,input,true);
    if(card.dataset.done==='1')return;
+ }
+
+ const incompleteSet=[...card.querySelectorAll('[data-set-pos]')].some(slot=>{
+   const pos=Number(slot.dataset.setPos);
+   const total=getSetFieldValues(q,pos).length;
+   const used=(slot.dataset.used||'').split(',').filter(Boolean).length;
+   return used<total;
+ });
+
+ const incompleteLegacy=[...card.querySelectorAll('[data-multi-pos]')].some(slot=>{
+   const pos=Number(slot.dataset.multiPos);
+   const total=getMultiSlotValues(q,pos).length;
+   const used=(slot.dataset.used||'').split(',').filter(Boolean).length;
+   return used<total;
+ });
+
+ if(incompleteSet||incompleteLegacy){
+   revealAllRemainingFillAnswers(card,q);
+   lockFillQuestion(card);
+   if(registerPracticeAttempt(i,false))practiceFeedback(i,false,q.explicacao);
+   return;
  }
 
  maybeFinishFillQuestion(i,true);
@@ -4997,3 +5458,5 @@ document.addEventListener('keydown',e=>{
    cancelInlineCategoryEdit(id);
  }
 });
+
+setTimeout(installAnswerAutocomplete,0);

@@ -3803,5 +3803,127 @@
         ]
       }
     ]
+  },
+  {
+    "id": "q-1794178599912",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "{{img:imagens/1794178580725-image.png}} Ao circular fora de uma localidade em marcha lenta, o condutor de um automóvel pesado deve manter em relação ao veículo que circula à sua frente uma distância mínima de [[1]] metros.",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "50"
+      ]
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "50"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q-1794178703356",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "{{img:imagens/1794178648453-image.png}} A carga e descarga de um veículo na via pública deve ser feita [[1]], pelo lado [[2]] ou pela [[3]].",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "rapidamente"
+      ],
+      [
+        "permitido para a paragem do veículo"
+      ],
+      [
+        "retaguarda"
+      ]
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "rapidamente"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "permitido para a paragem do veículo"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "retaguarda"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q-1794179352804",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "O veiculo pode ser apreendido se:[[1]]",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      []
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "set",
+        "respostas": [
+          "não compareça à inspeção",
+          "transite sem ter sido inspecionado",
+          "circule sem seguro obrigatório",
+          "circule com alterações não autorizadas"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q-1794179465437",
+    "categoria": "Sem categoria",
+    "tipo": "fill",
+    "pergunta": "A carta é cassada se num periodo de 5 anos [[1]] ou [[2]]",
+    "grupo": "teoria",
+    "explicacao": "",
+    "imagem": "",
+    "respostas": [
+      [
+        "cometa três contraordenações muito graves",
+        "cometa 3 contraordenações muito graves"
+      ],
+      [
+        "5 contraordenações entre graves e muito graves"
+      ]
+    ],
+    "respostas_multiplas": [],
+    "campos_resposta": [
+      {
+        "modo": "single",
+        "respostas": [
+          "cometa três contraordenações muito graves",
+          "cometa 3 contraordenações muito graves"
+        ]
+      },
+      {
+        "modo": "single",
+        "respostas": [
+          "5 contraordenações entre graves e muito graves"
+        ]
+      }
+    ]
   }
 ]

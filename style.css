@@ -1244,3 +1244,122 @@ input,select,textarea{width:100%;border:1px solid var(--line);border-radius:10px
     grid-template-columns:1fr;
   }
 }
+
+
+/* Sugestões de palavras nas respostas dos jogos */
+.answer-autocomplete-box{
+  position:absolute;
+  z-index:10000;
+  max-height:250px;
+  overflow-y:auto;
+  padding:5px;
+  border:1px solid #b2ccff;
+  border-radius:10px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(16,24,40,.16);
+}
+
+.answer-autocomplete-box.hidden{
+  display:none !important;
+}
+
+.answer-autocomplete-item{
+  display:block !important;
+  width:100% !important;
+  min-width:0 !important;
+  margin:0 !important;
+  padding:8px 10px !important;
+  border:0 !important;
+  border-radius:7px !important;
+  background:#fff !important;
+  color:#101828 !important;
+  font:inherit !important;
+  font-weight:700 !important;
+  text-align:left !important;
+  cursor:pointer;
+}
+
+.answer-autocomplete-item:hover,
+.answer-autocomplete-item:focus{
+  outline:none !important;
+  background:#eef4ff !important;
+  color:#1849a9 !important;
+}
+
+@media(max-width:760px){
+  .answer-autocomplete-box{
+    max-height:210px;
+  }
+
+  .answer-autocomplete-item{
+    padding:10px !important;
+  }
+}
+
+
+/* =========================================================
+   Autocomplete no PC — faixa em fluxo, sem tapar a pergunta
+   ========================================================= */
+.answer-autocomplete-inline{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  width:100%;
+  box-sizing:border-box;
+  margin:6px 0 10px;
+  padding:7px 9px;
+  border:1px solid #d1e0ff;
+  border-radius:10px;
+  background:#f8faff;
+}
+
+.answer-autocomplete-inline-label{
+  flex:0 0 auto;
+  color:#475467;
+  font-size:12px;
+  font-weight:800;
+}
+
+.answer-autocomplete-inline-items{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px;
+  min-width:0;
+}
+
+.answer-autocomplete-chip{
+  width:auto !important;
+  min-width:0 !important;
+  margin:0 !important;
+  padding:5px 9px !important;
+  border:1px solid #b2ccff !important;
+  border-radius:999px !important;
+  background:#fff !important;
+  color:#1849a9 !important;
+  font:inherit !important;
+  font-size:12px !important;
+  font-weight:800 !important;
+  line-height:1.2 !important;
+  cursor:pointer;
+}
+
+.answer-autocomplete-chip:hover,
+.answer-autocomplete-chip:focus{
+  outline:none !important;
+  background:#eef4ff !important;
+  border-color:#528bff !important;
+}
+
+@media(min-width:900px){
+  .answer-autocomplete-box{
+    display:none !important;
+  }
+}
+
+@media(max-width:899px){
+  .answer-autocomplete-inline{
+    display:none !important;
+  }
+}
